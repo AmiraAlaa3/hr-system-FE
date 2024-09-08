@@ -1,0 +1,29 @@
+.color {
+    background-color: #d6e4eb;
+}
+.navbarHeader{
+    color: #296f93;
+    margin-bottom: -10px;
+}
+.navbarHeader + p {
+    margin-top: -25px; 
+}
+.search{
+    margin-left: 550px;
+}
+.searchInput{
+    background-color: #bdd2de;
+}
+.bi{
+    color: #e94d65; 
+    top: 50%;
+    transform: translateY(-50%);
+}
+.bi-search{
+    left: 10px; 
+}
+.bi-x {
+    font-size: 18px; 
+    right: 10px; 
+    cursor: pointer;
+}

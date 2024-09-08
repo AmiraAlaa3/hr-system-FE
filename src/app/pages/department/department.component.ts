@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Department } from '../../models/idepartment';
 import { DepartmentService } from './../../services/department.service';
 import { CommonModule } from '@angular/common';
-import { PageTitleComponent } from '../page-title/page-title.component';
+import { PageTitleComponent } from '../../components/page-title/page-title.component';
+
 
 @Component({
   selector: 'app-department',
