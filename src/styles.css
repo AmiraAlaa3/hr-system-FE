@@ -1,92 +1,146 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
-    --primary-50-color: #d6e4eb;
-    --primary-100-color: #bdd2de;
-    --primary-200-color: #9dbdcd;
-    --primary-300-color: #709fb7;
-    --primary-400-color: #548ca9;
-    --primary-500-color: #296f93;
-    --primary-600-color: #256586;
-    --primary-700-color: #1d4f68;
-    --primary-800-color: #173d51;
-    --primary-900-color: #112f3e;
+  --primary-50-color: #d6e4eb;
+  --primary-100-color: #bdd2de;
+  --primary-200-color: #9dbdcd;
+  --primary-300-color: #709fb7;
+  --primary-400-color: #548ca9;
+  --primary-500-color: #296f93;
+  --primary-600-color: #256586;
+  --primary-700-color: #1d4f68;
+  --primary-800-color: #173d51;
+  --primary-900-color: #112f3e;
 
-    --secondary-100-color: #f8c8cf;
-    --secondary-200-color: #f5adb8;
-    --secondary-300-color: #f08898;
-    --secondary-400-color: #ed7184;
-    --secondary-500-color: #e94d65;
-    --secondary-600-color: #d4465c;
-    --secondary-700-color: #a53748;
-    --secondary-800-color: #802a38;
-    --secondary-900-color: #62202a;
+  --secondary-100-color: #f8c8cf;
+  --secondary-200-color: #f5adb8;
+  --secondary-300-color: #f08898;
+  --secondary-400-color: #ed7184;
+  --secondary-500-color: #e94d65;
+  --secondary-600-color: #d4465c;
+  --secondary-700-color: #a53748;
+  --secondary-800-color: #802a38;
+  --secondary-900-color: #62202a;
 
-    --background-100-color: #e0e0e0;
-    --background-200-color: #d1d1d1;
-    --background-300-color: #bbbbbb;
-    --background-400-color: #aeaeae;
-    --background-500-color: #9a9a9a;
-    --background-600-color: #8c8c8c;
-    --background-700-color: #6d6d6d;
-    --background-800-color: #555555;
-    --background-900-color: #414141;
+  --background-100-color: #e0e0e0;
+  --background-200-color: #d1d1d1;
+  --background-300-color: #bbbbbb;
+  --background-400-color: #aeaeae;
+  --background-500-color: #9a9a9a;
+  --background-600-color: #8c8c8c;
+  --background-700-color: #6d6d6d;
+  --background-800-color: #555555;
+  --background-900-color: #414141;
 
-    --dark-color: #343A40;
-    --light-color: #FFFFFF;
+  --dark-color: #343A40;
+  --light-color: #FFFFFF;
 
-    --information-100-color: #badefb;
-    --information-200-color: #99cff9;
-    --information-300-color: #6ab9f7;
-    --information-400-color: #4dabf5;
-    --information-500-color: #2196f3;
-    --information-600-color: #1e89dd;
-    --information-700-color: #176bad;
-    --information-800-color: #125386;
-    --information-900-color: #0e3f66;
+  --information-100-color: #badefb;
+  --information-200-color: #99cff9;
+  --information-300-color: #6ab9f7;
+  --information-400-color: #4dabf5;
+  --information-500-color: #2196f3;
+  --information-600-color: #1e89dd;
+  --information-700-color: #176bad;
+  --information-800-color: #125386;
+  --information-900-color: #0e3f66;
 
-    --warning-100-color: #fff9c2;
-    --warning-200-color: #fff6a5;
-    --warning-300-color: #fff27c;
-    --warning-400-color: #ffef62;
-    --warning-500-color: #ffeb3b;
-    --warning-600-color: #e8d636;
-    --warning-700-color: #b5a72a;
-    --warning-800-color: #8c8120;
-    --warning-900-color: #6b6319;
+  --warning-100-color: #fff9c2;
+  --warning-200-color: #fff6a5;
+  --warning-300-color: #fff27c;
+  --warning-400-color: #ffef62;
+  --warning-500-color: #ffeb3b;
+  --warning-600-color: #e8d636;
+  --warning-700-color: #b5a72a;
+  --warning-800-color: #8c8120;
+  --warning-900-color: #6b6319;
 
-    --confirmation-100-color: #d1e4c8;
-    --confirmation-200-color: #bad7ae;
-    --confirmation-300-color: #9bc589;
-    --confirmation-400-color: #88b972;
-    --confirmation-500-color: #6aa84f;
-    --confirmation-600-color: #609948;
-    --confirmation-700-color: #4b7738;
-    --confirmation-800-color: #3a5c2b;
-    --confirmation-900-color: #2d4721;
+  --confirmation-100-color: #d1e4c8;
+  --confirmation-200-color: #bad7ae;
+  --confirmation-300-color: #9bc589;
+  --confirmation-400-color: #88b972;
+  --confirmation-500-color: #6aa84f;
+  --confirmation-600-color: #609948;
+  --confirmation-700-color: #4b7738;
+  --confirmation-800-color: #3a5c2b;
+  --confirmation-900-color: #2d4721;
 
-    --error-100-color: #ffc0c0;
-    --error-200-color: #ffa1a1;
-    --error-300-color: #ff7676;
-    --error-400-color: #ff5c5c;
-    --error-500-color: #ff3333;
-    --error-600-color: #e82e2e;
-    --error-700-color: #b52424;
-    --error-800-color: #8c1c1c;
-    --error-900-color: #6b1515;
+  --error-100-color: #ffc0c0;
+  --error-200-color: #ffa1a1;
+  --error-300-color: #ff7676;
+  --error-400-color: #ff5c5c;
+  --error-500-color: #ff3333;
+  --error-600-color: #e82e2e;
+  --error-700-color: #b52424;
+  --error-800-color: #8c1c1c;
+  --error-900-color: #6b1515;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 html,
 body {
-    height: 100%;
+  height: 100%;
+}
+
+
+.btn {
+  border-radius: 100px;
+}
+
+.btn-danger {
+  background-color: var(--secondary-500-color);
+  border-color: var(--secondary-500-color);
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active {
+  background-color: var(--secondary-400-color);
+  border-color: var(--secondary-400-color);
+}
+
+.btn-primary {
+  background-color: var(--primary-200-color);
+  border-color: var(--primary-200-color);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--primary-300-color);
+  border-color: var(--primary-300-color);
+}
+
+
+.btn-info {
+  background-color: var(--information-200-color);
+  border-color: var(--information-200-color);
+}
+
+.btn-info:active,
+.btn-info:focus,
+.btn-info:hover {
+  background-color: var(--information-300-color);
+  border-color: var(--information-300-color);
+}
+
+.btn-secondary {
+  background-color: var(--primary-600-color);
+  border-color: var(--primary-600-color);
+  font-size: 20px;
+}
+
+.btn-secondary:active,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: var(--primary-700-color);
+  border-color: var(--primary-700-color);
 }

@@ -12,6 +12,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { WeeklyHolidaysComponent } from './pages/weekly-holidays/weekly-holidays.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { LoginComponent } from './pages/login/login.component';
+import { DepartmentFormComponent } from './components/department-form/department-form.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent, title: 'Login' },
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'bouns', component: BounsComponent, title: 'Bouns' },
   { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
   { path: 'dapartments', component: DepartmentComponent, title: 'Departments' },
+  { path: 'departments/:id/edit', component: DepartmentFormComponent, title: 'Edit Department' },
   { path: 'employees', component: EmployeesComponent, title: 'All Employees' },
   { path: 'groups', component: GroupsComponent, title: 'Groups' },
   { path: 'leaves', component: LeavesComponent, title: 'Leaves' },
