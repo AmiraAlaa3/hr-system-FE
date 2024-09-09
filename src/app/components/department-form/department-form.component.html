@@ -1,0 +1,31 @@
+<div class="container px-5 py-3">
+  <app-page-title [title]="departmentId == 0 ? 'Add New Department' : 'Edit Department'"></app-page-title>
+
+  <form (submit)="DepartmentHandler($event)" [formGroup]="departmentForm" class="w-50 mt-5">
+    <div class="mb-3">
+      <label for="Department" class="form-label"><span class="text-danger me-1">*</span>Department Name</label>
+      <input
+        type="text"
+        formControlName="name"
+        class="form-control"
+        id="Department"
+        aria-describedby="Department"
+        placeholder="Enter Department Name" />
+      @if(getName.touched){
+      <ng-container>
+        @if(getName.hasError('required')){
+        <div id="emailHelp" class="form-text mt-2 text-danger">
+          Department Name is Required
+        </div>
+        }
+      </ng-container>
+      }
+    </div>
+
+    <div class="d-flex justify-content-end my-5">
+      <button type="submit" class="btn btn-add px-4">
+        {{ departmentId == 0 ? "Add Department" : "Edit Department" }}
+      </button>
+    </div>
+  </form>
+</div>
