@@ -1,51 +1,56 @@
 <div class="container px-5 py-3">
-  <app-page-title [title]="'All Department'"></app-page-title>
+  <app-page-title [title]="'All Department'" />
   @if(message){
   <div class="alert alert-success">
     {{ message }}
     <i class="bi bi-x-lg ms-5" (click)="closeMessage()" role="button"></i>
   </div>
   }
-  <div class="d-flex justify-content-end align-items-center mb-3">
+  <div class="d-flex justify-content-end align-items-center mb-4">
     <app-add-button [entity]="'Department'"
-      [routerLink]="['/departments', 0, 'edit']"></app-add-button>
+      [routerLink]="['/departments', 0, 'edit']" />
   </div>
+
   <div className="table-responsive mb-4">
-    <table className="order-table">
-      <thead>
-        <tr class='row table-header'>
-          <th scope="col" class="col-1">id</th>
-          <th scope="col" class="col-4">name</th>
-          <th scope="col" class="col-7">action</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for(department of departments ; track departments.id){
-        <tr class="row">
-          <td class="col-1">{{department?.id}}</td>
-          <td class="col-4">{{department?.name}}</td>
-          <td class="col-7">
-            <button class="btn btn-info me-2"><i class="bi bi-eye"></i>
-              View</button>
-            <button class="btn btn-primary mx-2"
-              [routerLink]="['/departments', department?.id, 'edit']">
-              <i class="bi bi-pen"></i>
-              Edit
-            </button>
-            <button class="btn btn-danger mx-2"
-            (click)="openDeleteModal(department?.id)">
-              <i class="bi bi-x-lg"></i>
-              Delete
-            </button>
-          </td>
-        </tr>
-        }
-      </tbody>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="id" class="col-1">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let department"> {{department.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name" class="col-4">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let department"> {{department.name}} </td>
+      </ng-container>
+
+      <!-- Add other columns as needed -->
+      <ng-container matColumnDef="action" class="col-7">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let department">
+          <button class="btn btn-view me-2" [routerLink]="['/departments', department.id]"><i class="bi bi-eye"></i>
+            View</button>
+          <button class="btn btn-edit mx-2"
+            [routerLink]="['/departments', department.id, 'edit']">
+            <i class="bi bi-pen"></i> Edit
+          </button>
+          <button class="btn btn-delete mx-2"
+            (click)="openDeleteModal(department.id)">
+            <i class="bi bi-x-lg"></i> Delete
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    @if(showModal){
     <app-confirm-modal
-    *ngIf="showModal"
-    (confirm)="confirmDelete()"
-    (cancel)="closeModal()"
-    [message]="'Are you sure you want to delete this department?'"
-  ></app-confirm-modal>
+      (confirmed)="confirmDelete()"
+      (closed)="closeModal()"
+      [message]="'Are you sure you want to delete this department?'" />
+    }
+
+    <mat-paginator [length]="totalDepartments" [pageSize]="5"
+      [pageSizeOptions]="[5, 10]" showFirstLastButtons class="mt-4"></mat-paginator>
+
   </div>

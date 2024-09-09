@@ -96,51 +96,72 @@ body {
   border-radius: 100px;
 }
 
-.btn-danger {
+.btn-delete {
   background-color: var(--secondary-500-color);
   border-color: var(--secondary-500-color);
+  color: var(--light-color);
 }
 
-.btn-danger:hover,
-.btn-danger:focus,
-.btn-danger:active {
+.btn-delete:active,
+.btn-delete:active:hover,
+.btn-delete:active:focus,
+.btn-delete:focus:active,
+.btn-delete:hover,
+.btn-delete:focus {
   background-color: var(--secondary-400-color);
   border-color: var(--secondary-400-color);
+  color: var(--light-color);
 }
 
-.btn-primary {
+.btn-edit {
   background-color: var(--primary-200-color);
   border-color: var(--primary-200-color);
+  color: var(--light-color);
 }
 
-.btn-primary:hover,
-.btn-primary:focus {
+.btn-edit:active,
+.btn-edit:active:hover,
+.btn-edit:active:focus,
+.btn-edit:focus:active,
+.btn-edit:focus:hover,
+.btn-edit:hover,
+.btn-edit:focus {
   background-color: var(--primary-300-color);
   border-color: var(--primary-300-color);
+  color: var(--light-color);
 }
 
 
-.btn-info {
+.btn-view {
   background-color: var(--information-200-color);
   border-color: var(--information-200-color);
 }
 
-.btn-info:active,
-.btn-info:focus,
-.btn-info:hover {
+.btn-view:active,
+.btn-view:active:hover,
+.btn-view:active:focus,
+.btn-view:focus:active,
+.btn-view:focus:hover,
+.btn-view:hover,
+.btn-view:focus{
   background-color: var(--information-300-color);
   border-color: var(--information-300-color);
 }
 
-.btn-secondary {
+.btn-add {
   background-color: var(--primary-600-color);
   border-color: var(--primary-600-color);
   font-size: 20px;
+  color: var(--light-color);
 }
 
-.btn-secondary:active,
-.btn-secondary:hover,
-.btn-secondary:focus {
+.btn-add:active,
+.btn-add:active:hover,
+.btn-add:active:focus,
+.btn-add:focus:active,
+.btn-add:focus:hover,
+.btn-add:hover {
   background-color: var(--primary-700-color);
   border-color: var(--primary-700-color);
+  color: var(--light-color);
 }
