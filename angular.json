@@ -16,6 +16,7 @@
             "outputPath": "dist/hr-system-fe",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "sourceMap": false,
             "polyfills": [
               "zone.js"
             ],

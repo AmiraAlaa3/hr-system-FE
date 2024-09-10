@@ -16,6 +16,8 @@ import { DepartmentFormComponent } from './components/department-form/department
 import { DepartmentDetailsComponent } from './components/department-details/department-details.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { authGuard } from './guard/auth.guard';
+import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -51,5 +53,7 @@ export const routes: Routes = [
       { path: 'weeklyHolidays', component: WeeklyHolidaysComponent, title: 'Weekly Holidays'},
     ]
   },
+
   { path: '**', component: NotfoundComponent, title: 'not found' }
 ];
+ 
