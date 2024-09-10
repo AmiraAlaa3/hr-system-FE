@@ -11,13 +11,14 @@ interface User {
     providedIn: 'root',
 })
 export class LoginService {
-    // private apiUrl = 'http://127.0.0.1:8000/api/login';
+    private loginUrl = 'http://127.0.0.1:8000/api/login';
 
-    // constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {}
 
-    // login(user: User): Observable<any> {
-    //     return this.http.post(`${this.apiUrl}/login`, user);
-    // }
+    login(email: string, password: string): Observable<any> {
+        const body = { email, password };
+        return this.http.post<any>(this.loginUrl, body);
+    }
 
     // logout(): Observable<any> {
     //     const headers = new HttpHeaders({
