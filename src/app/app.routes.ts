@@ -14,6 +14,7 @@ import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DepartmentFormComponent } from './components/department-form/department-form.component';
 import { DepartmentDetailsComponent } from './components/department-details/department-details.component';
+import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent, title: 'Login' },
@@ -32,6 +33,7 @@ export const routes: Routes = [
     title: 'Department Details',
   },
   { path: 'employees', component: EmployeesComponent, title: 'All Employees' },
+  { path: 'employees/:id/edit', component: EmployeeFormComponent, title: 'Employees' },
   { path: 'groups', component: GroupsComponent, title: 'Groups' },
   { path: 'leaves', component: LeavesComponent, title: 'Leaves' },
   {

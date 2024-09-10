@@ -1,0 +1,329 @@
+<div class="container px-5 py-3">
+  <app-page-title
+    [title]="employeeId == 0 ? 'Add New Employee' : 'Edit Employee'"></app-page-title>
+
+  <form (submit)="EmployeeHandler($event)" [formGroup]="employeeForm"
+    class="w-100 mt-5">
+    <div class="row">
+      <div class="col-md-12 col-lg-6">
+        <h2 class="mb-3 sub-title">Basic Data</h2>
+        <div class="mb-3">
+          <label for="EmployeeName" class="form-label"><span
+              class="text-danger me-1">*</span>Employee Name</label>
+          <input
+            type="text"
+            formControlName="name"
+            class="form-control"
+            id="Department"
+            aria-describedby="Department"
+            placeholder="Enter Employee Name" />
+          @if(getName.touched){
+          <ng-container>
+            @if(getName.hasError('required')){
+            <div id="emailHelp" class="form-text mt-2 text-danger">
+              Department Name is Required
+            </div>
+            }
+          </ng-container>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="EmployeeEmail" class="form-label"><span
+              class="text-danger me-1">*</span>Email</label>
+          <input
+            type="text"
+            formControlName="email"
+            class="form-control"
+            id="EmployeeEmail"
+            aria-describedby="EmployeeEmail"
+            placeholder="Enter Employee Email" />
+          @if(getEmail.touched){
+          <ng-container>
+            @if(getEmail.hasError('required')){
+            <div class="form-text mt-2 text-danger">
+              Employee Email is Required
+            </div>
+            }
+            @if (getEmail.hasError('email')) {
+              <div class="form-text mt-2 text-danger">
+                Invalid Email Address
+              </div>
+            }
+          </ng-container>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="EmployeeAddress" class="form-label"><span
+              class="text-danger me-1">*</span>Address</label>
+          <input
+            type="text"
+            formControlName="address"
+            class="form-control"
+            id="EmployeeAddress"
+            aria-describedby="EmployeeAddress"
+            placeholder="Enter Employee Address" />
+          @if(getAddress.touched){
+          <ng-container>
+            @if(getAddress.hasError('required')){
+            <div class="form-text mt-2 text-danger">
+              Employee Address Name is Required
+            </div>
+            }
+          </ng-container>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="EmployeePhone" class="form-label"><span
+              class="text-danger me-1">*</span>Phone</label>
+          <input
+            type="text"
+            formControlName="phone_number"
+            class="form-control"
+            id="EmployeePhone"
+            aria-describedby="EmployeePhone"
+            placeholder="Enter Employee Phone" />
+          @if(getPhone.touched){
+          <ng-container>
+            @if(getPhone.hasError('required')){
+            <div class="form-text mt-2 text-danger">
+              Employee phone number is Required
+            </div>
+            }
+          </ng-container>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="EmployeeGender" class="form-label"><span
+              class="text-danger me-1">*</span>Gender</label>
+          <select
+            formControlName="gender"
+            class="form-control"
+            id="EmployeeGender">
+            <option value disabled>Select Gender</option>
+            @for (gender of genders; track $index) {
+               <option [value]="gender">{{ gender }}</option>
+            }
+
+          </select>
+          @if(getGender.touched && getGender.invalid) {
+            <div class="form-text mt-2 text-danger">
+              Employee Gender is Required
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="Marital_status" class="form-label"><span
+              class="text-danger me-1">*</span>Marital status</label>
+          <select
+            formControlName="Marital_status"
+            class="form-control"
+            id="Marital_status">
+            <option value disabled>Select Marital status</option>
+            @for (Marital_status of Maritals; track $index) {
+               <option [value]="Marital_status">{{ Marital_status }}</option>
+            }
+
+          </select>
+          @if(getMarital_status.touched && getMarital_status.invalid) {
+            <div class="form-text mt-2 text-danger">
+              Employee Marital status is Required
+            </div>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="Employeenationality" class="form-label"><span
+              class="text-danger me-1">*</span>Nationality</label>
+          <input
+            type="text"
+            formControlName="nationality"
+            class="form-control"
+            id="Employeenationality"
+            aria-describedby="Employeenationality"
+            placeholder="Enter Employee Nationality" />
+          @if(getNationality.touched){
+          <ng-container>
+            @if(getNationality.hasError('required')){
+            <div class="form-text mt-2 text-danger">
+              Employee Nationality is Required
+            </div>
+            }
+          </ng-container>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="EmployeeSsn" class="form-label"><span
+              class="text-danger me-1">*</span>National ID</label>
+          <input
+            type="text"
+            formControlName="ssn"
+            class="form-control"
+            id="EmployeeSsn"
+            aria-describedby="EmployeeSsn"
+            placeholder="Enter Employee National ID" />
+          @if(getSsn.touched){
+          <ng-container>
+            @if(getSsn.hasError('required')){
+            <div class="form-text mt-2 text-danger">
+              Employee National ID is Required
+            </div>
+            }
+          </ng-container>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="birthdate" class="form-label"><span
+              class="text-danger me-1">*</span>Birth Date</label>
+          <input
+            type="date"
+            formControlName="birthdate"
+            class="form-control"
+            id="birthdate"
+            aria-describedby="birthdate"
+            placeholder="Enter Employee Birth Date" />
+          @if(getBirthdate.touched){
+          <ng-container>
+            @if(getBirthdate.hasError('required')){
+            <div class="form-text mt-2 text-danger">
+              Employee Birth Date is Required
+            </div>
+            }
+          </ng-container>
+          }
+        </div>
+
+      </div>
+
+      <div class="col-md-12 col-lg-6">
+        <h2 class="mb-3 sub-title">Work Data</h2>
+        <div class="mb-3">
+          <label for="hire_date" class="form-label"><span
+              class="text-danger me-1">*</span>Hire Date</label>
+          <input
+            type="date"
+            formControlName="hire_date"
+            class="form-control"
+            id="hire_date"
+            aria-describedby="hire_date"
+            placeholder="Enter Employee Hire Date" />
+          @if(getHire_date.touched){
+          <ng-container>
+            @if(getHire_date.hasError('required')){
+            <div class="form-text mt-2 text-danger">
+              Employee hire date is Required
+            </div>
+            }
+          </ng-container>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="EmployeeDepartment" class="form-label"><span class="text-danger me-1">*</span>Department</label>
+          <select
+            formControlName="department_id"
+            class="form-control"
+            id="EmployeeDepartment">
+            <option value="" disabled>Select Department</option>
+            @for (department of departments; track $index) {
+               <option [value]="department.id">{{ department.name }}</option>
+            }
+          </select>
+          @if(getDepartment_id.touched && getDepartment_id.invalid) {
+            <div class="form-text mt-2 text-danger">
+              Employee Department is Required
+            </div>
+          }
+         
+        </div>
+        <div class="mb-3">
+          <label for="position" class="form-label"><span
+              class="text-danger me-1">*</span>Position</label>
+          <input
+            type="text"
+            formControlName="position"
+            class="form-control"
+            id="position"
+            aria-describedby="position"
+            placeholder="Enter Employee Position" />
+          @if(getPosition.touched){
+          <ng-container>
+            @if(getPosition.hasError('required')){
+            <div class="form-text mt-2 text-danger">
+              Employee position is Required
+            </div>
+            }
+          </ng-container>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="EmployeeSalary" class="form-label"><span
+              class="text-danger me-1">*</span>Salary</label>
+          <input
+            type="text"
+            formControlName="salary"
+            class="form-control"
+            id="EmployeeSalary"
+            aria-describedby="EmployeeSalary"
+            placeholder="Enter Employee Salary" />
+          @if(getSalary.touched){
+          <ng-container>
+            @if(getSalary.hasError('required')){
+            <div class="form-text mt-2 text-danger">
+              Employee Salary is Required
+            </div>
+            }
+          </ng-container>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="check_in_time" class="form-label"><span
+              class="text-danger me-1">*</span>Check In</label>
+          <input
+            type="time"
+            formControlName="check_in_time"
+            class="form-control"
+            id="check_in_time"
+            aria-describedby="check_in_time"
+            placeholder="Enter check in time" />
+          @if(getCheck_in_time.touched){
+          <ng-container>
+            @if(getCheck_in_time.hasError('required')){
+            <div id="emailHelp" class="form-text mt-2 text-danger">
+              check in time is Required
+            </div>
+            }
+          </ng-container>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="check_out_time" class="form-label"><span
+              class="text-danger me-1">*</span>Check Out</label>
+          <input
+            type="time"
+            formControlName="check_out_time"
+            class="form-control"
+            id="check_out_time"
+            aria-describedby="check_out_time"
+            placeholder="Enter check out time" />
+          @if(getCheck_out_time.touched){
+          <ng-container>
+            @if(getCheck_out_time.hasError('required')){
+            <div id="emailHelp" class="form-text mt-2 text-danger">
+              check out time is Required
+            </div>
+            }
+          </ng-container>
+          }
+        </div>
+
+        <div class="d-flex justify-content-end my-5">
+          <button type="submit" class="btn btn-add px-4">
+            {{ employeeId == 0 ? "Add Employee" : "Edit Employee" }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
