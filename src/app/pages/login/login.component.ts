@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { LoginService } from './../../services/login.service';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -30,34 +29,3 @@ export class LoginComponent {
         }
     }
 }
-    // loginForm: FormGroup;
-    // message: string | null = null;
-
-    // constructor(private fb: FormBuilder, private LoginService: LoginService) {
-    //     this.loginForm = this.fb.group({
-    //         email: ['', [Validators.required, Validators.email]],
-    //         password: ['', Validators.required],
-    //     });
-    // }
-
-    // onSubmit() {
-    //     if (this.loginForm.valid) {
-    //         this.LoginService.login(this.loginForm.value).subscribe(
-    //             (response) => {
-    //                 if (response && response.token) {
-    //                     localStorage.setItem('token', response.token); 
-    //                     this.message = 'Login successful!';
-    //                     // redirect to dashboard
-    //                 } else {
-    //                     this.message = 'Login failed. No token returned.';
-    //                 }
-    //             },
-    //             (error) => {
-    //                 console.error('Login error', error);
-    //                 this.message = 'Invalid credentials. Please try again.';
-    //             }
-    //         );
-    //     } else {
-    //         this.message = 'Please fill out the form correctly.';
-    //     }
-    // }
