@@ -26,17 +26,28 @@ export const routes: Routes = [
     canActivate:[authGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
-      { path: 'attendance', component: AttendanceComponent, title: 'Attendance' },
+      { path: 'attendance', component: AttendanceComponent, title: 'Attendance', children:[
+        { path: ':id/edit', component: AttendanceComponent, title: 'Edit Attendance'},
+      ]},
       { path: 'bouns', component: BounsComponent, title: 'Bouns' },
-      { path: 'departments', component: DepartmentComponent, title: 'Departments'},
-      { path: 'departments/:id/edit', component: DepartmentFormComponent, title: 'Edit Department'},
-      { path: 'departments/:id', component: DepartmentDetailsComponent, title: 'Department Details'},
-      { path: 'employees', component: EmployeesComponent, title: 'All Employees' },
+      { path: 'departments', component: DepartmentComponent, title: 'Departments', children:[
+        { path: ':id/edit', component: DepartmentFormComponent, title: 'Edit Department'},
+        { path: ':id', component: DepartmentDetailsComponent, title: 'Department Details'},
+      ]},
+      { path: 'employees', component: EmployeesComponent, title: 'All Employees', children:[
+        { path: ':id/edit', component: EmployeesComponent, title: 'Edit Employee'},
+      ]},
       { path: 'groups', component: GroupsComponent, title: 'Groups' },
       { path: 'leaves', component: LeavesComponent, title: 'Leaves' },
-      { path: 'officalHolidays', component: OfficalHolidaysComponent, title: 'Offical Holidays'},
-      { path: 'salary', component: SalaryComponent, title: 'Salary' },
-      { path: 'users', component: UsersComponent, title: 'All Users' },
+      { path: 'officalHolidays', component: OfficalHolidaysComponent, title: 'Offical Holidays', children:[
+        { path: ':id/edit', component: OfficalHolidaysComponent, title: 'Add offical Holiday'},
+      ]},
+      { path: 'salary', component: SalaryComponent, title: 'Salary', children:[
+        { path: ':id/edit', component: SalaryComponent, title: 'Edit Salary'},
+      ]},
+      { path: 'users', component: UsersComponent, title: 'All Users', children:[
+        { path: 'add', component: UsersComponent, title: 'Add new Admin'},
+      ] },
       { path: 'weeklyHolidays', component: WeeklyHolidaysComponent, title: 'Weekly Holidays'},
     ]
   },
