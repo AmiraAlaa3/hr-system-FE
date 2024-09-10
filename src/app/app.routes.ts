@@ -14,37 +14,31 @@ import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DepartmentFormComponent } from './components/department-form/department-form.component';
 import { DepartmentDetailsComponent } from './components/department-details/department-details.component';
+import { LayoutComponent } from './pages/layout/layout.component';
+import { authGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent, title: 'Login' },
-  { path: 'attendance', component: AttendanceComponent, title: 'Attendance' },
-  { path: 'bouns', component: BounsComponent, title: 'Bouns' },
-  { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
-  { path: 'dapartments', component: DepartmentComponent, title: 'Departments' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, title: 'Login' },
   {
-    path: 'departments/:id/edit',
-    component: DepartmentFormComponent,
-    title: 'Edit Department',
+    path: 'layout',
+    component: LayoutComponent,
+    canActivate:[authGuard],
+    children: [
+      { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
+      { path: 'attendance', component: AttendanceComponent, title: 'Attendance' },
+      { path: 'bouns', component: BounsComponent, title: 'Bouns' },
+      { path: 'dapartments', component: DepartmentComponent, title: 'Departments' },
+      { path: 'departments/:id/edit', component: DepartmentFormComponent, title: 'Edit Department'},
+      { path: 'departments/:id', component: DepartmentDetailsComponent, title: 'Department Details'},
+      { path: 'employees', component: EmployeesComponent, title: 'All Employees' },
+      { path: 'groups', component: GroupsComponent, title: 'Groups' },
+      { path: 'leaves', component: LeavesComponent, title: 'Leaves' },
+      { path: 'officalHolidays', component: OfficalHolidaysComponent, title: 'Offical Holidays'},
+      { path: 'salary', component: SalaryComponent, title: 'Salary' },
+      { path: 'users', component: UsersComponent, title: 'All Users' },
+      { path: 'weeklyHolidays', component: WeeklyHolidaysComponent, title: 'Weekly Holidays'},
+    ]
   },
-  {
-    path: 'departments/:id',
-    component: DepartmentDetailsComponent,
-    title: 'Department Details',
-  },
-  { path: 'employees', component: EmployeesComponent, title: 'All Employees' },
-  { path: 'groups', component: GroupsComponent, title: 'Groups' },
-  { path: 'leaves', component: LeavesComponent, title: 'Leaves' },
-  {
-    path: 'officalHolidays',
-    component: OfficalHolidaysComponent,
-    title: 'Offical Holidays',
-  },
-  { path: 'salary', component: SalaryComponent, title: 'Salary' },
-  { path: 'users', component: UsersComponent, title: 'All Users' },
-  {
-    path: 'weeklyHolidays',
-    component: WeeklyHolidaysComponent,
-    title: 'Weekly Holidays',
-  },
-  { path: '**', component: NotfoundComponent, title: 'not found' },
+  { path: '**', component: NotfoundComponent, title: 'not found' }
 ];
