@@ -21,14 +21,14 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, title: 'Login' },
   {
-    path: 'layout',
+    path: '',
     component: LayoutComponent,
     canActivate:[authGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
       { path: 'attendance', component: AttendanceComponent, title: 'Attendance' },
       { path: 'bouns', component: BounsComponent, title: 'Bouns' },
-      { path: 'dapartments', component: DepartmentComponent, title: 'Departments' },
+      { path: 'departments', component: DepartmentComponent, title: 'Departments'},
       { path: 'departments/:id/edit', component: DepartmentFormComponent, title: 'Edit Department'},
       { path: 'departments/:id', component: DepartmentDetailsComponent, title: 'Department Details'},
       { path: 'employees', component: EmployeesComponent, title: 'All Employees' },

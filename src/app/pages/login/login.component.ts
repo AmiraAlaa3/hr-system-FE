@@ -12,22 +12,52 @@ import { Router } from '@angular/router';
     styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-    email:string = "";
+    email: string = "";
     password: any = "";
-    
-    constructor(private LoginService :LoginService ,private router: Router){};
 
-    onlogin(){
+    constructor(private LoginService: LoginService, private router: Router) { };
+
+    onlogin() {
         if (this.email && this.password) {
-            this.LoginService.login(this.email, this.password).subscribe((response)=>{
+            this.LoginService.login(this.email, this.password).subscribe((response) => {
                 if (response.status && response.token) {
-                    localStorage.setItem('token', response.token); 
-                    this.router.navigateByUrl("layout/dashboard");
-                }else{
+                    localStorage.setItem('token', response.token);
+                    this.router.navigateByUrl("dashboard");
+                } else {
                     alert('Check your Email or Password');
                 }
             });
         }
     }
-
 }
+    // loginForm: FormGroup;
+    // message: string | null = null;
+
+    // constructor(private fb: FormBuilder, private LoginService: LoginService) {
+    //     this.loginForm = this.fb.group({
+    //         email: ['', [Validators.required, Validators.email]],
+    //         password: ['', Validators.required],
+    //     });
+    // }
+
+    // onSubmit() {
+    //     if (this.loginForm.valid) {
+    //         this.LoginService.login(this.loginForm.value).subscribe(
+    //             (response) => {
+    //                 if (response && response.token) {
+    //                     localStorage.setItem('token', response.token); 
+    //                     this.message = 'Login successful!';
+    //                     // redirect to dashboard
+    //                 } else {
+    //                     this.message = 'Login failed. No token returned.';
+    //                 }
+    //             },
+    //             (error) => {
+    //                 console.error('Login error', error);
+    //                 this.message = 'Invalid credentials. Please try again.';
+    //             }
+    //         );
+    //     } else {
+    //         this.message = 'Please fill out the form correctly.';
+    //     }
+    // }

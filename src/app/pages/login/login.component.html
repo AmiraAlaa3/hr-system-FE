@@ -9,7 +9,7 @@
             <div class="logo">
                 <img src="images/Full-logo.png" alt="Logo" />
             </div>
-            <form>
+            <form (submit)="onlogin()">
                 <div class="form-group">
                     <label for="email">Email Address:</label>
                     <input type="email" [(ngModel)]="email" id="email" name="email"
@@ -23,7 +23,7 @@
                 <div class="form-footer">
                     <a href="#" class="forgot-password">forget password?</a>
                 </div>
-                <button type="submit" (click)="onlogin()" class="login-button">Log in</button>
+                <button type="submit" class="login-button">Log in</button>
             </form>
         </div>
     </div>
