@@ -1,0 +1,74 @@
+<div class="container px-5 py-3">
+    <app-page-title [title]="attendanceId == 0 ? 'Add New Attendance' : 'Edit Attendance'"></app-page-title>
+  
+    <form (submit)="attendanceHandler($event)" [formGroup]="attendanceForm" class="w-50 mt-5">
+      <div class="mb-3">
+        <label for="employee_id" class="form-label"><span class="text-danger me-1">*</span>Employee Name</label>
+        <select
+          formControlName="employee_id"
+          class="form-control"
+          id="employee-id"
+          required>
+          <option value="">Select Employee</option>
+          <option *ngFor="let employee of employees" [value]="employee.id">{{ employee.name }}</option>
+        </select>
+        <ng-container *ngIf="getEmployeeId.touched && getEmployeeId.hasError('required')">
+          <div id="employeeHelp" class="form-text mt-2 text-danger">
+            Employee Name is Required
+          </div>
+        </ng-container>
+      </div>
+  
+      <div class="mb-3">
+        <label for="checkIN" class="form-label"><span class="text-danger me-1">*</span>Check-In Time</label>
+        <input
+          type="time"
+          formControlName="checkIN"
+          class="form-control"
+          id="checkIN"
+          required />
+        <ng-container *ngIf="getCheckIn.touched && getCheckIn.hasError('required')">
+          <div id="checkInHelp" class="form-text mt-2 text-danger">
+            Check-In Time is Required
+          </div>
+        </ng-container>
+      </div>
+  
+      <div class="mb-3">
+        <label for="checkOUT" class="form-label"><span class="text-danger me-1">*</span>Check-Out Time</label>
+        <input
+          type="time"
+          formControlName="checkOUT"
+          class="form-control"
+          id="checkOUT"
+          required />
+        <ng-container *ngIf="getCheckOut.touched && getCheckOut.hasError('required')">
+          <div id="checkOutHelp" class="form-text mt-2 text-danger">
+            Check-Out Time is Required
+          </div>
+        </ng-container>
+      </div>
+  
+      <div class="mb-3">
+        <label for="date" class="form-label"><span class="text-danger me-1">*</span>Date</label>
+        <input
+          type="date"
+          formControlName="date"
+          class="form-control"
+          id="date"
+          required />
+        <ng-container *ngIf="getDate.touched && getDate.hasError('required')">
+          <div id="dateHelp" class="form-text mt-2 text-danger">
+            Date is Required
+          </div>
+        </ng-container>
+      </div>
+  
+      <div class="d-flex justify-content-end my-5">
+        <button type="submit" class="btn btn-add px-4">
+          {{ attendanceId == 0 ? 'Add Attendance' : 'Edit Attendance' }}
+        </button>
+      </div>
+    </form>
+  </div>
+  
