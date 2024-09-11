@@ -14,10 +14,17 @@ import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DepartmentFormComponent } from './components/department-form/department-form.component';
 import { DepartmentDetailsComponent } from './components/department-details/department-details.component';
+import { AttendanceFormComponent } from './components/attendance-form/attendance-form.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent, title: 'Login' },
   { path: 'attendance', component: AttendanceComponent, title: 'Attendance' },
+  {
+    path: 'attendance/:id/edit',
+    component : AttendanceFormComponent,
+    title: 'Edit Attendance',
+  },
+  
   { path: 'bouns', component: BounsComponent, title: 'Bouns' },
   { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
   { path: 'dapartments', component: DepartmentComponent, title: 'Departments' },
