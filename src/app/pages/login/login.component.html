@@ -23,6 +23,9 @@
                 <div class="form-footer">
                     <a href="#" class="forgot-password">forget password?</a>
                 </div>
+                @if (errorMessage) {
+                    <div class="alert alert-danger"> {{errorMessage}} </div>
+                }
                 <button type="submit" class="login-button">Log in</button>
             </form>
         </div>

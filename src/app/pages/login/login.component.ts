@@ -13,19 +13,32 @@ import { Router } from '@angular/router';
 export class LoginComponent {
     email: string = "";
     password: any = "";
+    errorMessage: string = "";
 
     constructor(private LoginService: LoginService, private router: Router) { };
 
     onlogin() {
-        if (this.email && this.password) {
-            this.LoginService.login(this.email, this.password).subscribe((response) => {
-                if (response.status && response.token) {
-                    localStorage.setItem('token', response.token);
-                    this.router.navigateByUrl("dashboard");
-                } else {
-                    alert('Check your Email or Password');
-                }
-            });
+
+        if (!this.email) {
+            this.errorMessage = "Email is required.";
+            return;
         }
-    }
+
+        if (!this.password) {
+            this.errorMessage = "Password is required.";
+            return;
+        }
+
+        this.LoginService.login(this.email, this.password).subscribe((response) => {
+            if (response.status && response.token) {
+                localStorage.setItem('token', response.token);
+                this.router.navigateByUrl("dashboard");
+            } else {
+                alert('Check your Email or Password');
+            }
+        },
+        (error) => {
+            this.errorMessage = "Your passsword or email is incorrect";
+        });
+}
 }
