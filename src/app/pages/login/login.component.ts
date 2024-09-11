@@ -1,12 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { LoginService } from './../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    standalone: true,
+    imports: [FormsModule],
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+    email: string = "";
+    password: any = "";
 
+    constructor(private LoginService: LoginService, private router: Router) { };
+
+    onlogin() {
+        if (this.email && this.password) {
+            this.LoginService.login(this.email, this.password).subscribe((response) => {
+                if (response.status && response.token) {
+                    localStorage.setItem('token', response.token);
+                    this.router.navigateByUrl("dashboard");
+                } else {
+                    alert('Check your Email or Password');
+                }
+            });
+        }
+    }
 }

@@ -1,0 +1,25 @@
+.all {
+    height: 100vh;
+    background-color: #d6e4eb70;
+    padding-top: 100px;
+}
+
+.btn {
+    background-color: #256586;
+    border-color: #256586;
+    font-size: 20px;
+    color: #FFFFFF;
+    margin: 10px;
+    padding: 7px 15px;
+}
+
+.btn:active,
+.btn:active:hover,
+.btn:active:focus,
+.btn:focus:active,
+.btn:focus:hover,
+.btn:hover {
+    background-color: #1d4f68;
+    border-color: #1d4f68;
+    color: #FFFFFF;
+}

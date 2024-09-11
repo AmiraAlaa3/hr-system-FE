@@ -1,0 +1,99 @@
+<div class="container px-5 py-3">
+  <header class="my-4">
+    <h1 class="page-title">
+      <span class="text-muted fw-semibold">All Employees ></span> View
+      <span class="employee">{{employee?.name}}</span> Employee
+    </h1>
+    <p>
+      This page will show employee
+      <span class="employee">{{employee?.name}}</span> information.
+    </p>
+  </header>
+  <main>
+    <div class="card-info mb-4">
+      <div class="edit-icon d-flex justify-content-center align-items-center"
+        role="button">
+        <i class="bi bi-pen"
+          [routerLink]="['/employees', employee?.id, 'edit']"></i>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 col-lg-6">
+          <p class="lead fw-semibold mb-0">{{employee?.name}}</p>
+          <p class="fw-5 mb-0 employee-sub">{{employee?.position}} Team</p>
+          <p class="fw-5 mb-0 employee-sub">{{employee?.department?.name}}
+            Department</p>
+          <p class="fw-5 mb-0 fw-bold mt-4">
+            Employee ID: #{{employee?.id}}
+          </p>
+          <p class="fw-5 mb-0 employee-sub mb-5">
+            <span class="fw-bold">Date of Join:</span> {{employee?.hire_date}}
+          </p>
+        </div>
+        <div class="col-md-12 col-lg-6 col-line">
+          <p class="fw-4 mb-2">
+            <span class="fw-semibold title">Phone:</span>
+            <span class="info">{{employee?.phone_number}}</span>
+          </p>
+          <p class="fw-4 mb-2">
+            <span class="fw-semibold title">Email:</span>
+            <span class="info">{{employee?.email}}</span>
+          </p>
+          <p class="fw-4 mb-2">
+            <span class="fw-semibold title">Birthday:</span>
+            <span class="employee-sub">{{employee?.birthdate}}</span>
+          </p>
+          <p class="fw-4 mb-2">
+            <span class="fw-semibold title">Address:</span>
+            <span class="employee-sub">{{employee?.address}}</span>
+          </p>
+          <p class="fw-4 mb-2">
+            <span class="fw-semibold title">Gender:</span>
+            <span class="employee-sub">{{employee?.gender}}</span>
+          </p>
+          <p class="fw-4 mb-2">
+            <span class="fw-semibold title">Marital Status:</span>
+            <span class="employee-sub">{{employee?.Marital_status}}</span>
+          </p>
+          <p class="fw-4 mb-2">
+            <span class="fw-semibold title">Nationality:</span>
+            <span class="employee-sub">{{employee?.nationality}}</span>
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <!-- work info -->
+    <div class="d-flex justify-content-between">
+      <div class="card-info w-50">
+        <h2 class>Employee Details</h2>
+        <div class="row">
+          <div class="col-md-12 col-lg-12">
+            <p class="fw-4 mb-2">
+              <span class="fw-semibold title">Salary:</span>
+              <span class="employee-sub">{{employee?.salary | currency:'EGP '}}</span>
+            </p>
+            <p class="fw-4 mb-2">
+              <span class="fw-semibold title">Department:</span>
+              <span class="employee-sub">{{employee?.department?.name}}</span>
+            </p>
+
+            <p class="fw-4 mb-2">
+              <span class="fw-semibold title">check in time:</span>
+              <span class="info">{{employee?.check_in_time}}</span>
+            </p>
+
+            <p class="fw-4 mb-2">
+              <span class="fw-semibold title">check out time:</span>
+              <span class="info">{{employee?.check_out_time}}</span>
+            </p>
+          </div>
+
+        </div>
+      </div>
+      <div class="align-content-end">
+        <button class="btn btn-add px-5" (click)="goBack()">Back</button>
+      </div>
+    </div>
+  </main>
+</div>

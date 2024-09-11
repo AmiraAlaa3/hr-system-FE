@@ -3,7 +3,7 @@ import { PageTitleComponent } from '../page-title/page-title.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { DepartmentService } from '../../services/department.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Employee } from '../../models/iemployee';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
   selector: 'app-department-details',
   standalone: true,
   imports: [
+    RouterLink,
     PageTitleComponent,
     MatTableModule,
     MatPaginatorModule
@@ -21,7 +22,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class DepartmentDetailsComponent implements OnInit {
   departmentName: string ='';
   department: any;
-  displayedColumns: string[] = ['id', 'name', 'email', 'position', 'salary'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'position', 'salary' ,'action'];
   dataSource: MatTableDataSource<Employee> = new MatTableDataSource<Employee>();
   departmentId: number = 0;
   totalEmployees: number = 0;
@@ -55,6 +56,6 @@ export class DepartmentDetailsComponent implements OnInit {
   }
 
   goBack(){
-    this.router.navigate(['/dapartments']);
+    this.router.navigate(['/departments']);
   }
 }

@@ -165,3 +165,32 @@ body {
   border-color: var(--primary-700-color);
   color: var(--light-color);
 }
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-header-row {
+  background-color: var(--primary-200-color) !important;
+}
+
+th {
+  color: var(--primary-800-color);
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 700;
+
+}
+
+td {
+  color: var(--primary-800-color);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.alert{
+  position: fixed;
+  bottom: 0;
+  right: 50px;
+  width: 350px;
+}
