@@ -14,9 +14,7 @@ import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DepartmentFormComponent } from './components/department-form/department-form.component';
 import { DepartmentDetailsComponent } from './components/department-details/department-details.component';
-
 import { AttendanceFormComponent } from './components/attendance-form/attendance-form.component';
-
 import { LayoutComponent } from './pages/layout/layout.component';
 import { authGuard } from './guard/auth.guard';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
@@ -33,7 +31,11 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
       { path: 'attendance', component: AttendanceComponent, title: 'Attendance'},
-      { path: 'attendance:id/edit', component: AttendanceComponent, title: 'Edit Attendance'},
+      {
+        path: 'attendance/:id/edit',
+        component : AttendanceFormComponent,
+        title: 'Edit Attendance',
+      },
       { path: 'bouns', component: BounsComponent, title: 'Bouns' },
       { path: 'departments', component: DepartmentComponent, title: 'Departments'},
       { path: 'departments/:id/edit', component: DepartmentFormComponent, title: 'Edit Department'},

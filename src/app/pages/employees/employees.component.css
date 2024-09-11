@@ -1,6 +1,6 @@
 .search-input {
   width: 450px;
-  border: 1px solid var(--primary-800-color);
+  border: 1px solid var(--primary-600-color);
   border-radius: 6px;
   transition: border-color 0.3s;
 }

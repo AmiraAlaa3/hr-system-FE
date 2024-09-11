@@ -194,3 +194,18 @@ td {
   right: 50px;
   width: 350px;
 }
+
+
+.btn-outline-add
+{
+  background-color: transparent;
+  border: 1px solid var(--primary-600-color);
+  color: var(--primary-600-color);
+}
+
+.btn-outline-add:hover,
+.btn-outline-add:active,
+.btn-outline-add:focus {
+  background-color: var(--primary-600-color);
+  color: var(--light-color);
+}

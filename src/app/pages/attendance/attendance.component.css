@@ -1,32 +1,32 @@
 .search-input {
-    width: 450px;
-    border: 1px solid var(--primary-800-color);
+    width: 500px;
+    border: 1px solid var(--primary-600-color);
     border-radius: 6px;
     transition: border-color 0.3s;
   }
   input{
     outline: none;
   }
-  
+
   input:focus {
     border-color: var(--secondary-500-color);
   }
-  
+
   input::placeholder {
     color: var(--primary-100-color);
     opacity: 1;
   }
-  
+
   input::-moz-placeholder {
     color: var(--primary-100-color);
     opacity: 1;
   }
-  
+
   input:-ms-input-placeholder {
     color: var(--primary-100-color);
     opacity: 1;
   }
-  
+
   .clear-search {
     color: var(--secondary-500-color);
     padding-top: 2px;
@@ -35,11 +35,11 @@
     transform: translateY(-50%);
     cursor: pointer;
   }
-  
+
   .bi-x::before {
     font-size: 20px;
   }
-  
+
   .search-icon {
     color: var(--secondary-500-color);
     left: 10px;
@@ -50,43 +50,42 @@
   .date-input {
     width: 200px; /* Adjust width as needed */
   }
-  
+
   .filter-button {
     padding: 0.5rem 1rem; /* Adjust padding for button */
     font-size: 1rem; /* Adjust font size */
   }
-  
+
   .d-flex {
     display: flex;
   }
-  
+
   .flex-column {
     flex-direction: column;
   }
-  
+
   .align-items-center {
     align-items: center;
   }
-  
+
   .me-2 {
     margin-right: 0.5rem; /* Space between inputs and button */
   }
-  
+
   .mb-3 {
     margin-bottom: 1rem; /* Space between inputs and button */
   }
-  
+
   .mt-5 {
     margin-top: 3rem; /* Top margin */
   }
-  
+
   .btn-primary {
     background-color: #007bff; /* Primary button color */
     border-color: #007bff; /* Border color for button */
   }
-  
+
   .btn-primary:hover {
     background-color: #0056b3; /* Darker color on hover */
     border-color: #004085; /* Darker border color on hover */
   }
-  
