@@ -1,15 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { PageTitleComponent } from '../page-title/page-title.component';
 import { EmployeeService } from '../../services/employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DepartmentService } from '../../services/department.service'; 
+import { DepartmentService } from '../../services/department.service';
 
 @Component({
   selector: 'app-employee-form',
@@ -21,11 +23,12 @@ import { DepartmentService } from '../../services/department.service';
 export class EmployeeFormComponent implements OnInit {
   employeeId: any;
   employee: any;
-  departments: any[] = []; 
-  errorMessages: any = {}; 
-  genders :string []= ['male', 'female']; 
+  departments: any[] = [];
+  errorMessages: { [key: string]: string[] } = {};
+
+  genders :string []= ['male', 'female'];
   Maritals :string [] = ['single','married','widowed'];
-  
+
   constructor(
     private employeeService: EmployeeService,
     private departmentService: DepartmentService,
@@ -48,7 +51,6 @@ export class EmployeeFormComponent implements OnInit {
         next: (response) => {
           this.employee = response.data;
           this.employeeForm.patchValue(this.employee);
-          console.log(this.employee)
           // this.getName.setValue(this.employee.name);
           // this.getAddress.setValue(this.employee.address);
           // this.getEmail.setValue(this.employee.email);
@@ -78,11 +80,11 @@ export class EmployeeFormComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required,Validators.email]),
     address: new FormControl('', [Validators.required]),
-    phone_number: new FormControl('', [Validators.required]),
+    phone_number: new FormControl('', [Validators.required,Validators.maxLength(11)]),
     gender: new FormControl('', [Validators.required]),
     nationality: new FormControl('', [Validators.required]),
     Marital_status: new FormControl('', [Validators.required]),
-    birthdate: new FormControl('', [Validators.required]),
+    birthdate: new FormControl('', [Validators.required,this.ageValidator(20)]),
     ssn: new FormControl('', [Validators.required]),
     check_in_time: new FormControl('', [Validators.required]),
     check_out_time: new FormControl('', [Validators.required]),
@@ -91,6 +93,21 @@ export class EmployeeFormComponent implements OnInit {
     hire_date: new FormControl('', [Validators.required]),
     position: new FormControl('', [Validators.required]),
   });
+
+  ageValidator(minAge: number): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const birthDate = new Date(control.value);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDifference = today.getMonth() - birthDate.getMonth();
+
+      if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      return age >= minAge ? null : { 'ageInvalid': { value: control.value } };
+    };
+  }
 
   get getName() {
     return this.employeeForm.controls['name'];
@@ -151,7 +168,7 @@ export class EmployeeFormComponent implements OnInit {
             });
           },
           error: (error) => {
-            this.errorMessages = error.error.errors;
+            this.errorMessages = error.error.error;
           }
         });
       } else {
@@ -164,12 +181,22 @@ export class EmployeeFormComponent implements OnInit {
               });
             },
             error: (error) => {
-              this.errorMessages = error.error.errors;
+              this.errorMessages = error.error.error;
             }
           });
       }
     } else {
       this.employeeForm.markAllAsTouched();
     }
+  }
+
+  // Method to get the keys of errorMessages
+  objectKeys(obj: any): string[] {
+    return Object.keys(obj);
+  }
+
+  // Method to check if there are any errors
+  hasErrors(): boolean {
+    return Object.keys(this.errorMessages).length > 0;
   }
 }

@@ -7,7 +7,7 @@ import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-mo
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { EmployeeService } from '../../services/employee.service';
-
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-employees',
   standalone: true,
@@ -19,6 +19,7 @@ import { EmployeeService } from '../../services/employee.service';
     ConfirmModalComponent,
     MatPaginatorModule,
     MatTableModule,
+    ReactiveFormsModule
   ],
   templateUrl: './employees.component.html',
   styleUrl: './employees.component.css',
@@ -27,6 +28,8 @@ export class EmployeesComponent implements OnInit {
   message: string | null = null;
   showModal: boolean = false;
   employeeIdToDelete: number | null = null;
+
+  searchControl = new FormControl('');
 
   displayedColumns: string[] =  ['id', 'name', 'email', 'position', 'department','action'];
   dataSource!: MatTableDataSource<any>;
@@ -49,13 +52,16 @@ export class EmployeesComponent implements OnInit {
       }
     });
     this.loadDepartments();
+    // Listen for changes on the search input
+    this.searchControl.valueChanges.subscribe(value => {
+      this.applyFilter(value);
+    });
   }
 
   loadDepartments(): void {
     this.employeeService.getEmployees().subscribe({
       next: (response) => {
         this.dataSource = new MatTableDataSource(response.data);
-        console.log(this.dataSource)
         this.dataSource.paginator = this.paginator;
         this.totalEmployees = response.data.length;
       },
@@ -100,5 +106,13 @@ export class EmployeesComponent implements OnInit {
 
   closeMessage() {
     this.message = null;
+  }
+  // search by employee name
+  applyFilter(value: any) {
+    this.dataSource.filter = value.trim().toLowerCase();
+  }
+  clearSearch(){
+    this.searchControl.setValue('');
+    this.dataSource.filter = '';
   }
 }

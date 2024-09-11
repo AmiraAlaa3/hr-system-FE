@@ -2,6 +2,19 @@
   <app-page-title
     [title]="employeeId == 0 ? 'Add New Employee' : 'Edit Employee'"></app-page-title>
 
+
+
+    <div *ngIf="hasErrors()" class="alert alert-danger">
+      <ul>
+        <li *ngFor="let key of objectKeys(errorMessages)">
+          <strong>{{ key }}:</strong>
+          <ul>
+            <li *ngFor="let message of errorMessages[key]">{{ message }}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
   <form (submit)="EmployeeHandler($event)" [formGroup]="employeeForm"
     class="w-100 mt-5">
     <div class="row">
@@ -190,6 +203,12 @@
               Employee Birth Date is Required
             </div>
             }
+            @if(getBirthdate.hasError('ageInvalid')){
+              <div class="form-text mt-2 text-danger">
+                Employee Age must be grater than 20 year
+              </div>
+              }
+
           </ng-container>
           }
         </div>
@@ -234,7 +253,7 @@
               Employee Department is Required
             </div>
           }
-         
+
         </div>
         <div class="mb-3">
           <label for="position" class="form-label"><span
@@ -324,6 +343,5 @@
         </div>
       </div>
     </div>
-
   </form>
 </div>
