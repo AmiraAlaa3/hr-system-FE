@@ -17,6 +17,7 @@ import { DepartmentDetailsComponent } from './components/department-details/depa
 import { LayoutComponent } from './pages/layout/layout.component';
 import { authGuard } from './guard/auth.guard';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
+import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 
 
 export const routes: Routes = [
@@ -28,17 +29,15 @@ export const routes: Routes = [
     canActivate:[authGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
-      { path: 'attendance', component: AttendanceComponent, title: 'Attendance', children:[
-        { path: ':id/edit', component: AttendanceComponent, title: 'Edit Attendance'},
-      ]},
+      { path: 'attendance', component: AttendanceComponent, title: 'Attendance'},
+      { path: 'attendance:id/edit', component: AttendanceComponent, title: 'Edit Attendance'},
       { path: 'bouns', component: BounsComponent, title: 'Bouns' },
-      { path: 'departments', component: DepartmentComponent, title: 'Departments', children:[
-        { path: ':id/edit', component: DepartmentFormComponent, title: 'Edit Department'},
-        { path: ':id', component: DepartmentDetailsComponent, title: 'Department Details'},
-      ]},
-      { path: 'employees', component: EmployeesComponent, title: 'All Employees', children:[
-        { path: ':id/edit', component: EmployeesComponent, title: 'Edit Employee'},
-      ]},
+      { path: 'departments', component: DepartmentComponent, title: 'Departments'},
+      { path: 'departments/:id/edit', component: DepartmentFormComponent, title: 'Edit Department'},
+      { path: 'departments/:id', component: DepartmentDetailsComponent, title: 'Department Details'},
+      { path: 'employees', component: EmployeesComponent, title: 'All Employees'},
+      { path: 'employees/:id/edit', component: EmployeeFormComponent, title: 'Employee'},
+      { path: 'employees/:id', component: EmployeeDetailsComponent, title: 'Employee'},
       { path: 'groups', component: GroupsComponent, title: 'Groups' },
       { path: 'leaves', component: LeavesComponent, title: 'Leaves' },
       { path: 'officalHolidays', component: OfficalHolidaysComponent, title: 'Offical Holidays', children:[
@@ -56,4 +55,4 @@ export const routes: Routes = [
 
   { path: '**', component: NotfoundComponent, title: 'not found' }
 ];
- 
+

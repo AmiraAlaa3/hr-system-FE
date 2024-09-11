@@ -35,7 +35,6 @@ export class DepartmentFormComponent implements OnInit {
     });
 
     if (this.departmentId != 0) {
-      console.log(this.departmentId);
       this.departmentService.getDepartment(this.departmentId).subscribe({
         next: (response) => {
           this.department = response.data;

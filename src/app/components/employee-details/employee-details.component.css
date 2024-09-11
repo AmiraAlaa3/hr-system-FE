@@ -1,0 +1,65 @@
+.employee {
+  color: var(--primary-300-color);
+}
+
+.page-title {
+  color: var(--primary-800-color);
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.card-info {
+  background-color: var(--primary-100-color);
+  color: var(--primary-800-color);
+  border-radius: 6px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+  position: relative;
+}
+
+.fw-semibold {
+  text-transform: capitalize;
+  color: var(--primary-800-color);
+}
+
+.employee-sub {
+  text-transform: capitalize;
+  color: var(--primary-700-color) !important;
+  font-weight: 500;
+}
+
+.col-line {
+  position: relative;
+}
+
+.col-line::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -20px;
+  bottom: 0;
+  top: 0;
+  width: 1px;
+  border: 1px solid var(--primary-300-color);
+}
+
+.title {
+  display: inline-block;
+  width: 30%;
+}
+
+.info {
+  color: var(--secondary-500-color);
+}
+
+.edit-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+  color: var(--primary-600-color);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--background-300-color);
+}
