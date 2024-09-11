@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AttendanceService } from '../../services/attendance.service';
-import { EmployeeService } from '../../services/employee.service'; // Import the employee service
+import { EmployeeService } from '../../services/employee.service';
 import { PageTitleComponent } from '../page-title/page-title.component';
 import { CommonModule } from '@angular/common';
 
@@ -17,16 +17,16 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, PageTitleComponent],
   templateUrl: './attendance-form.component.html',
-  styleUrls: ['./attendance-form.component.css'] // Corrected styleUrls
+  styleUrls: ['./attendance-form.component.css']
 })
 export class AttendanceFormComponent implements OnInit {
   attendanceId: any;
   attendance: any;
-  employees: any[] = []; // Array to hold employee data
+  employees: any[] = [];
 
   constructor(
     private attendanceService: AttendanceService,
-    private employeeService: EmployeeService, // Inject employee service
+    private employeeService: EmployeeService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -35,7 +35,7 @@ export class AttendanceFormComponent implements OnInit {
     // Fetch the list of employees when the component initializes
     this.employeeService.getEmployees().subscribe({
       next: (response) => {
-        this.employees = response.data; // Assuming response.data holds the list of employees
+        this.employees = response.data;
       },
     });
 
@@ -56,8 +56,8 @@ export class AttendanceFormComponent implements OnInit {
         this.attendance = response.data;
         this.attendanceForm.patchValue({
           employee_id: this.attendance.employee_id,
-          checkIN: this.attendance.check_in,
-          checkOUT: this.attendance.check_out,
+          checkIN: this.attendance.checkIN,
+          checkOUT: this.attendance.checkOUT,
           date: this.attendance.date,
         });
       },
@@ -65,7 +65,7 @@ export class AttendanceFormComponent implements OnInit {
   }
 
   attendanceForm = new FormGroup({
-    employee_id: new FormControl('', [Validators.required]), // Correctly named form control
+    employee_id: new FormControl('', [Validators.required]),
     checkIN: new FormControl('', [Validators.required]),
     checkOUT: new FormControl('', [Validators.required]),
     date: new FormControl('', [Validators.required])
@@ -116,5 +116,5 @@ export class AttendanceFormComponent implements OnInit {
       this.attendanceForm.markAllAsTouched();
     }
   }
-  
+
 }

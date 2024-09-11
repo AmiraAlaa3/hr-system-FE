@@ -39,7 +39,7 @@ export class AttendanceComponent implements OnInit {
   searchTerm: string = '';
   startDate: string | null = null;
   endDate: string | null = null;
-  // dataSource!: MatTableDataSource<any>;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -64,8 +64,6 @@ export class AttendanceComponent implements OnInit {
     this.attendanceService.getAttendances().subscribe({
 
       next: (response) => {
-        console.log(response.data);
-        // console.log(response);
         this.dataSource = new MatTableDataSource(response.data);
         console.log(this.dataSource);
         this.dataSource.paginator = this.paginator;
@@ -79,30 +77,30 @@ export class AttendanceComponent implements OnInit {
 
   applyFilter(): void {
     const filterValue = this.searchTerm.trim().toLowerCase();
-  
+
     this.dataSource.filterPredicate = (data: any, filter: string) => {
       const employeeName = data.employee_name ? data.employee_name.toLowerCase() : '';
       const departmentName = data.department_name ? data.department_name.toLowerCase() : '';
-  
+
       return employeeName.includes(filter) || departmentName.includes(filter);
     };
-  
+
     this.dataSource.filter = filterValue;
   }
   filterByDate(): void {
     const startDateValue = this.startDate ? new Date(this.startDate) : null;
     const endDateValue = this.endDate ? new Date(this.endDate) : null;
-  
+
     this.dataSource.filterPredicate = (data: any, filter: string): boolean => {
       const attendanceDate = data.date ? new Date(data.date) : null;
-  
+
       const matchesDateRange =
         (!startDateValue || (attendanceDate && attendanceDate >= startDateValue)) &&
         (!endDateValue || (attendanceDate && attendanceDate <= endDateValue));
-  
+
       return matchesDateRange || false;
     };
-  
+
     this.dataSource.filter = 'filter'; // Just a dummy value to trigger the filter
   }
   // searchAttendances(): void {
@@ -159,6 +157,10 @@ export class AttendanceComponent implements OnInit {
   closeModal(): void {
     this.showModal = false;
     this.attendanceIdToDelete = null;
+  }
+  clearSearch() :void{
+    this.searchTerm = '';
+    this.dataSource.filter = '';
   }
 }
 
