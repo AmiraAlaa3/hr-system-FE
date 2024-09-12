@@ -19,6 +19,7 @@ import { LayoutComponent } from './pages/layout/layout.component';
 import { authGuard } from './guard/auth.guard';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
+import { HolidayFormComponent } from './components/holiday-form/holiday-form.component';
 
 
 export const routes: Routes = [
@@ -45,12 +46,10 @@ export const routes: Routes = [
       { path: 'employees/:id', component: EmployeeDetailsComponent, title: 'Employee'},
       { path: 'groups', component: GroupsComponent, title: 'Groups' },
       { path: 'leaves', component: LeavesComponent, title: 'Leaves' },
-      { path: 'officalHolidays', component: OfficalHolidaysComponent, title: 'Offical Holidays', children:[
-        { path: ':id/edit', component: OfficalHolidaysComponent, title: 'Add offical Holiday'},
-      ]},
-      { path: 'salary', component: SalaryComponent, title: 'Salary', children:[
-        { path: ':id/edit', component: SalaryComponent, title: 'Edit Salary'},
-      ]},
+      { path: 'officalHolidays', component: OfficalHolidaysComponent, title: 'Offical Holidays'},
+      { path: 'officalHolidays/:id/edit', component: HolidayFormComponent, title: 'offical Holiday'},
+      { path: 'salary', component: SalaryComponent, title: 'Salary'},
+      { path: 'salary/:id/edit', component: SalaryComponent, title: 'Edit Salary'},
       { path: 'users', component: UsersComponent, title: 'All Users', children:[
         { path: 'add', component: UsersComponent, title: 'Add new Admin'},
       ] },
