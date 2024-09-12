@@ -31,6 +31,7 @@ export class AttendanceComponent implements OnInit {
   message: string | null = null;
   showModal: boolean = false;
   attendanceIdToDelete: number | null = null;
+  searchError : string = '';
 
 
   displayedColumns: string[] = ['id', 'DepartmentName','EmployeeName','checkIN','checkOUT','date', 'action'];
@@ -77,6 +78,13 @@ export class AttendanceComponent implements OnInit {
 
   applyFilter(): void {
     const filterValue = this.searchTerm.trim().toLowerCase();
+    if(!filterValue) {
+      this.searchError = 'Please enter a search term';
+      setTimeout(() => {
+        this.searchError = '';
+      }, 3000);
+      return;
+    }
 
     this.dataSource.filterPredicate = (data: any, filter: string) => {
       const employeeName = data.employee_name ? data.employee_name.toLowerCase() : '';
@@ -90,6 +98,13 @@ export class AttendanceComponent implements OnInit {
   filterByDate(): void {
     const startDateValue = this.startDate ? new Date(this.startDate) : null;
     const endDateValue = this.endDate ? new Date(this.endDate) : null;
+    if (!startDateValue &&!endDateValue) {
+      this.searchError = 'Please Select Date';
+      setTimeout(() => {
+        this.searchError = '';
+      }, 3000);
+      return;
+    }
 
     this.dataSource.filterPredicate = (data: any, filter: string): boolean => {
       const attendanceDate = data.date ? new Date(data.date) : null;

@@ -21,6 +21,11 @@
       <i class="bi bi-x position-absolute clear-search"
         (click)="clearSearch()"></i>
     </div>
+    @if (searchError !='') {
+      <div class="alert alert-danger">
+        {{ searchError }}
+      </div>
+    }
   </div>
 
   <!-- date filter -->
