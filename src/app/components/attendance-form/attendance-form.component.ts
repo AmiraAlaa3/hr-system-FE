@@ -87,6 +87,10 @@ export class AttendanceFormComponent implements OnInit {
   attendanceHandler(e: any) {
     e.preventDefault();
     if (this.attendanceForm.status === 'VALID') {
+      const formValue = this.attendanceForm.value;
+      formValue.checkIN = this.convertToTimeWithSeconds(formValue.checkIN);
+      formValue.checkOUT = this.convertToTimeWithSeconds(formValue.checkOUT);
+
       if (this.attendanceId == 0) {
         this.attendanceService
           .createAttendance(this.attendanceForm.value)
@@ -97,6 +101,7 @@ export class AttendanceFormComponent implements OnInit {
               });
             },
             error: (error) => {
+              console.log(this.attendanceForm.value)
               // Extract and set validation errors
               // this.setServerErrors(error);
             }
@@ -117,4 +122,10 @@ export class AttendanceFormComponent implements OnInit {
     }
   }
 
+ convertToTimeWithSeconds(time: any): string {
+    if (time.length === 8) {
+      return time;
+    }
+    return time + ':00';
+  }
 }

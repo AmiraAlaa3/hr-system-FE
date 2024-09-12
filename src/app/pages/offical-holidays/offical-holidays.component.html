@@ -1,1 +1,7 @@
-<p>offical-holidays works!</p>
+<div class="container px-5 py-3">
+  <app-page-title [title]="'All Official Holidays'" />
+  <div class="d-flex justify-content-end align-items-center mb-4">
+    <app-add-button [entity]="'Holiday'"
+      [routerLink]="['/officalHolidays', 0, 'edit']" />
+  </div>
+</div>
