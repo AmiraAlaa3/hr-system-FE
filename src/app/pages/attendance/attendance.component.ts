@@ -41,6 +41,7 @@ export class AttendanceComponent implements OnInit {
   searchTerm: string = '';
   startDate: string | null = null;
   endDate: string | null = null;
+  importMessage: string | null = null;
 
   showImportForm = false;
   selectedFile: File | null = null;
@@ -200,24 +201,32 @@ export class AttendanceComponent implements OnInit {
 
   importExcelFile(): void {
     if (!this.selectedFile) {
-      alert('Please select a file to upload.');
+      this.importMessage = 'Please select a file to upload.';
+      setTimeout(() => {
+        this.importMessage = null;
+      }, 3000);
       return;
     }
 
     const formData = new FormData();
     formData.append('import_file', this.selectedFile);
 
-    
+
 
     this.attendanceService.importExcelFile(formData).subscribe({
       next: (response: any) => {
-        console.log('File imported successfully', response);
-        alert('File imported successfully');
+        this.importMessage = 'File imported successfully';
+        this.loadAttendances();
         this.closeImportForm();
+        setTimeout(() => {
+          this.importMessage = null;
+        }, 3000);
       },
       error: (error: any) => {
-        console.error('Error importing file', error);
-        alert('Error importing file');
+        this.importMessage = 'Error importing file';
+        setTimeout(() => {
+          this.importMessage = null;
+        }, 3000);
       }
     });
   }
