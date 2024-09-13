@@ -1,15 +1,12 @@
 import { Routes } from '@angular/router';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
-import { BounsComponent } from './pages/bouns/bouns.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DepartmentComponent } from './pages/department/department.component';
 import { EmployeesComponent } from './pages/employees/employees.component';
 import { GroupsComponent } from './pages/groups/groups.component';
-import { LeavesComponent } from './pages/leaves/leaves.component';
 import { OfficalHolidaysComponent } from './pages/offical-holidays/offical-holidays.component';
 import { SalaryComponent } from './pages/salary/salary.component';
 import { UsersComponent } from './pages/users/users.component';
-import { WeeklyHolidaysComponent } from './pages/weekly-holidays/weekly-holidays.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DepartmentFormComponent } from './components/department-form/department-form.component';
@@ -21,6 +18,7 @@ import { authGuard } from './guard/auth.guard';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 import { HolidayFormComponent } from './components/holiday-form/holiday-form.component';
+import { SettingsFormComponent } from './components/settings-form/settings-form.component';
 
 
 export const routes: Routes = [
@@ -38,12 +36,7 @@ export const routes: Routes = [
         component : AttendanceFormComponent,
         title: 'Edit Attendance',
       },
-      // {
-      //   path: 'attendance/ExcelImport',
-      //   component : AttendanceExcelComponent,
-      //   title: 'Add Excel File',
-      // },
-      { path: 'bouns', component: BounsComponent, title: 'Bouns' },
+      { path: 'settings', component: SettingsFormComponent, title: 'settings' },
       { path: 'departments', component: DepartmentComponent, title: 'Departments'},
       { path: 'departments/:id/edit', component: DepartmentFormComponent, title: 'Edit Department'},
       { path: 'departments/:id', component: DepartmentDetailsComponent, title: 'Department Details'},
@@ -51,7 +44,6 @@ export const routes: Routes = [
       { path: 'employees/:id/edit', component: EmployeeFormComponent, title: 'Employee'},
       { path: 'employees/:id', component: EmployeeDetailsComponent, title: 'Employee'},
       { path: 'groups', component: GroupsComponent, title: 'Groups' },
-      { path: 'leaves', component: LeavesComponent, title: 'Leaves' },
       { path: 'officalHolidays', component: OfficalHolidaysComponent, title: 'Offical Holidays'},
       { path: 'officalHolidays/:id/edit', component: HolidayFormComponent, title: 'offical Holiday'},
       { path: 'salary', component: SalaryComponent, title: 'Salary'},
@@ -59,7 +51,6 @@ export const routes: Routes = [
       { path: 'users', component: UsersComponent, title: 'All Users', children:[
         { path: 'add', component: UsersComponent, title: 'Add new Admin'},
       ] },
-      { path: 'weeklyHolidays', component: WeeklyHolidaysComponent, title: 'Weekly Holidays'},
     ]
   },
 

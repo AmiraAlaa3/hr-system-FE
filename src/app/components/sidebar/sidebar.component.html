@@ -32,12 +32,6 @@
         </li>
         <li>
             <a href="#" class="nav-link d-flex align-items-center"
-            [routerLink]="['/leaves']">
-                <i class="bi bi-calendar-event me-2"></i> Leaves
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link d-flex align-items-center"
             [routerLink]="['/officalHolidays']">
                 <i class="bi bi-calendar4-week me-2"></i> Official Holidays
             </a>
@@ -67,11 +61,11 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link d-flex align-items-center"
-            [routerLink]="['/weeklyHolidays']">
-                <i class="bi bi-calendar-week me-2"></i> Weekly Holidays
-            </a>
-        </li>
+          <a href="#" class="nav-link d-flex align-items-center"
+          [routerLink]="['/settings']">
+                <i class="bi bi-gear me-2"></i>General settings
+          </a>
+      </li>
         <li>
             <a href="#" class="nav-link d-flex align-items-center"
             [routerLink]="['/']" (click)="logout()">
