@@ -46,8 +46,24 @@
    <div class="d-flex justify-content-end align-items-center mb-4">
     <app-add-button [entity]="'Attendance'"
       [routerLink]="['/attendance', 0, 'edit']" />
+      <!-- <app-add-button [entity]="'Excel'"
+      [routerLink]="['/attendance/ExcelImport']" /> -->
+      <button class="btn btn-add ms-2" (click)="openImportForm()">
+        <i class="bi bi-plus-lg"></i>
+        Import Excel File</button>
   </div>
 
+<!-- Import Form -->
+<div *ngIf="showImportForm" class="import-form">
+  <form (ngSubmit)="importExcelFile()">
+    <div class="mb-3">
+      <label for="importFile" class="form-label">Choose Excel File</label>
+      <input type="file" id="importFile" (change)="onFileSelected($event)" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-success">Upload</button>
+    <button type="button" class="btn btn-secondary" (click)="closeImportForm()">Cancel</button>
+  </form>
+</div>
   <!-- attendance table -->
   <div className="table-responsive mb-4">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
