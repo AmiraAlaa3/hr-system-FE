@@ -10,6 +10,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-attendance',
@@ -23,6 +24,7 @@ import { HttpClient } from '@angular/common/http';
     MatPaginatorModule,
     MatTableModule,
     FormsModule,
+    MatSortModule,
   ],
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.css'],
@@ -46,7 +48,7 @@ export class AttendanceComponent implements OnInit {
   showImportForm = false;
   selectedFile: File | null = null;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  @ViewChild(MatSort) sort!: MatSort;
   constructor(
     private attendanceService: AttendanceService,
     private activatedRoute: ActivatedRoute,
@@ -70,10 +72,13 @@ export class AttendanceComponent implements OnInit {
     this.attendanceService.getAttendances().subscribe({
 
       next: (response) => {
-        this.dataSource = new MatTableDataSource(response.data);
-        console.log(this.dataSource);
-        this.dataSource.paginator = this.paginator;
-        this.totalAttendances = response.data.length;
+          const sortedData = response.data.sort((a: any, b: any) => {
+            return new Date(a.date).getTime() - new Date(b.date).getTime();
+          });
+          this.dataSource = new MatTableDataSource(sortedData);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.totalAttendances = sortedData.length;
       },
       error: (error) => {
         console.log(error);
