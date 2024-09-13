@@ -48,4 +48,8 @@ export class AttendanceService {
       .set('end_date', endDate);
     return this.http.get(`${this.apiUrl}/filterByDate`, { params });
   }
+
+  importExcelFile(formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/ExcelImport`, formData);
+  }
 }

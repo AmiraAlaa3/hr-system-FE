@@ -9,6 +9,7 @@ import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-mo
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-attendance',
@@ -41,12 +42,15 @@ export class AttendanceComponent implements OnInit {
   startDate: string | null = null;
   endDate: string | null = null;
 
+  showImportForm = false;
+  selectedFile: File | null = null;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private attendanceService: AttendanceService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -176,6 +180,46 @@ export class AttendanceComponent implements OnInit {
   clearSearch() :void{
     this.searchTerm = '';
     this.dataSource.filter = '';
+  }
+
+  openImportForm(): void {
+    this.showImportForm = true;
+  }
+
+  closeImportForm(): void {
+    this.showImportForm = false;
+    this.selectedFile = null;
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
+  }
+
+  importExcelFile(): void {
+    if (!this.selectedFile) {
+      alert('Please select a file to upload.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('import_file', this.selectedFile);
+
+    
+
+    this.attendanceService.importExcelFile(formData).subscribe({
+      next: (response: any) => {
+        console.log('File imported successfully', response);
+        alert('File imported successfully');
+        this.closeImportForm();
+      },
+      error: (error: any) => {
+        console.error('Error importing file', error);
+        alert('Error importing file');
+      }
+    });
   }
 }
 
