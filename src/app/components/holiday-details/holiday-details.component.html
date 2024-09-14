@@ -1,0 +1,58 @@
+<div class="container px-5 py-3">
+    <header class="my-4">
+      <h1 class="page-title">
+        <span class="text-muted fw-semibold">All Offical Holidays ></span> View
+        <span class="holiday">{{holiday?.title}}</span> Holiday
+      </h1>
+      <p>
+        This page will show holiday
+        <span class="holiday">{{holiday?.title}}</span> information.
+      </p>
+    </header>
+
+    <div class="container d-flex justify-content-center align-items-center min-vh-95">
+        <div class="card shadow p-4" style="width: 45rem; background-color: #f8f9fa;">
+          <div class="card-body">
+            <main>
+              <div class="card-info mb-4 text-center">
+                <h2 class="mb-4 "style="background-color: #3a89d8;">Holiday Details</h2>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <p class="fw-4 mb-2">
+                    <span class="fw-semibold title">Date: </span>
+                    <span class="holiday-sub">{{holiday?.date}}</span>
+                  </p>
+                  <p class="fw-4 mb-2">
+                    <span class="fw-semibold title">Title: </span>
+                    <span class="holiday-sub">{{holiday?.title}}</span>
+                  </p>
+                  <p class="fw-4 mb-2">
+                    <span class="fw-semibold title">Description: </span>
+                    <span class="info">{{holiday?.description}}</span>
+                  </p>
+                  <p class="fw-4 mb-2">
+                    <span class="fw-semibold title">From Date: </span>
+                    <span class="info">{{holiday?.from_date}}</span>
+                  </p>
+                  <p class="fw-4 mb-2">
+                    <span class="fw-semibold title">To Date: </span>
+                    <span class="info">{{holiday?.to_date}}</span>
+                  </p>
+                  <p class="fw-4 mb-2">
+                    <span class="fw-semibold title">Number Of Days: </span>
+                    <span class="info">{{holiday?.numberOfDays}}</span>
+                  </p>
+                </div>
+              </div>
+              <div class="text-center mt-4">
+                <button class="btn btn-primary px-5" (click)="goBack()">Back</button>
+                <div class="edit-icon d-inline-flex justify-content-center align-items-center ms-3 p-2 rounded-circle" style="background-color: #3a89d8;" role="button">
+                  <i class="bi bi-pen" [routerLink]="['/officalHolidays', holiday?.id, 'edit']"></i>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+</div>
