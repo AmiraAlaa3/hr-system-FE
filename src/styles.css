@@ -190,7 +190,7 @@ td {
 
 .alert{
   position: fixed;
-  bottom: 0;
+  top: 100px;
   right: 50px;
   width: 350px;
 }
@@ -201,6 +201,7 @@ td {
   background-color: transparent;
   border: 1px solid var(--primary-600-color);
   color: var(--primary-600-color);
+  font-size: 20px;
 }
 
 .btn-outline-add:hover,

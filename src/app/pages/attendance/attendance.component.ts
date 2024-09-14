@@ -10,6 +10,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-attendance',
@@ -23,6 +24,7 @@ import { HttpClient } from '@angular/common/http';
     MatPaginatorModule,
     MatTableModule,
     FormsModule,
+    MatSortModule,
   ],
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.css'],
@@ -41,11 +43,12 @@ export class AttendanceComponent implements OnInit {
   searchTerm: string = '';
   startDate: string | null = null;
   endDate: string | null = null;
+  importMessage: string | null = null;
 
   showImportForm = false;
   selectedFile: File | null = null;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  @ViewChild(MatSort) sort!: MatSort;
   constructor(
     private attendanceService: AttendanceService,
     private activatedRoute: ActivatedRoute,
@@ -69,10 +72,13 @@ export class AttendanceComponent implements OnInit {
     this.attendanceService.getAttendances().subscribe({
 
       next: (response) => {
-        this.dataSource = new MatTableDataSource(response.data);
-        console.log(this.dataSource);
-        this.dataSource.paginator = this.paginator;
-        this.totalAttendances = response.data.length;
+          const sortedData = response.data.sort((a: any, b: any) => {
+            return new Date(a.date).getTime() - new Date(b.date).getTime();
+          });
+          this.dataSource = new MatTableDataSource(sortedData);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.totalAttendances = sortedData.length;
       },
       error: (error) => {
         console.log(error);
@@ -185,24 +191,32 @@ export class AttendanceComponent implements OnInit {
 
   importExcelFile(): void {
     if (!this.selectedFile) {
-      alert('Please select a file to upload.');
+      this.importMessage = 'Please select a file to upload.';
+      setTimeout(() => {
+        this.importMessage = null;
+      }, 3000);
       return;
     }
 
     const formData = new FormData();
     formData.append('import_file', this.selectedFile);
 
-    
+
 
     this.attendanceService.importExcelFile(formData).subscribe({
       next: (response: any) => {
-        console.log('File imported successfully', response);
-        alert('File imported successfully');
+        this.importMessage = 'File imported successfully';
+        this.loadAttendances();
         this.closeImportForm();
+        setTimeout(() => {
+          this.importMessage = null;
+        }, 3000);
       },
       error: (error: any) => {
-        console.error('Error importing file', error);
-        alert('Error importing file');
+        this.importMessage = 'Error importing file';
+        setTimeout(() => {
+          this.importMessage = null;
+        }, 3000);
       }
     });
   }
