@@ -19,8 +19,12 @@ import { LayoutComponent } from './pages/layout/layout.component';
 import { authGuard } from './components/guard/auth.guard';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
+
+import { OfficalHolidayFormComponent } from './components/offical-holiday-form/offical-holiday-form.component';
+import { HolidayDetailsComponent } from './components/holiday-details/holiday-details.component';
 import { HolidayFormComponent } from './components/holiday-form/holiday-form.component';
 import { SettingsFormComponent } from './components/settings-form/settings-form.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -49,15 +53,16 @@ export const routes: Routes = [
       { path: 'employees/:id', component: EmployeeDetailsComponent, title: 'Employee'},
       { path: 'groups', component: GroupsComponent, title: 'Groups' },
       { path: 'officalHolidays', component: OfficalHolidaysComponent, title: 'Offical Holidays'},
-      { path: 'officalHolidays/:id/edit', component: HolidayFormComponent, title: 'offical Holiday'},
+
+      { path: 'officalHolidays/:id/edit', component: OfficalHolidayFormComponent, title: 'offical Holiday'},
+      { path: 'officalHolidays/:id', component: HolidayDetailsComponent, title: 'View Holiday'},
+      { path: 'salary', component: SalaryComponent, title: 'Salary', children:[
+        { path: ':id/edit', component: SalaryComponent, title: 'Edit Salary'},
+      ]},
+
       { path: 'salary', component: SalaryComponent, title: 'Salary'},
       { path: 'salary/:id/edit', component: SalaryComponent, title: 'Edit Salary'},
       { path: 'users', component: UsersComponent, title: 'All Users'},
-      // {
-      //   path: 'user/:id/edit',
-      //   component : UserFormComponent,
-      //   title: 'Edit User',
-      // },
       { path: 'user/:id/edit', component: UserFormComponent },
 
       { path: 'settings', component: SettingsFormComponent, title: 'settings' },
@@ -107,14 +112,6 @@ export const routes: Routes = [
         path: 'salary/:id/edit',
         component: SalaryComponent,
         title: 'Edit Salary',
-      },
-      {
-        path: 'users',
-        component: UsersComponent,
-        title: 'All Users',
-        children: [
-          { path: 'add', component: UsersComponent, title: 'Add new Admin' },
-        ],
       },
     ],
   },
