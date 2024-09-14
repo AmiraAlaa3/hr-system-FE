@@ -9,6 +9,8 @@ import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-mo
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-attendance',
@@ -22,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatTableModule,
     FormsModule,
+    MatSortModule,
   ],
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.css'],
@@ -31,6 +34,7 @@ export class AttendanceComponent implements OnInit {
   message: string | null = null;
   showModal: boolean = false;
   attendanceIdToDelete: number | null = null;
+  searchError : string = '';
 
 
   displayedColumns: string[] = ['id', 'DepartmentName','EmployeeName','checkIN','checkOUT','date', 'action'];
@@ -39,13 +43,17 @@ export class AttendanceComponent implements OnInit {
   searchTerm: string = '';
   startDate: string | null = null;
   endDate: string | null = null;
+  importMessage: string | null = null;
 
+  showImportForm = false;
+  selectedFile: File | null = null;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  @ViewChild(MatSort) sort!: MatSort;
   constructor(
     private attendanceService: AttendanceService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -64,10 +72,13 @@ export class AttendanceComponent implements OnInit {
     this.attendanceService.getAttendances().subscribe({
 
       next: (response) => {
-        this.dataSource = new MatTableDataSource(response.data);
-        console.log(this.dataSource);
-        this.dataSource.paginator = this.paginator;
-        this.totalAttendances = response.data.length;
+          const sortedData = response.data.sort((a: any, b: any) => {
+            return new Date(a.date).getTime() - new Date(b.date).getTime();
+          });
+          this.dataSource = new MatTableDataSource(sortedData);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.totalAttendances = sortedData.length;
       },
       error: (error) => {
         console.log(error);
@@ -77,6 +88,13 @@ export class AttendanceComponent implements OnInit {
 
   applyFilter(): void {
     const filterValue = this.searchTerm.trim().toLowerCase();
+    if(!filterValue) {
+      this.searchError = 'Please enter a search term';
+      setTimeout(() => {
+        this.searchError = '';
+      }, 3000);
+      return;
+    }
 
     this.dataSource.filterPredicate = (data: any, filter: string) => {
       const employeeName = data.employee_name ? data.employee_name.toLowerCase() : '';
@@ -90,6 +108,13 @@ export class AttendanceComponent implements OnInit {
   filterByDate(): void {
     const startDateValue = this.startDate ? new Date(this.startDate) : null;
     const endDateValue = this.endDate ? new Date(this.endDate) : null;
+    if (!startDateValue &&!endDateValue) {
+      this.searchError = 'Please Select Date';
+      setTimeout(() => {
+        this.searchError = '';
+      }, 3000);
+      return;
+    }
 
     this.dataSource.filterPredicate = (data: any, filter: string): boolean => {
       const attendanceDate = data.date ? new Date(data.date) : null;
@@ -161,6 +186,54 @@ export class AttendanceComponent implements OnInit {
   clearSearch() :void{
     this.searchTerm = '';
     this.dataSource.filter = '';
+  }
+
+  openImportForm(): void {
+    this.showImportForm = true;
+  }
+
+  closeImportForm(): void {
+    this.showImportForm = false;
+    this.selectedFile = null;
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
+  }
+
+  importExcelFile(): void {
+    if (!this.selectedFile) {
+      this.importMessage = 'Please select a file to upload.';
+      setTimeout(() => {
+        this.importMessage = null;
+      }, 3000);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('import_file', this.selectedFile);
+
+
+
+    this.attendanceService.importExcelFile(formData).subscribe({
+      next: (response: any) => {
+        this.importMessage = 'File imported successfully';
+        this.loadAttendances();
+        this.closeImportForm();
+        setTimeout(() => {
+          this.importMessage = null;
+        }, 3000);
+      },
+      error: (error: any) => {
+        this.importMessage = 'Error importing file';
+        setTimeout(() => {
+          this.importMessage = null;
+        }, 3000);
+      }
+    });
   }
 }
 
