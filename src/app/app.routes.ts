@@ -19,6 +19,8 @@ import { LayoutComponent } from './pages/layout/layout.component';
 import { authGuard } from './guard/auth.guard';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
+import { OfficalHolidayFormComponent } from './components/offical-holiday-form/offical-holiday-form.component';
+import { HolidayDetailsComponent } from './components/holiday-details/holiday-details.component';
 
 
 export const routes: Routes = [
@@ -45,9 +47,9 @@ export const routes: Routes = [
       { path: 'employees/:id', component: EmployeeDetailsComponent, title: 'Employee'},
       { path: 'groups', component: GroupsComponent, title: 'Groups' },
       { path: 'leaves', component: LeavesComponent, title: 'Leaves' },
-      { path: 'officalHolidays', component: OfficalHolidaysComponent, title: 'Offical Holidays', children:[
-        { path: ':id/edit', component: OfficalHolidaysComponent, title: 'Add offical Holiday'},
-      ]},
+      { path: 'officalHolidays', component: OfficalHolidaysComponent, title: 'Offical Holidays'},
+      { path: 'officalHolidays/:id/edit', component: OfficalHolidayFormComponent, title: 'offical Holiday'},
+      { path: 'officalHolidays/:id', component: HolidayDetailsComponent, title: 'View Holiday'},
       { path: 'salary', component: SalaryComponent, title: 'Salary', children:[
         { path: ':id/edit', component: SalaryComponent, title: 'Edit Salary'},
       ]},
