@@ -1,4 +1,4 @@
-import { Group } from './../../models/user';
+import { Group } from './../../models/group';
 // import { Component } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators ,FormBuilder} from '@angular/forms';
@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './user-form.component.css'
 })
 export class UserFormComponent {
-  userId: number = 0; // Default to 0 for new user
+  userId: number = 0;
   groups: Group[] = [];
   userForm: FormGroup;
 
@@ -31,20 +31,20 @@ export class UserFormComponent {
       name: new FormControl('', [Validators.required, Validators.maxLength(255)]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(255)]),
       password: new FormControl('', [Validators.minLength(8)]), // Password is optional for updates
-      group_ids: new FormControl([], [Validators.required])
+      group_id: new FormControl('', [Validators.required]) // Single group selection
     });
   }
 
   ngOnInit(): void {
-    // Get userId from route parameters
+    // Check if editing an existing user
     this.route.params.subscribe(params => {
-      this.userId = +params['id']; // Convert id to number
+      this.userId = +params['id'];
       if (this.userId !== 0) {
         this.loadUserData();
       }
     });
 
-    // Load groups for the select input
+    // Load available groups
     this.groupService.getGroups().subscribe({
       next: (response) => {
         this.groups = response.data;
@@ -58,10 +58,11 @@ export class UserFormComponent {
   loadUserData() {
     this.userService.getUser(this.userId).subscribe({
       next: (response) => {
+        const user = response.data as User;
         this.userForm.patchValue({
-          name: response.data.name,
-          email: response.data.email,
-          group_ids: response.data.groups.map(group => group.id)
+          name: user.name,
+          email: user.email,
+          group_id: user.group.id // Set group_id from the user object
         });
       },
       error: (error) => {
@@ -78,9 +79,7 @@ export class UserFormComponent {
         // Create new user
         this.userService.createUser(userData).subscribe({
           next: () => {
-            this.router.navigate(['/users'], {
-              queryParams: { message: 'User created successfully!' },
-            });
+            this.router.navigate(['/users'], { queryParams: { message: 'User created successfully!' } });
           },
           error: (error) => {
             console.error('Error creating user:', error);
@@ -90,9 +89,7 @@ export class UserFormComponent {
         // Update existing user
         this.userService.updateUser(this.userId, userData).subscribe({
           next: () => {
-            this.router.navigate(['/users'], {
-              queryParams: { message: 'User updated successfully!' },
-            });
+            this.router.navigate(['/users'], { queryParams: { message: 'User updated successfully!' } });
           },
           error: (error) => {
             console.error('Error updating user:', error);
@@ -100,19 +97,7 @@ export class UserFormComponent {
         });
       }
     } else {
-      this.userForm.markAllAsTouched();
+      this.userForm.markAllAsTouched(); // Mark all fields as touched to show validation errors
     }
   }
-  // onSubmit() {
-  //   console.log('Form submitted');
-  //   console.log('Form value:', this.userForm.value);
-  
-  //   if (this.userForm.valid) {
-  //     console.log('Form is valid');
-  //     // Existing user logic here
-  //   } else {
-  //     console.log('Form is invalid');
-  //     this.userForm.markAllAsTouched();
-  //   }
-  // }
 }
