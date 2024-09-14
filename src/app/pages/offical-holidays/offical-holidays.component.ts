@@ -1,3 +1,4 @@
+
 import { HolidaysService } from './../../services/holidays.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,6 +12,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 @Component({
   selector: 'app-offical-holidays',
   standalone: true,
+
   imports: [
     CommonModule,
     PageTitleComponent,
@@ -20,6 +22,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatPaginatorModule,
     MatTableModule,
   ],
+
   templateUrl: './offical-holidays.component.html',
   styleUrls: ['./offical-holidays.component.css'],
 })
