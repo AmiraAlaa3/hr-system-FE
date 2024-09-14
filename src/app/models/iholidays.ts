@@ -1,5 +1,3 @@
-import { Employee } from "./iemployee";
-
 export interface Holidays {
   id?: number;
   title?: string;
