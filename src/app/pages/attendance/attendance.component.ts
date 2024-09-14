@@ -128,22 +128,7 @@ export class AttendanceComponent implements OnInit {
 
     this.dataSource.filter = 'filter'; // Just a dummy value to trigger the filter
   }
-  // searchAttendances(): void {
-  //   if (this.searchTerm.trim()) {
-  //     this.attendanceService.searchAttendances(this.searchTerm).subscribe({
-  //       next: (response) => {
-  //         this.dataSource = new MatTableDataSource(response.data);
-  //         this.dataSource.paginator = this.paginator;
-  //         this.totalAttendances = response.data.length;
-  //       },
-  //       error: (error) => {
-  //         console.log(error);
-  //       },
-  //     });
-  //   } else {
-  //     this.loadAttendances();
-  //   }
-  // }
+  
 
   closeMessage(): void {
     this.message = null;
