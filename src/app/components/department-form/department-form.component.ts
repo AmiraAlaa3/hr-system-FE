@@ -58,7 +58,7 @@ export class DepartmentFormComponent implements OnInit {
           .createDepartment(this.departmentForm.value)
           .subscribe({
             next: () => {
-              this.router.navigate(['/dapartments'], {
+              this.router.navigate(['/departments'], {
                 queryParams: { message: 'Department added successfully!' }
               });
             },
@@ -68,7 +68,7 @@ export class DepartmentFormComponent implements OnInit {
           .updateDepartment(this.departmentId, this.departmentForm.value)
           .subscribe({
             next: () => {
-              this.router.navigate(['/dapartments'], {
+              this.router.navigate(['/departments'], {
                 queryParams: { message: 'Department updated successfully!' }
               });
             },

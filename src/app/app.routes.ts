@@ -21,14 +21,23 @@ import { HolidayFormComponent } from './components/holiday-form/holiday-form.com
 import { SettingsFormComponent } from './components/settings-form/settings-form.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, title: 'Login' },
+  { path: '', 
+    redirectTo: 'login', 
+    pathMatch: 'full' 
+  },
+  { path: 'login',
+    component: LoginComponent, 
+    title: 'Login' 
+  },
   {
     path: '',
     component: LayoutComponent,
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
     children: [
-      { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
+      { path: 'dashboard', 
+        component: DashboardComponent, 
+        title: 'Dashboard'
+      },
       {
         path: 'attendance',
         component: AttendanceComponent,
@@ -39,7 +48,9 @@ export const routes: Routes = [
         component: AttendanceFormComponent,
         title: 'Edit Attendance',
       },
-      { path: 'settings', component: SettingsFormComponent, title: 'settings' },
+      { path: 'settings', 
+        component: SettingsFormComponent, 
+        title: 'settings' },
       {
         path: 'departments',
         component: DepartmentComponent,
@@ -70,7 +81,9 @@ export const routes: Routes = [
         component: EmployeeDetailsComponent,
         title: 'Employee',
       },
-      { path: 'groups', component: GroupsComponent, title: 'Groups' },
+      { path: 'groups', 
+        component: GroupsComponent, 
+        title: 'Groups' },
       {
         path: 'officalHolidays',
         component: OfficalHolidaysComponent,
@@ -81,7 +94,9 @@ export const routes: Routes = [
         component: HolidayFormComponent,
         title: 'offical Holiday',
       },
-      { path: 'salary', component: SalaryComponent, title: 'Salary' },
+      { path: 'salary',
+        component: SalaryComponent, 
+        title: 'Salary' },
       {
         path: 'salary/:id/edit',
         component: SalaryComponent,
@@ -92,11 +107,17 @@ export const routes: Routes = [
         component: UsersComponent,
         title: 'All Users',
         children: [
-          { path: 'add', component: UsersComponent, title: 'Add new Admin' },
+          { path: 'add', 
+            component: UsersComponent, 
+            title: 'Add new Admin' },
         ],
       },
     ],
   },
 
-  { path: '**', component: NotfoundComponent, title: 'not found' },
+  { 
+    path: '**', 
+    component: NotfoundComponent, 
+    title: 'not found' 
+  },
 ];

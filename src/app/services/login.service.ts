@@ -23,7 +23,7 @@ export class LoginService {
 
     isLoggedIn(): boolean {
         const token = localStorage.getItem('token');
-        return token !== null && token.trim() !== '';
+        return token !== null && token.trim() !== ''; 
     }
 
     login(email: string, password: string): Observable<any> {
@@ -31,15 +31,13 @@ export class LoginService {
         return this.http.post<any>(this.loginUrl, body);
     }
 
-    logout(): void {
+    logout(): Observable<any> {
         localStorage.removeItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${localStorage.getItem('token')}`, 
+        });
+        return this.http.post(`${this.loginUrl}/logout`, {}, { headers });
     }
-    // logout(): Observable<any> {
-    //     const headers = new HttpHeaders({
-    //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
-    //     });
-    //     return this.http.post(`${this.apiUrl}/logout`, {}, { headers });
-    // }
 
     // getUser(): Observable<any> {
     //     const headers = new HttpHeaders({

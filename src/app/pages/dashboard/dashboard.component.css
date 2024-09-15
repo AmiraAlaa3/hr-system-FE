@@ -1,0 +1,50 @@
+.card-stats {
+    justify-content: space-around;
+    margin-top: 40px;
+}
+.count-card{
+    width: 280px;
+    height: 150px;
+    background-color: #d6e4eb8e;
+    border: none;
+}
+.stats-icon {
+    font-size: 5.5rem;
+    color: #e94d65;
+}
+.text-section h5{
+    color:  #709fb7;
+    font-size: 17px;
+}
+.text-section h3{
+    color:  #256586;
+    font-size: 45px ;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+.upcoming-card,
+.working-hours {
+    margin-top: 20px;
+}
+.upcoming-card{
+    width: 400px;
+    margin-left: 65px;
+}
+.next-holiday-card{
+    background-color: #1e89dd;
+}
+.calender-icon{
+    font-size: 3rem;
+}
+.btn{
+    color: #173d51;
+    margin-top: 40px;
+    margin-left: 100px;
+}
+
+
+.chart-container {
+    position: relative;
+    height: 200px;
+    width: 100%;
+}
