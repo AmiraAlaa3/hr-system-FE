@@ -61,11 +61,26 @@ export class UsersComponent implements OnInit{
     this.loadUsers();
   }
 
+  // loadUsers(): void {
+  //   this.usersService.getAllUsers().subscribe({
+  //     next: (response) => {
+  //       this.users = response.data;
+  //       console.log('Users:', this.users);
+  //       this.dataSource = new MatTableDataSource(this.users);
+  //       this.dataSource.paginator = this.paginator;
+  //       this.totalUsers = this.users.length;
+  //     },
+  //     error: (error) => {
+  //       console.log(error);
+  //     },
+  //   });
+  // }
   loadUsers(): void {
     this.usersService.getAllUsers().subscribe({
       next: (response) => {
+        console.log('Response:', response); // Log the entire response
         this.users = response.data;
-        console.log('Users:', this.users);
+        console.log('Users:', this.users); // Log the user data
         this.dataSource = new MatTableDataSource(this.users);
         this.dataSource.paginator = this.paginator;
         this.totalUsers = this.users.length;
@@ -74,6 +89,9 @@ export class UsersComponent implements OnInit{
         console.log(error);
       },
     });
+  }
+  isLast(permission: string, permissionArray: string[]): boolean {
+    return permissionArray.indexOf(permission) === permissionArray.length - 1;
   }
 
   closeMessage(): void {

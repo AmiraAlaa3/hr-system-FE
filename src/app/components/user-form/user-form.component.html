@@ -1,84 +1,51 @@
 <div class="container px-5 py-3">
-  <app-page-title
-    [title]="userId === 0 ? 'Add New User' : 'Edit User'"></app-page-title>
+  <app-page-title [title]="userId === 0 ? 'Add New User' : 'Edit User'"></app-page-title>
 
   <form (ngSubmit)="onSubmit()" [formGroup]="userForm" class="w-50 mt-5">
+    <!-- Name Input -->
     <div class="mb-3">
-      <label for="name" class="form-label"><span
-          class="text-danger me-1">*</span>Name</label>
-      <input
-        type="text"
-        formControlName="name"
-        class="form-control"
-        id="name"
-        required />
-      <ng-container
-        *ngIf="userForm.get('name')?.touched && userForm.get('name')?.hasError('required')">
-        <div id="nameHelp" class="form-text mt-2 text-danger">
-          Name is required
-        </div>
+      <label for="name" class="form-label"><span class="text-danger me-1">*</span>Name</label>
+      <input type="text" formControlName="name" class="form-control" id="name" required />
+      <ng-container *ngIf="userForm.get('name')?.touched && userForm.get('name')?.hasError('required')">
+        <div id="nameHelp" class="form-text mt-2 text-danger">Name is required</div>
       </ng-container>
     </div>
 
+    <!-- Email Input -->
     <div class="mb-3">
-      <label for="email" class="form-label"><span
-          class="text-danger me-1">*</span>Email</label>
-      <input
-        type="email"
-        formControlName="email"
-        class="form-control"
-        id="email"
-        required />
-      <ng-container
-        *ngIf="userForm.get('email')?.touched && userForm.get('email')?.hasError('required')">
-        <div id="emailHelp" class="form-text mt-2 text-danger">
-          Email is required
-        </div>
+      <label for="email" class="form-label"><span class="text-danger me-1">*</span>Email</label>
+      <input type="email" formControlName="email" class="form-control" id="email" required />
+      <ng-container *ngIf="userForm.get('email')?.touched && userForm.get('email')?.hasError('required')">
+        <div id="emailHelp" class="form-text mt-2 text-danger">Email is required</div>
       </ng-container>
-      <ng-container
-        *ngIf="userForm.get('email')?.touched && userForm.get('email')?.hasError('email')">
-        <div id="emailHelp" class="form-text mt-2 text-danger">
-          Invalid email address
-        </div>
+      <ng-container *ngIf="userForm.get('email')?.touched && userForm.get('email')?.hasError('email')">
+        <div id="emailHelp" class="form-text mt-2 text-danger">Invalid email address</div>
       </ng-container>
     </div>
 
+    <!-- Password Input -->
     <div class="mb-3">
-      <label for="password" class="form-label"><span
-          class="text-danger me-1">*</span>Password</label>
-      <input
-        type="password"
-        formControlName="password"
-        class="form-control"
-        id="password"
-        required />
-      <ng-container
-        *ngIf="userForm.get('password')?.touched && userForm.get('password')?.hasError('minlength')">
-        <div id="passwordHelp" class="form-text mt-2 text-danger">
-          Password must be at least 8 characters long
-        </div>
+      <label for="password" class="form-label">Password</label>
+      <input type="password" formControlName="password" class="form-control" id="password" />
+      <ng-container *ngIf="userForm.get('password')?.touched && userForm.get('password')?.hasError('minlength')">
+        <div id="passwordHelp" class="form-text mt-2 text-danger">Password must be at least 8 characters long</div>
       </ng-container>
     </div>
 
+    <!-- Group Select (Single) -->
     <div class="mb-3">
-      <label for="group_ids" class="form-label"><span
-          class="text-danger me-1">*</span>Groups</label>
-      <select
-        formControlName="group_ids"
-        class="form-control"
-        id="group_ids"
-        multiple
-        required>
-        <option *ngFor="let group of groups" [value]="group.id">{{ group.name
-          }}</option>
+      <label for="group_id" class="form-label"><span class="text-danger me-1">*</span>Group</label>
+      <select formControlName="group_id" class="form-control" id="group_id" required>
+        <option *ngFor="let group of groups" [value]="group.id">{{ group.name }}</option>
       </select>
-      <ng-container
-        *ngIf="userForm.get('group_ids')?.touched && userForm.get('group_ids')?.hasError('required')">
-        <div id="group_idsHelp" class="form-text mt-2 text-danger">
-          At least one group must be selected
-        </div>
+      <ng-container *ngIf="userForm.get('group_id')?.touched && userForm.get('group_id')?.hasError('required')">
+        <div id="group_idHelp" class="form-text mt-2 text-danger">Please select a group</div>
       </ng-container>
     </div>
+
+    <!-- Submit Button -->
+<!--   <app-page-title
+    [title]="userId === 0 ? 'Add New User' : 'Edit User'"></app-page-title> -->
 
     <div class="d-flex justify-content-end my-5">
       <button type="submit" class="btn btn-add px-4">

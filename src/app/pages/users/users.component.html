@@ -1,9 +1,7 @@
-
-
 <div class="container px-5 py-3">
   <!-- Page title  -->
   <app-page-title [title]="'All Users'"></app-page-title>
-  
+
   <!-- Success message -->
   <div *ngIf="message">
     <div class="alert alert-success">
@@ -17,47 +15,52 @@
     <app-add-button [entity]="'User'" [routerLink]="['/user', 0, 'edit']"></app-add-button>
   </div>
 
- <!-- User Table -->
-<div class="table-responsive mb-4">
+  <!-- User Table -->
+  <div class="table-responsive mb-4">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- ID Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
         <td mat-cell *matCellDef="let user">{{ user.id }}</td>
       </ng-container>
-  
+
+      <!-- Name Column -->
       <ng-container matColumnDef="Name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let user">{{ user.name }}</td>
       </ng-container>
-  
+
+      <!-- Email Column -->
       <ng-container matColumnDef="Email">
         <th mat-header-cell *matHeaderCellDef>Email</th>
         <td mat-cell *matCellDef="let user">{{ user.email }}</td>
       </ng-container>
-  
+
+      <!-- Group Column -->
       <ng-container matColumnDef="Group">
         <th mat-header-cell *matHeaderCellDef>Group</th>
         <td mat-cell *matCellDef="let user">
-          <div class="mb-2" *ngFor="let group of user.groups">
-            {{ group.name }}
-          </div>
+          {{ user.group?.name }}
         </td>
       </ng-container>
-  
+
+      <!-- Permissions Column -->
       <ng-container matColumnDef="Permissions">
         <th mat-header-cell *matHeaderCellDef>Permissions</th>
         <td mat-cell *matCellDef="let user">
-          <div class="d-flex" *ngFor="let group of user.groups">
-            <div class="me-2 mb-2" *ngFor="let permission of group.permissions">
+          <div class="d-flex" *ngFor="let permissionArray of user.permissions">
+            <div class="me-2" *ngFor="let permission of permissionArray">
               <span *ngIf="permission === 'view'">View</span>
               <span *ngIf="permission === 'add'">Add</span>
               <span *ngIf="permission === 'edit'">Edit</span>
               <span *ngIf="permission === 'delete'">Delete</span>
+              <span *ngIf="permissionArray.length > 1 && !isLast(permission, permissionArray)">, </span>
             </div>
           </div>
         </td>
       </ng-container>
-  
+
+      <!-- Action Column -->
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let user">
@@ -69,14 +72,14 @@
           </button>
         </td>
       </ng-container>
-  
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-  
+
     <mat-paginator [length]="totalUsers" [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons class="mt-4"></mat-paginator>
   </div>
-  
+
   <!-- Confirmation Modal -->
   <app-confirm-modal
     *ngIf="showModal"
@@ -84,4 +87,4 @@
     (closed)="closeModal()"
     [message]="'Are you sure you want to delete this user?'"
   ></app-confirm-modal>
-  
+</div>
