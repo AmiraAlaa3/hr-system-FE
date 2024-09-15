@@ -147,6 +147,7 @@ export class SalaryComponent implements OnInit {
     this.dataSource.filter = '';
   }
     months = [
+
       { name: 'January', value: 1 },
       { name: 'February', value: 2 },
       { name: 'March', value: 3 },

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpParams } from '@angular/common/http';
+import { HttpClient,HttpParams,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Salary } from '../models/salary';
 @Injectable({
@@ -9,9 +9,14 @@ export class SalaryService {
   private apiUrl = 'http://127.0.0.1:8000/api/salarys';
 
   constructor(private http: HttpClient) { }
-
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token'); 
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
   getSalary(): Observable<{ data: Salary[] }> {
-    return this.http.get<{ data: Salary[] }>(this.apiUrl);
+    return this.http.get<{ data: Salary[] }>(this.apiUrl,{ headers: this.getAuthHeaders() });
   }
   searchSalary(employeeName?: string): Observable<any> {
     let params = new HttpParams();
@@ -19,13 +24,13 @@ export class SalaryService {
       params = params.set('name', employeeName);
     }
 
-    return this.http.get(`${this.apiUrl}/search`, { params });
+    return this.http.get(`${this.apiUrl}/search`, { params , headers: this.getAuthHeaders() });
   }
      filterSalaryByDate(month: number , year: number): Observable<any> {
         const params = new HttpParams()
           .set('month', month)
           .set('year', year);
-        return this.http.get(`http://127.0.0.1:8000/api/salary/search-by-month-year?month=${month}&year=${year}`, { params });
+        return this.http.get(`http://127.0.0.1:8000/api/salary/search-by-month-year?month=${month}&year=${year}`, { params ,headers: this.getAuthHeaders() });
       }
 //   getAttendance(id: number): Observable<{ data: Attendance[] }> {
 //     return this.http.get<{ data: Attendance[] }>(`${this.apiUrl}/${id}`);
