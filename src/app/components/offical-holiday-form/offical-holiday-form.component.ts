@@ -42,7 +42,7 @@ export class OfficalHolidayFormComponent implements OnInit {
           this.getDescription.setValue(this.holiday.description);
           this.getFromDate.setValue(this.holiday.from_date);
           this.getToDate.setValue(this.holiday.to_date);
-          this.getNumberOfDays.setValue(this.holiday.numberOfDays);
+          // this.getNumberOfDays.setValue(this.holiday.numberOfDays);
         },
       });
     }
@@ -55,7 +55,7 @@ export class OfficalHolidayFormComponent implements OnInit {
     description: new FormControl('', [Validators.required]), // Fix: Correct form control name
     from_date: new FormControl('', [Validators.required]),
     to_date: new FormControl('', [Validators.required]),
-    numberOfDays: new FormControl('', [Validators.required]),
+    // numberOfDays: new FormControl('', [Validators.required]),
   });
 
   
@@ -76,9 +76,9 @@ export class OfficalHolidayFormComponent implements OnInit {
   get getToDate() {
     return this.holidayForm.controls['to_date'];
   }
-  get getNumberOfDays() {
-    return this.holidayForm.controls['numberOfDays'];
-  }
+  // get getNumberOfDays() {
+  //   return this.holidayForm.controls['numberOfDays'];
+  // }
 
   // Event handler for form submission
   HolidayHandler(e: any) {
