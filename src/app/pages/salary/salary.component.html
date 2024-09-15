@@ -1,3 +1,97 @@
+
 <div class="container px-5 py-3">
-    <app-page-title [title]="'Employee Salary'"></app-page-title>
+    <app-page-title [title]="'Employee Salary'"/>
+    @if(message){
+        <div class="alert alert-success">
+          {{ message }}
+          <i class="bi bi-x-lg ms-5" (click)="closeMessage()" role="button"></i>
+        </div>
+        }
+    <div class="d-flex justify-content-center align-items-center mb-4">
+        <div class="position-relative search-input">
+          <input class="form-control ps-5 pe-5 p-2"
+            id="searchEmployeeName"
+            placeholder="Search By Employee Name"
+            [(ngModel)]="searchTerm" type="search" aria-label="Search"
+            (input)="applyFilter()">
+          <i class="bi bi-search position-absolute search-icon"></i>
+          <i class="bi bi-x position-absolute clear-search"
+            (click)="clearSearch()"></i>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center align-items-center mb-4">
+        <label class="me-2">Month</label>
+        <select [(ngModel)]="month" class="form-control date-input me-2">
+            <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+          </select>
+          
+      
+        <label class="me-2">Year</label>
+        <input
+          type="number"
+          [(ngModel)]="year"
+          class="form-control date-input me-2"
+          min="2008" max="2100" step="1"
+          placeholder="Select Year"
+        />
+      
+        <button class="btn btn-outline-add filter-button" (click)="filterByDate()">
+          Filter by Month and Year
+        </button>
+      </div>
+      
+<div className="table-responsive mb-3">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="EmployeeName" class="col-1">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let salary"> {{salary.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="DepartmentName">
+        <th mat-header-cell *matHeaderCellDef> Department Name </th>
+        <td mat-cell *matCellDef="let salary"> {{salary.department.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="WorkDays">
+        <th mat-header-cell *matHeaderCellDef> Work Days </th>
+        <td mat-cell *matCellDef="let salary"> {{salary.work_days}} </td>
+      </ng-container>
+      <ng-container matColumnDef="AbsenceDays">
+        <th mat-header-cell *matHeaderCellDef> Absence Days</th>
+        <td mat-cell *matCellDef="let salary"> {{salary.absence_days}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="TotalBounsHours">
+        <th mat-header-cell *matHeaderCellDef> Total Bonus Hours</th>
+        <td mat-cell *matCellDef="let salary"> {{salary.total_bonus_hours| number: '1.2-2'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="TotalDeductionsHours">
+        <th mat-header-cell *matHeaderCellDef> Total Deduction Hours</th>
+        <td mat-cell *matCellDef="let salary"> {{salary.total_deduction_hours| number: '1.2-2'}}
+        </td>
+        </ng-container>
+        <ng-container matColumnDef="TotalBouns">
+        <th mat-header-cell *matHeaderCellDef> Bonus Amount </th>
+        <td mat-cell *matCellDef="let salary"> {{salary.bonus_amount| number: '1.2-2'}}
+        </td>
+        </ng-container>
+        <ng-container matColumnDef="TotalDeductions">
+         <th mat-header-cell *matHeaderCellDef> Deductions Amount </th>
+        <td mat-cell *matCellDef="let salary"> {{salary.deductions_amount| number: '1.2-2'}}
+        </td>
+        <ng-container matColumnDef="totalsalary">
+            <th mat-header-cell *matHeaderCellDef> Salary </th>
+            <td mat-cell *matCellDef="let salary"> {{salary.total_salary | number: '1.2-2'}} </td>
+          </ng-container>
+        </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
+    </table>
+    <!-- confirm delete -->
+
+
+    <!--paginator-->
+    <mat-paginator [length]="totalSalary" [pageSize]="5"
+      [pageSizeOptions]="[5, 10]" showFirstLastButtons class="mt-3">
+    </mat-paginator>
 </div>
+  </div>
