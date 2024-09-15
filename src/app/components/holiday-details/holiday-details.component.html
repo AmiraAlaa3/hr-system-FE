@@ -10,13 +10,10 @@
       </p>
     </header>
 
-    <div class="container d-flex justify-content-center align-items-center min-vh-95">
-        <div class="card shadow p-4" style="width: 45rem; background-color: #f8f9fa;">
+    <div class="min-vh-95 mt-5">
+        <div class="card shadow p-4 w-50" style="background-color: #bdd2de;">
           <div class="card-body">
             <main>
-              <div class="card-info mb-4 text-center">
-                <h2 class="mb-4 "style="background-color: #3a89d8;">Holiday Details</h2>
-              </div>
               <div class="row justify-content-center">
                 <div class="col-12">
                   <p class="fw-4 mb-2">
@@ -29,7 +26,7 @@
                   </p>
                   <p class="fw-4 mb-2">
                     <span class="fw-semibold title">Description: </span>
-                    <span class="info">{{holiday?.description}}</span>
+                    <span class="">{{holiday?.description}}</span>
                   </p>
                   <p class="fw-4 mb-2">
                     <span class="fw-semibold title">From Date: </span>
@@ -45,14 +42,16 @@
                   </p>
                 </div>
               </div>
-              <div class="text-center mt-4">
-                <button class="btn btn-primary px-5" (click)="goBack()">Back</button>
-                <div class="edit-icon d-inline-flex justify-content-center align-items-center ms-3 p-2 rounded-circle" style="background-color: #3a89d8;" role="button">
-                  <i class="bi bi-pen" [routerLink]="['/officalHolidays', holiday?.id, 'edit']"></i>
-                </div>
-              </div>
             </main>
           </div>
         </div>
+      </div>
+      <div class="d-flex justify-content-end mt-5 w-50">
+        <button class="btn btn-outline-add px-3 me-3"  [routerLink]="['/officalHolidays', holiday?.id, 'edit']">
+          <i class="bi bi-pen"></i>
+          Edit
+        </button>
+        <button class="btn btn-add px-4 " (click)="goBack()">Back</button>
+
       </div>
 </div>

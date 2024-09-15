@@ -61,20 +61,6 @@ export class UsersComponent implements OnInit{
     this.loadUsers();
   }
 
-  // loadUsers(): void {
-  //   this.usersService.getAllUsers().subscribe({
-  //     next: (response) => {
-  //       this.users = response.data;
-  //       console.log('Users:', this.users);
-  //       this.dataSource = new MatTableDataSource(this.users);
-  //       this.dataSource.paginator = this.paginator;
-  //       this.totalUsers = this.users.length;
-  //     },
-  //     error: (error) => {
-  //       console.log(error);
-  //     },
-  //   });
-  // }
   loadUsers(): void {
     this.usersService.getAllUsers().subscribe({
       next: (response) => {
