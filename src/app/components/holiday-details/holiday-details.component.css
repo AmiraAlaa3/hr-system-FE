@@ -1,0 +1,18 @@
+.holiday {
+    color: var(--primary-300-color);
+  }
+
+  .page-title {
+    color: var(--primary-800-color);
+    font-size: 30px;
+    font-weight: 600;
+  }
+.title
+{
+  text-transform: capitalize;
+  color: var(--primary-700-color) !important;
+  font-weight: 500;
+}
+.info{
+  color: var(--secondary-500-color);
+}
