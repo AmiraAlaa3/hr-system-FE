@@ -11,6 +11,15 @@
       </ng-container>
     </div>
 
+    <!--full Name Input -->
+    <div class="mb-3">
+      <label for="fullName" class="form-label"><span class="text-danger me-1">*</span>Full Name</label>
+      <input type="text" formControlName="Full_name" class="form-control" id="fullName" required />
+      <ng-container *ngIf="userForm.get('fullName')?.touched && userForm.get('fullName')?.hasError('required')">
+        <div id="nameHelp" class="form-text mt-2 text-danger">Full Name is required</div>
+      </ng-container>
+    </div>
+
     <!-- Email Input -->
     <div class="mb-3">
       <label for="email" class="form-label"><span class="text-danger me-1">*</span>Email</label>

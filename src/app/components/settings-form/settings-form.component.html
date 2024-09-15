@@ -1,1 +1,95 @@
-<p>settings-form works!</p>
+<div class="container px-5 py-3">
+  <app-page-title [title]="'General Setting'"></app-page-title>
+  @if (messages != '') {
+  <div class="alert alert-success" role="alert">
+    {{ messages }}
+  </div>
+  }
+  @if (errors != '') {
+  <div class="alert alert-danger" role="alert">
+    {{ errors }}
+  </div>
+  }
+  <form (submit)="settingHandler($event)" [formGroup]="settingForm"
+    class="w-50 mt-5">
+    <section>
+      <div class="mb-3">
+        <label for="bonusHours" class="form-label"><span
+            class="text-danger me-1">*</span>Bonus Hours</label>
+        <input type="number" formControlName="bonusHours" class="form-control"
+          id="bonusHours" placeholder="Enter Bonus Hours" />
+        @if(getBonusHours.touched){
+        @if(getBonusHours.hasError('required')){
+        <div class="form-text mt-2 text-danger">
+          Bonus Hours are required
+        </div>
+        }
+        @if(getBonusHours.hasError('min')){
+        <div class="form-text mt-2 text-danger">
+          Bonus Hours must be at least 1
+        </div>
+        }
+        }
+      </div>
+
+      <div class="mb-3">
+        <label for="deductionsHours" class="form-label"><span
+            class="text-danger me-1">*</span>Deductions Hours</label>
+        <input type="number" formControlName="deductionsHours"
+          class="form-control" id="deductionsHours"
+          placeholder="Enter Deductions Hours" />
+        @if(getDeductionsHours.touched){
+        @if(getDeductionsHours.hasError('required')){
+        <div class="form-text mt-2 text-danger">
+          Deductions Hours are required
+        </div>
+        }
+        @if(getDeductionsHours.hasError('min')){
+        <div class="form-text mt-2 text-danger">
+          Deductions Hours must be at least 1
+        </div>
+        }
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2 class="mb-3 mt-4 section-title">Weekly Hoilday</h2>
+      <div class="mb-3">
+        <label for="weekend1" class="form-label"><span
+            class="text-danger me-1">*</span>Weekend 1</label>
+        <select formControlName="weekend1" class="form-control" id="weekend1">
+          <option *ngFor="let day of daysOfWeek" [value]="day">{{ day
+            }}</option>
+        </select>
+        @if(getWeekend1.touched && getWeekend1.hasError('required')){
+        <div class="form-text mt-2 text-danger">
+          Weekend 1 is required
+        </div>
+        }
+
+      </div>
+
+      <div class="mb-3">
+        <label for="weekend2" class="form-label"><span
+            class="text-danger me-1">*</span>Weekend 2</label>
+        <select formControlName="weekend2" class="form-control" id="weekend2">
+          <option *ngFor="let day of daysOfWeek" [value]="day">{{ day
+            }}</option>
+        </select>
+        @if(getWeekend2.touched && getWeekend2.hasError('required')){
+        <div class="form-text mt-2 text-danger">
+          Weekend 2 is required
+        </div>
+        }
+
+      </div>
+    </section>
+
+    <div class="d-flex justify-content-end mt-4">
+      <button type="submit" class="btn btn-add px-4">
+        Edit
+      </button>
+    </div>
+  </form>
+</div>

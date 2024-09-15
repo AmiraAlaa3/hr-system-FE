@@ -22,7 +22,6 @@ import { EmployeeDetailsComponent } from './components/employee-details/employee
 
 import { OfficalHolidayFormComponent } from './components/offical-holiday-form/offical-holiday-form.component';
 import { HolidayDetailsComponent } from './components/holiday-details/holiday-details.component';
-import { HolidayFormComponent } from './components/holiday-form/holiday-form.component';
 import { SettingsFormComponent } from './components/settings-form/settings-form.component';
 
 

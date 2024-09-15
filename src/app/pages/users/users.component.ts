@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit{
   userIdToDelete: number | null = null;
   searchError: string = '';
 
-  displayedColumns: string[] = ['id', 'Name', 'Email', 'Group', 'Permissions', 'action'];
+  displayedColumns: string[] = ['id', 'Name','Full_Name', 'Email', 'Group', 'Permissions', 'action'];
   dataSource!: MatTableDataSource<User>;
   totalUsers: number = 0;
   searchTerm: string = '';
@@ -64,7 +64,6 @@ export class UsersComponent implements OnInit{
   loadUsers(): void {
     this.usersService.getAllUsers().subscribe({
       next: (response) => {
-        console.log('Response:', response); // Log the entire response
         this.users = response.data;
         console.log('Users:', this.users); // Log the user data
         this.dataSource = new MatTableDataSource(this.users);
