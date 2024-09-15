@@ -29,6 +29,7 @@ export class UserFormComponent {
   ) {
     this.userForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(255)]),
+      Full_name: new FormControl('', [Validators.required, Validators.maxLength(255)]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(255)]),
       password: new FormControl('', [Validators.minLength(8)]), // Password is optional for updates
       group_id: new FormControl('', [Validators.required]) // Single group selection
@@ -61,6 +62,7 @@ export class UserFormComponent {
         const user = response.data as User;
         this.userForm.patchValue({
           name: user.name,
+          Full_name: user.Full_name,
           email: user.email,
           group_id: user.group.id // Set group_id from the user object
         });
