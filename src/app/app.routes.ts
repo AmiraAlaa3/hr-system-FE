@@ -56,9 +56,6 @@ export const routes: Routes = [
 
       { path: 'officalHolidays/:id/edit', component: OfficalHolidayFormComponent, title: 'offical Holiday'},
       { path: 'officalHolidays/:id', component: HolidayDetailsComponent, title: 'View Holiday'},
-      { path: 'salary', component: SalaryComponent, title: 'Salary', children:[
-        { path: ':id/edit', component: SalaryComponent, title: 'Edit Salary'},
-      ]},
 
       { path: 'salary', component: SalaryComponent, title: 'Salary'},
       { path: 'salary/:id/edit', component: SalaryComponent, title: 'Edit Salary'},
@@ -66,53 +63,9 @@ export const routes: Routes = [
       { path: 'user/:id/edit', component: UserFormComponent },
 
       { path: 'settings', component: SettingsFormComponent, title: 'settings' },
-      {
-        path: 'departments',
-        component: DepartmentComponent,
-        title: 'Departments',
-      },
-      {
-        path: 'departments/:id/edit',
-        component: DepartmentFormComponent,
-        title: 'Edit Department',
-      },
-      {
-        path: 'departments/:id',
-        component: DepartmentDetailsComponent,
-        title: 'Department Details',
-      },
-      {
-        path: 'employees',
-        component: EmployeesComponent,
-        title: 'All Employees',
-      },
-      {
-        path: 'employees/:id/edit',
-        component: EmployeeFormComponent,
-        title: 'Employee',
-      },
-      {
-        path: 'employees/:id',
-        component: EmployeeDetailsComponent,
-        title: 'Employee',
-      },
+
       { path: 'groups', component: GroupsComponent, title: 'Groups' },
-      {
-        path: 'officalHolidays',
-        component: OfficalHolidaysComponent,
-        title: 'Offical Holidays',
-      },
-      {
-        path: 'officalHolidays/:id/edit',
-        component: HolidayFormComponent,
-        title: 'offical Holiday',
-      },
-      { path: 'salary', component: SalaryComponent, title: 'Salary' },
-      {
-        path: 'salary/:id/edit',
-        component: SalaryComponent,
-        title: 'Edit Salary',
-      },
+
     ],
   },
 
