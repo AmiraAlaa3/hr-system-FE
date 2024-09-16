@@ -102,6 +102,16 @@
               Employee phone number is Required
             </div>
             }
+            @if (getPhone.hasError('invalidNumber')) {
+              <div class="form-text mt-2 text-danger">
+                Phone number must contain only digits.
+              </div>
+            }
+            @if (getPhone.hasError('minlength')) {
+              <div class="form-text mt-2 text-danger">
+                Phone number must contain at least 11 digits.
+              </div>
+            }
           </ng-container>
           }
         </div>
@@ -181,6 +191,16 @@
             <div class="form-text mt-2 text-danger">
               Employee National ID is Required
             </div>
+            }
+            @if (getSsn.hasError('minlength') || getSsn.hasError('maxlength')) {
+              <div class="form-text mt-2 text-danger">
+                 National ID must be 14 number
+              </div>
+            }
+            @if (getSsn.hasError('invalidNumber')) {
+              <div class="form-text mt-2 text-danger">
+                 National ID must contain only digits
+              </div>
             }
           </ng-container>
           }
@@ -291,6 +311,11 @@
             <div class="form-text mt-2 text-danger">
               Employee Salary is Required
             </div>
+            }
+            @if(getSalary.hasError('invalidNumber')){
+              <div class="form-text mt-2 text-danger">
+                 Salary must be must contain only digits
+              </div>
             }
           </ng-container>
           }

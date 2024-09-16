@@ -51,20 +51,6 @@ export class EmployeeFormComponent implements OnInit {
         next: (response) => {
           this.employee = response.data;
           this.employeeForm.patchValue(this.employee);
-          // this.getName.setValue(this.employee.name);
-          // this.getAddress.setValue(this.employee.address);
-          // this.getEmail.setValue(this.employee.email);
-          // this.getPhone.setValue(this.employee.phone_number);
-          // this.getGender.setValue(this.employee.gender);
-          // this.getNationality.setValue(this.employee.nationality);
-          // this.getMarital_status.setValue(this.employee.Marital_status);
-          // this.getBirthdate.setValue(this.employee.birthdate);
-          // this.getSsn.setValue(this.employee.ssn);
-          // this.getHire_date.setValue(this.employee.hire_date);
-          // this.getPosition.setValue(this.employee.position);
-          // this.getSalary.setValue(this.employee.salary);
-          // this.getCheck_in_time.setValue(this.employee.check_in_time);
-          // this.getCheck_out_time.setValue(this.employee.check_out_time);
           this.getDepartment_id.setValue(this.employee.department.id);
         },
       });
@@ -80,15 +66,15 @@ export class EmployeeFormComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required,Validators.email]),
     address: new FormControl('', [Validators.required]),
-    phone_number: new FormControl('', [Validators.required,Validators.maxLength(11)]),
+    phone_number: new FormControl('', [Validators.required,Validators.minLength(11),this.numberValidator]),
     gender: new FormControl('', [Validators.required]),
     nationality: new FormControl('', [Validators.required]),
     Marital_status: new FormControl('', [Validators.required]),
     birthdate: new FormControl('', [Validators.required,this.ageValidator(20)]),
-    ssn: new FormControl('', [Validators.required]),
+    ssn: new FormControl('', [Validators.required, Validators.minLength(14),Validators.maxLength(14),this.numberValidator]),
     check_in_time: new FormControl('', [Validators.required]),
     check_out_time: new FormControl('', [Validators.required]),
-    salary: new FormControl('', [Validators.required]),
+    salary: new FormControl('', [Validators.required,this.numberValidator]),
     department_id: new FormControl('', [Validators.required]),
     hire_date: new FormControl('', [Validators.required]),
     position: new FormControl('', [Validators.required]),
@@ -107,6 +93,14 @@ export class EmployeeFormComponent implements OnInit {
 
       return age >= minAge ? null : { 'ageInvalid': { value: control.value } };
     };
+  }
+
+  numberValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const validNumberPattern = /^[0-9]*$/;
+    if (control.value && !validNumberPattern.test(control.value)) {
+      return { 'invalidNumber': true };
+    }
+    return null;
   }
 
   get getName() {
@@ -194,11 +188,10 @@ export class EmployeeFormComponent implements OnInit {
   objectKeys(obj: any): string[] {
     return Object.keys(obj);
   }
-  formErrors: any = {};
 
   // Method to check if there are any errors
   hasErrors(): boolean {
-    return this.formErrors && Object.keys(this.formErrors).length > 0;
-}
+    return Object.keys(this.errorMessages).length > 0;
+  }
 
 }
