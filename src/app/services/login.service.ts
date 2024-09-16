@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 interface User {
     email: string;
@@ -23,26 +23,27 @@ export class LoginService {
 
     isLoggedIn(): boolean {
         const token = localStorage.getItem('token');
-        return token !== null && token.trim() !== ''; 
+        return token !== null && token.trim() !== '';
     }
 
     login(email: string, password: string): Observable<any> {
         const body = { email, password };
-        return this.http.post<any>(this.loginUrl, body);
+        return this.http.post<any>(this.loginUrl, body).pipe(
+            tap((response) => {
+                localStorage.setItem('token', response.token);
+                localStorage.setItem('name', response.name); 
+            }));
+    }
+
+    getUserName(): string | null {
+        return localStorage.getItem('name');
     }
 
     logout(): Observable<any> {
         localStorage.removeItem('token');
         const headers = new HttpHeaders({
-            'Authorization': `Bearer ${localStorage.getItem('token')}`, 
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
         });
         return this.http.post(`${this.loginUrl}/logout`, {}, { headers });
     }
-
-    // getUser(): Observable<any> {
-    //     const headers = new HttpHeaders({
-    //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
-    //     });
-    //     return this.http.get(`${this.apiUrl}/user`, { headers });
-    // }
 }

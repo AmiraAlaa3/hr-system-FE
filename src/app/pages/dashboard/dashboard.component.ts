@@ -38,6 +38,7 @@ export class DashboardComponent {
       setTimeout(() => {
         this.createChart();
       }, 0);
+
       },
       (error) => {
         console.error('Error fetching dashboard data', error);
