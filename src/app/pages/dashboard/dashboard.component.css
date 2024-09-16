@@ -3,7 +3,7 @@
     margin-top: 40px;
 }
 .count-card{
-    width: 280px;
+    width: 320px;
     height: 150px;
     background-color: #d6e4eb8e;
     border: none;
@@ -41,8 +41,6 @@
     margin-top: 40px;
     margin-left: 100px;
 }
-
-
 .chart-container {
     position: relative;
     height: 200px;

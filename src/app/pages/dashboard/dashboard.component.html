@@ -45,13 +45,25 @@
                         <p>30 Dec 2025</p>
                     </div>
                     <div>
-                        <button class="btn btn-light rounded">View All</button>
+                        <button class="btn btn-light rounded" [routerLink]="['/officalHolidays']">View All</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Working Hours Chart -->
+        <!-- <div class="col-lg-6 working-hours">
+            <div class="card shadow-sm p-3 bg-white rounded">
+                <h5>Working Hours</h5>
+                <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm">
+                    <option selected>Weekly</option>
+                    <option value="1">Monthly</option>
+                </select>
+                <div class="chart-container">
+                    <canvas id="workingHoursChart"></canvas>
+                </div>
+            </div>
+        </div> -->
 
     </div>
 </div>
