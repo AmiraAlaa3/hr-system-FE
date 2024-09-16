@@ -26,14 +26,23 @@ import { SettingsFormComponent } from './components/settings-form/settings-form.
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, title: 'Login' },
+  { path: '', 
+    redirectTo: 'login', 
+    pathMatch: 'full' 
+  },
+  { path: 'login',
+    component: LoginComponent, 
+    title: 'Login' 
+  },
   {
     path: '',
     component: LayoutComponent,
     canActivate: [authGuard],
     children: [
-      { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
+      { path: 'dashboard', 
+        component: DashboardComponent, 
+        title: 'Dashboard'
+      },
       {
         path: 'attendance',
         component: AttendanceComponent,
@@ -44,29 +53,96 @@ export const routes: Routes = [
         component: AttendanceFormComponent,
         title: 'Edit Attendance',
       },
-      { path: 'departments', component: DepartmentComponent, title: 'Departments'},
-      { path: 'departments/:id/edit', component: DepartmentFormComponent, title: 'Edit Department'},
-      { path: 'departments/:id', component: DepartmentDetailsComponent, title: 'Department Details'},
-      { path: 'employees', component: EmployeesComponent, title: 'All Employees'},
-      { path: 'employees/:id/edit', component: EmployeeFormComponent, title: 'Employee'},
-      { path: 'employees/:id', component: EmployeeDetailsComponent, title: 'Employee'},
-      { path: 'groups', component: GroupsComponent, title: 'Groups' },
-      { path: 'officalHolidays', component: OfficalHolidaysComponent, title: 'Offical Holidays'},
+      {
+        path: 'departments', 
+        component: DepartmentComponent,
+        title: 'Departments'
+      },
+      { 
+        path: 'departments/:id/edit', 
+        component: DepartmentFormComponent,
+        title: 'Edit Department'
+      },
+      { 
+        path: 'departments/:id',
+        component: DepartmentDetailsComponent,
+        title: 'Department Details'
+      },
+      {
+        path: 'employees',
+        component: EmployeesComponent,
+        title: 'All Employees'
+      },
+      {
+        path: 'employees/:id/edit',
+        component: EmployeeFormComponent,
+        title: 'Employee'
+      },
+      { 
+        path: 'employees/:id', 
+        component: EmployeeDetailsComponent,
+        title: 'Employee'
+      },
+      {
+        path: 'groups',
+        component: GroupsComponent,
+        title: 'Groups' },
+      { 
+        path: 'officalHolidays',
+        component: OfficalHolidaysComponent,
+        title: 'Offical Holidays'
+      },
 
-      { path: 'officalHolidays/:id/edit', component: OfficalHolidayFormComponent, title: 'offical Holiday'},
-      { path: 'officalHolidays/:id', component: HolidayDetailsComponent, title: 'View Holiday'},
+      { 
+        path: 'officalHolidays/:id/edit',
+        component: OfficalHolidayFormComponent,
+        title: 'offical Holiday'
+      },
+      {
+        path: 'officalHolidays/:id',
+        component: HolidayDetailsComponent,
+        title: 'View Holiday'
+      },
 
-      { path: 'salary', component: SalaryComponent, title: 'Salary'},
-      { path: 'salary/:id/edit', component: SalaryComponent, title: 'Edit Salary'},
-      { path: 'users', component: UsersComponent, title: 'All Users'},
-      { path: 'user/:id/edit', component: UserFormComponent },
+      {
+        path: 'salary',
+        component: SalaryComponent,
+        title: 'Salary'
+      },
+      { 
+        path: 'salary/:id/edit',
+        component: SalaryComponent,
+        title: 'Edit Salary'
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
+        title: 'All Users'
+      },
+      {
+        path: 'user/:id/edit',
+        component: UserFormComponent,
+        title:'Edit User'
+      },
 
-      { path: 'settings', component: SettingsFormComponent, title: 'settings' },
+      {
+        path: 'settings',
+        component: SettingsFormComponent,
+        title: 'settings' 
+      },
 
-      { path: 'groups', component: GroupsComponent, title: 'Groups' },
+      {
+        path: 'groups',
+        component: GroupsComponent,
+        title: 'Groups'
+      },
 
     ],
   },
 
-  { path: '**', component: NotfoundComponent, title: 'not found' },
+  { 
+    path: '**', 
+    component: NotfoundComponent, 
+    title: 'not found' 
+  },
 ];
