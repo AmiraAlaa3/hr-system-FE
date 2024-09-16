@@ -41,7 +41,7 @@
                         <i class="bi bi-calendar3 calender-icon text-light"></i>
                     </div>
                     <div class="mt-4 ms-3 text-light">
-                        <p class="text-light">{{nextLeave.title}}</p>
+                        <p class="text-light">{{ nextLeave.title }}</p>
                         <p class="next-leave-date">{{ nextLeave.date }}</p>
                     </div>
                     <div>
@@ -51,5 +51,14 @@
             </div>
         </div>
 
+        <!-- Department Employee Count Chart -->
+        <div class="col-lg-6 chart">
+            <div class="card shadow-sm p-3 bg-white rounded department-employee-chart ">
+                <h5 class="fw-bold text-center fs-4 chart-header">Departmental Employee Overview</h5>
+                <div class="chart-container">
+                    <canvas id="departmentChart" width="600" height="300"></canvas>
+                </div>    
+            </div>
+        </div>
     </div>
 </div>

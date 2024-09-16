@@ -44,8 +44,15 @@
 .next-leave-date{
     margin-top: -7px;
 }
+.chart-header{
+    color: #1e89dd;
+    margin-bottom: 20px;
+}
+.chart{
+    margin-left: 100px;
+}
 .chart-container {
     position: relative;
-    height: 200px;
+    height: 300px;
     width: 100%;
 }
