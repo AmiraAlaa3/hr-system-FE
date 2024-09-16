@@ -35,9 +35,9 @@ export class DashboardComponent {
         this.DepartmentsForChart = data.departments;
         this.employeeCountForChart = data.employeeCounts;
         
-      setTimeout(() => {
-        this.createChart(); 
-      }, 0);
+        setTimeout(() => {
+          this.createChart(); 
+        }, 0);
       },
       (error) => {
         console.error('Error fetching dashboard data', error);
