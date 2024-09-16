@@ -1,5 +1,5 @@
 .card-stats {
-    justify-content: space-around;
+    gap: 100px;
     margin-top: 40px;
 }
 .count-card{
@@ -22,13 +22,13 @@
     margin-left: 30px;
     margin-top: 15px;
 }
-.upcoming-card,
+/* .upcoming-card, */
 .working-hours {
     margin-top: 20px;
 }
 .upcoming-card{
     width: 400px;
-    margin-left: 65px;
+    /* margin-left: 65px; */
 }
 .next-holiday-card{
     background-color: #1e89dd;
@@ -36,23 +36,20 @@
 .calender-icon{
     font-size: 3rem;
 }
-.btn{
-    color: #173d51;
-    margin-top: 30px;
-    margin-left: 100px;
-}
+
 .next-leave-date{
     margin-top: -7px;
 }
 .chart-header{
-    color: #1e89dd;
-    margin-bottom: 20px;
+    color: var(--primary-800-color);
+    margin-bottom: 16px;
+    margin-top: 16px;
 }
 .chart{
-    margin-left: 100px;
+    margin-left: 66px;
 }
 .chart-container {
     position: relative;
-    height: 300px;
+    height: 270px;
     width: 100%;
 }
