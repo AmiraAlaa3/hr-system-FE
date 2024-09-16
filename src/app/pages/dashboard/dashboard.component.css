@@ -38,8 +38,11 @@
 }
 .btn{
     color: #173d51;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-left: 100px;
+}
+.next-leave-date{
+    margin-top: -7px;
 }
 .chart-container {
     position: relative;

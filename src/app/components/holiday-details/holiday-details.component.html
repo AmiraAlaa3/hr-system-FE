@@ -1,0 +1,57 @@
+<div class="container px-5 py-3">
+    <header class="my-4">
+      <h1 class="page-title">
+        <span class="text-muted fw-semibold">All Offical Holidays ></span> View
+        <span class="holiday">{{holiday?.title}}</span> Holiday
+      </h1>
+      <p>
+        This page will show holiday
+        <span class="holiday">{{holiday?.title}}</span> information.
+      </p>
+    </header>
+
+    <div class="min-vh-95 mt-5">
+        <div class="card shadow p-4 w-50" style="background-color: #bdd2de;">
+          <div class="card-body">
+            <main>
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <p class="fw-4 mb-2">
+                    <span class="fw-semibold title">Date: </span>
+                    <span class="holiday-sub">{{holiday?.date}}</span>
+                  </p>
+                  <p class="fw-4 mb-2">
+                    <span class="fw-semibold title">Title: </span>
+                    <span class="holiday-sub">{{holiday?.title}}</span>
+                  </p>
+                  <p class="fw-4 mb-2">
+                    <span class="fw-semibold title">Description: </span>
+                    <span class="">{{holiday?.description}}</span>
+                  </p>
+                  <p class="fw-4 mb-2">
+                    <span class="fw-semibold title">From Date: </span>
+                    <span class="info">{{holiday?.from_date}}</span>
+                  </p>
+                  <p class="fw-4 mb-2">
+                    <span class="fw-semibold title">To Date: </span>
+                    <span class="info">{{holiday?.to_date}}</span>
+                  </p>
+                  <p class="fw-4 mb-2">
+                    <span class="fw-semibold title">Number Of Days: </span>
+                    <span class="info">{{holiday?.numberOfDays}}</span>
+                  </p>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end mt-5 w-50">
+        <button class="btn btn-outline-add px-3 me-3"  [routerLink]="['/officalHolidays', holiday?.id, 'edit']">
+          <i class="bi bi-pen"></i>
+          Edit
+        </button>
+        <button class="btn btn-add px-4 " (click)="goBack()">Back</button>
+
+      </div>
+</div>

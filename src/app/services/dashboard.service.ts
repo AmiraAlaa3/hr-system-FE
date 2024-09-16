@@ -18,7 +18,7 @@ export class DashboardService {
     });
   }
 
-  getDashboardDate() : Observable <any>{
+  getDashboardData() : Observable <any>{
     return this.http.get<any>(this.apiUrl, { headers: this.getAuthHeaders() });
   }
 }

@@ -194,9 +194,11 @@ export class EmployeeFormComponent implements OnInit {
   objectKeys(obj: any): string[] {
     return Object.keys(obj);
   }
+  formErrors: any = {};
 
   // Method to check if there are any errors
   hasErrors(): boolean {
-    return Object.keys(this.errorMessages).length > 0;
-  }
+    return this.formErrors && Object.keys(this.formErrors).length > 0;
+}
+
 }

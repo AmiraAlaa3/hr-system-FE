@@ -7,7 +7,7 @@
             </div>
             <div class="text-section mt-4 ms-3">
                 <h5>Total Employees</h5>
-                <h3>20</h3> <!-- for example -->
+                <h3>{{ totalEmployee }}</h3> 
             </div>
         </div>
         <div class="card flex-row count-card shadow-sm p-3 mb-5 rounded">
@@ -16,7 +16,7 @@
             </div>
             <div class="text-section mt-4 ms-3">
                 <h5 class="ms-3">Total Users</h5>
-                <h3>10</h3> <!-- for example -->
+                <h3>{{ totalUsers }}</h3>
             </div>
         </div>
         <div class="card flex-row count-card shadow-sm p-3 mb-5 rounded">
@@ -25,7 +25,7 @@
             </div>
             <div class="text-section mt-4 ms-3">
                 <h5>Total Leaves</h5>
-                <h3>9</h3> <!-- for example -->
+                <h3>{{ totalLeaves }}</h3>  
             </div>
         </div>
     </div>
@@ -41,8 +41,8 @@
                         <i class="bi bi-calendar3 calender-icon text-light"></i>
                     </div>
                     <div class="mt-4 ms-3 text-light">
-                        <p class="text-light">New Year</p>
-                        <p>30 Dec 2025</p>
+                        <p class="text-light">{{nextLeave.title}}</p>
+                        <p class="next-leave-date">{{ nextLeave.date }}</p>
                     </div>
                     <div>
                         <button class="btn btn-light rounded" [routerLink]="['/officalHolidays']">View All</button>
@@ -50,20 +50,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Working Hours Chart -->
-        <!-- <div class="col-lg-6 working-hours">
-            <div class="card shadow-sm p-3 bg-white rounded">
-                <h5>Working Hours</h5>
-                <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm">
-                    <option selected>Weekly</option>
-                    <option value="1">Monthly</option>
-                </select>
-                <div class="chart-container">
-                    <canvas id="workingHoursChart"></canvas>
-                </div>
-            </div>
-        </div> -->
 
     </div>
 </div>
