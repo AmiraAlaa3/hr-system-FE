@@ -1,16 +1,16 @@
-<div class="container mt-4">
+<div class="container px-5 py-3">
     <!-- Stats Row -->
-    <div class="card-stats d-flex">
-        <div class="card flex-row count-card shadow-sm p-3 mb-5 rounded">
+    <div class="card-stats row">
+        <div class="col-lg-4 card flex-row count-card shadow-sm p-3 mb-4 rounded">
             <div class="icon-section mt-3">
                 <i class="bi bi-person-badge-fill stats-icon"></i>
             </div>
             <div class="text-section mt-4 ms-3">
                 <h5>Total Employees</h5>
-                <h3>{{ totalEmployee }}</h3> 
+                <h3>{{ totalEmployee }}</h3>
             </div>
         </div>
-        <div class="card flex-row count-card shadow-sm p-3 mb-5 rounded">
+        <div class="col-lg-4 card flex-row count-card shadow-sm p-3 mb-4 rounded">
             <div class="icon-section mt-3">
                 <i class="bi bi-people-fill stats-icon"></i>
             </div>
@@ -19,13 +19,13 @@
                 <h3>{{ totalUsers }}</h3>
             </div>
         </div>
-        <div class="card flex-row count-card shadow-sm p-3 mb-5 rounded">
+        <div class="col-lg-4 card flex-row count-card shadow-sm p-3 mb-4 rounded">
             <div class="icon-section mt-3">
                 <i class="bi bi-person-check-fill stats-icon"></i>
             </div>
             <div class="text-section mt-4 ms-3">
                 <h5>Total Leaves</h5>
-                <h3>{{ totalLeaves }}</h3>  
+                <h3>{{ totalLeaves }}</h3>
             </div>
         </div>
     </div>
@@ -33,31 +33,33 @@
     <!-- Upcoming Holidays and Working Hours -->
     <div class="row">
         <!-- Upcoming Holidays -->
-        <div class="col-lg-6 upcoming-card">
+        <div class="col-lg-3 upcoming-card ps-0">
             <div class="card next-holiday-card shadow-sm p-3 rounded border-0 ">
                 <h5 class="text-light fw-bold fs-5 m-1">Upcoming Holidays</h5>
                 <div class="card flex-row bg-transparent border-0">
                     <div class="mt-4">
                         <i class="bi bi-calendar3 calender-icon text-light"></i>
                     </div>
-                    <div class="mt-4 ms-3 text-light">
-                        <p class="text-light">{{ nextLeave.title }}</p>
-                        <p class="next-leave-date">{{ nextLeave.date }}</p>
-                    </div>
-                    <div>
-                        <button class="btn btn-light rounded" [routerLink]="['/officalHolidays']">View All</button>
-                    </div>
+                 <div class="d-flex justify-content-between w-100">
+                     <div class="mt-4 ms-3 text-light">
+                        <p class="text-light">{{ nextLeave?.title }}</p>
+                        <p class="next-leave-date">{{ nextLeave?.date }}</p>
+                      </div>
+                      <div class="d-flex align-items-end">
+                          <button class="btn btn-light rounded" [routerLink]="['/officalHolidays']">View All</button>
+                      </div>
+                 </div>
                 </div>
             </div>
         </div>
 
         <!-- Department Employee Count Chart -->
-        <div class="col-lg-6 chart">
+        <div class="col-lg-7 chart">
             <div class="card shadow-sm p-3 bg-white rounded department-employee-chart ">
-                <h5 class="fw-bold text-center fs-4 chart-header">Departmental Employee Overview</h5>
+                <h5 class="fw-semibold text-center fs-4 chart-header">Departmental Employee Overview</h5>
                 <div class="chart-container">
-                    <canvas id="departmentChart" width="600" height="300"></canvas>
-                </div>    
+                    <canvas id="departmentChart" width="600" height="270"></canvas>
+                </div>
             </div>
         </div>
     </div>

@@ -34,9 +34,9 @@ export class DashboardComponent {
         this.nextLeave = data.nextLeave;
         this.DepartmentsForChart = data.departments;
         this.employeeCountForChart = data.employeeCounts;
-        
+
       setTimeout(() => {
-        this.createChart(); 
+        this.createChart();
       }, 0);
       },
       (error) => {
@@ -44,7 +44,7 @@ export class DashboardComponent {
       }
     );
   }
-  
+
   createChart(): void {
     const ctx = document.getElementById('departmentChart') as HTMLCanvasElement;
     new Chart(ctx, {
@@ -55,8 +55,8 @@ export class DashboardComponent {
           {
             label: 'Number of Employees',
             data: this.employeeCountForChart,
-            backgroundColor:  '#1e89dd',
-            borderColor: '#1e89dd',
+            backgroundColor:  '#e94d65',
+            borderColor: '#e94d65',
             borderWidth: 1,
           },
         ],
@@ -64,18 +64,18 @@ export class DashboardComponent {
       options: {
         scales: {
           x: {
-            type: 'category', 
+            type: 'category',
             title: {
               display: true,
-              text: 'Departments', 
+              text: 'Departments',
             },
           },
           y: {
-            type: 'linear', 
+            type: 'linear',
             beginAtZero: true,
             title: {
               display: true,
-              text: 'Number of Employees', 
+              text: 'Number of Employees',
             },
           },
       },
