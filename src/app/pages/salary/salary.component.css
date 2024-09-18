@@ -56,36 +56,7 @@
     font-size: 1rem; /* Adjust font size */
   }
 
-  .d-flex {
-    display: flex;
-  }
-
-  .flex-column {
-    flex-direction: column;
-  }
-
-  .align-items-center {
-    align-items: center;
-  }
-
-  .me-2 {
-    margin-right: 0.5rem; /* Space between inputs and button */
-  }
-
-  .mb-3 {
-    margin-bottom: 1rem; /* Space between inputs and button */
-  }
-
-  .mt-5 {
-    margin-top: 3rem; /* Top margin */
-  }
-
-  .btn-primary {
-    background-color: #007bff; /* Primary button color */
-    border-color: #007bff; /* Border color for button */
-  }
-
-  .btn-primary:hover {
-    background-color: #0056b3; /* Darker color on hover */
-    border-color: #004085; /* Darker border color on hover */
-  }
+ .icon
+{
+  color: var(--secondary-500-color);
+}
