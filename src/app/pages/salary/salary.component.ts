@@ -7,6 +7,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import printJS from 'print-js';
 
 @Component({
   selector: 'app-salary',
@@ -22,7 +23,8 @@ export class SalaryComponent implements OnInit {
   showModal: boolean = false;
   attendanceIdToDelete: number | null = null;
 
-  displayedColumns: string[] = ['EmployeeName', 'DepartmentName', 'WorkDays', 'AbsenceDays', 'TotalBounsHours', 'TotalDeductionsHours', 'TotalBouns', 'TotalDeductions','totalsalary'];
+  displayedColumns: string[] = ['EmployeeName', 'DepartmentName', 'WorkDays', 'AbsenceDays', 'TotalBounsHours',
+    'TotalDeductionsHours', 'TotalBouns', 'TotalDeductions','totalsalary','action'];
   dataSource!: MatTableDataSource<any>;
   totalSalary: number = 0;
   searchTerm: string = '';
@@ -86,7 +88,7 @@ export class SalaryComponent implements OnInit {
       });
     }
   }
-  
+
   searchSalary(): void {
     if (this.searchTerm.trim()) {
       this.SalaryService.searchSalary(this.searchTerm).subscribe({
@@ -109,39 +111,6 @@ export class SalaryComponent implements OnInit {
     this.router.navigate([], { queryParams: { message: null } });
   }
 
-  openDeleteModal(attendanceId: number): void {
-    this.attendanceIdToDelete = attendanceId;
-    this.showModal = true;
-  }
-
-  // confirmDelete(): void {
-  //   if (this.attendanceIdToDelete !== null) {
-  //     this.attendanceService
-  //       .deleteAttendance(this.attendanceIdToDelete)
-  //       .subscribe({
-  //         next: () => {
-  //           const filteredData = this.dataSource.data.filter(
-  //             (attendance: any) => attendance.id !== this.attendanceIdToDelete
-  //           );
-  //           this.dataSource.data = filteredData;
-  //           this.message = 'Attendance deleted successfully';
-  //           setTimeout(() => {
-  //             this.closeMessage();
-  //           }, 3000);
-  //           this.loadAttendances();
-  //         },
-  //         error: (error) => {
-  //           console.error('Error deleting attendance', error);
-  //         },
-  //       });
-  //     this.closeModal();
-  //   }
-  // }
-
-  closeModal(): void {
-    this.showModal = false;
-    this.attendanceIdToDelete = null;
-  }
   clearSearch() :void{
     this.searchTerm = '';
     this.dataSource.filter = '';
@@ -162,7 +131,36 @@ export class SalaryComponent implements OnInit {
       { name: 'December', value: 12 }
     ];
 
-  
-  
+    printSalary(salary: any): void {
+      const printContent = `
+        <div>
+          <h1>Salary Details</h1>
+          <hr>
+          <div class='content'>
+           <p><strong>Name:</strong> ${salary.name}</p>
+          <p><strong>Department:</strong> ${salary.department.name}</p>
+          <p><strong>Work Days:</strong> ${salary.work_days}</p>
+          <p><strong>Absence Days:</strong> ${salary.absence_days}</p>
+          <p><strong>Total Bonus Hours:</strong> ${salary.total_bonus_hours.toFixed(2)}</p>
+          <p><strong>Total Deduction Hours:</strong> ${salary.total_deduction_hours.toFixed(2)}</p>
+          <p><strong>Bonus Amount:</strong> ${salary.bonus_amount.toFixed(2)}</p>
+          <p><strong>Deductions Amount:</strong> ${salary.deductions_amount.toFixed(2)}</p>
+          </div>
+          <hr>
+          <p id="sub-title"><strong>Total Salary:</strong> ${salary.total_salary.toFixed(2)}</p>
+        </div>
+      `;
+      printJS({
+        printable: printContent,
+        type: 'raw-html',
+        style: `
+          h1 { text-align: center; }
+          div { font-family: Arial, sans-serif;}
+          #sub-title{font-size:18px ; color:#e94d65;text-align:end}
+        `,
+        scanStyles: false
+      });
+    }
+
 }
 
