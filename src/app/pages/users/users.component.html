@@ -50,22 +50,6 @@
         </td>
       </ng-container>
 
-      <!-- Permissions Column -->
-      <ng-container matColumnDef="Permissions">
-        <th mat-header-cell *matHeaderCellDef>Permissions</th>
-        <td mat-cell *matCellDef="let user">
-          <div class="d-flex" *ngFor="let permissionArray of user.permissions">
-            <div class="me-2" *ngFor="let permission of permissionArray">
-              <span *ngIf="permission === 'view'">View</span>
-              <span *ngIf="permission === 'add'">Add</span>
-              <span *ngIf="permission === 'edit'">Edit</span>
-              <span *ngIf="permission === 'delete'">Delete</span>
-              <span *ngIf="permissionArray.length > 1 && !isLast(permission, permissionArray)">, </span>
-            </div>
-          </div>
-        </td>
-      </ng-container>
-
       <!-- Action Column -->
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>Action</th>
