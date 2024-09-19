@@ -26,21 +26,24 @@ import { SettingsFormComponent } from './components/settings-form/settings-form.
 
 
 export const routes: Routes = [
-  { path: '', 
-    redirectTo: 'login', 
-    pathMatch: 'full' 
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
-  { path: 'login',
-    component: LoginComponent, 
-    title: 'Login' 
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'Login'
   },
   {
     path: '',
     component: LayoutComponent,
     canActivate: [authGuard],
     children: [
-      { path: 'dashboard', 
-        component: DashboardComponent, 
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
         title: 'Dashboard'
       },
       {
@@ -54,16 +57,16 @@ export const routes: Routes = [
         title: 'Edit Attendance',
       },
       {
-        path: 'departments', 
+        path: 'departments',
         component: DepartmentComponent,
         title: 'Departments'
       },
-      { 
-        path: 'departments/:id/edit', 
+      {
+        path: 'departments/:id/edit',
         component: DepartmentFormComponent,
         title: 'Edit Department'
       },
-      { 
+      {
         path: 'departments/:id',
         component: DepartmentDetailsComponent,
         title: 'Department Details'
@@ -78,22 +81,33 @@ export const routes: Routes = [
         component: EmployeeFormComponent,
         title: 'Employee'
       },
-      { 
-        path: 'employees/:id', 
+      {
+        path: 'employees/:id',
         component: EmployeeDetailsComponent,
         title: 'Employee'
       },
       {
         path: 'groups',
         component: GroupsComponent,
-        title: 'Groups' },
-      { 
+        title: 'Groups'
+      },
+      {
+        path: 'groups/add',
+        component: GroupsComponent,
+        title: 'Add new group'
+      },
+      {
+        path: 'group/{:id}',
+        component: GroupsComponent,
+        title: 'View Group'
+      },
+      {
         path: 'officalHolidays',
         component: OfficalHolidaysComponent,
         title: 'Offical Holidays'
       },
 
-      { 
+      {
         path: 'officalHolidays/:id/edit',
         component: OfficalHolidayFormComponent,
         title: 'offical Holiday'
@@ -109,7 +123,7 @@ export const routes: Routes = [
         component: SalaryComponent,
         title: 'Salary'
       },
-      { 
+      {
         path: 'salary/:id/edit',
         component: SalaryComponent,
         title: 'Edit Salary'
@@ -122,13 +136,13 @@ export const routes: Routes = [
       {
         path: 'user/:id/edit',
         component: UserFormComponent,
-        title:'Edit User'
+        title: 'Edit User'
       },
 
       {
         path: 'settings',
         component: SettingsFormComponent,
-        title: 'settings' 
+        title: 'settings'
       },
 
       {
@@ -140,9 +154,9 @@ export const routes: Routes = [
     ],
   },
 
-  { 
-    path: '**', 
-    component: NotfoundComponent, 
-    title: 'not found' 
+  {
+    path: '**',
+    component: NotfoundComponent,
+    title: 'not found'
   },
 ];
