@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit{
   userIdToDelete: number | null = null;
   searchError: string = '';
 
-  displayedColumns: string[] = ['id', 'Name','Full_Name', 'Email', 'Group', 'Permissions', 'action'];
+  displayedColumns: string[] = ['id', 'Name','Full_Name', 'Email', 'Group', 'action'];
   dataSource!: MatTableDataSource<User>;
   totalUsers: number = 0;
   searchTerm: string = '';
