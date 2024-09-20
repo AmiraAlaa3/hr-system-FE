@@ -15,14 +15,14 @@ import { User } from '../../models/user';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [ CommonModule,
+  imports: [CommonModule,
     PageTitleComponent,
     AddButtonComponent,
     RouterLink,
     ConfirmModalComponent,
     MatPaginatorModule,
     MatTableModule,
-    FormsModule,],
+    FormsModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
@@ -31,7 +31,8 @@ export class UsersComponent implements OnInit{
   message: string | null = null;
   showModal: boolean = false;
   userIdToDelete: number | null = null;
-  searchError: string = '';
+  error: string = '';
+  fatechError :string = '';
 
   displayedColumns: string[] = ['id', 'Name','Full_Name', 'Email', 'Group', 'action'];
   dataSource!: MatTableDataSource<User>;
@@ -65,13 +66,12 @@ export class UsersComponent implements OnInit{
     this.usersService.getAllUsers().subscribe({
       next: (response) => {
         this.users = response.data;
-        console.log('Users:', this.users); // Log the user data
         this.dataSource = new MatTableDataSource(this.users);
         this.dataSource.paginator = this.paginator;
         this.totalUsers = this.users.length;
       },
       error: (error) => {
-        console.log(error);
+        this.fatechError = error.error.message;
       },
     });
   }
@@ -104,7 +104,10 @@ export class UsersComponent implements OnInit{
           this.loadUsers();
         },
         error: (error: any) => {
-          console.error('Error deleting user', error);
+          this.error = error.error.message;
+          setTimeout(() => {
+            this.error = '';
+          }, 5000);
         },
       });
       this.closeModal();

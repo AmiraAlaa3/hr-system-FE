@@ -54,12 +54,12 @@
 
 .edit-icon {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 15px;
+  right: 15px;
   cursor: pointer;
-  color: var(--primary-600-color);
-  width: 30px;
+  color: var(--primary-800-color);
+  /* width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: var(--background-300-color);
+  background-color: var(--background-300-color); */
 }

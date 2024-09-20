@@ -32,6 +32,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 export class AttendanceComponent implements OnInit {
   attendances: any;
   message: string | null = null;
+  errors:string ='';
   showModal: boolean = false;
   attendanceIdToDelete: number | null = null;
   searchError : string = '';
@@ -44,7 +45,7 @@ export class AttendanceComponent implements OnInit {
   startDate: string | null = null;
   endDate: string | null = null;
   importMessage: string | null = null;
-
+  fatechError :string = '';
   showImportForm = false;
   selectedFile: File | null = null;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -81,7 +82,7 @@ export class AttendanceComponent implements OnInit {
           this.totalAttendances = sortedData.length;
       },
       error: (error) => {
-        console.log(error);
+        this.fatechError = error.error.message;
       },
     });
   }
@@ -128,7 +129,7 @@ export class AttendanceComponent implements OnInit {
 
     this.dataSource.filter = 'filter'; // Just a dummy value to trigger the filter
   }
-  
+
 
   closeMessage(): void {
     this.message = null;
@@ -153,11 +154,14 @@ export class AttendanceComponent implements OnInit {
             this.message = 'Attendance deleted successfully';
             setTimeout(() => {
               this.closeMessage();
-            }, 3000);
+            }, 5000);
             this.loadAttendances();
           },
           error: (error) => {
-            console.error('Error deleting attendance', error);
+            this.errors =  error.error.message;
+            setTimeout(() => {
+              this.errors = '';
+            }, 5000);
           },
         });
       this.closeModal();
@@ -204,19 +208,19 @@ export class AttendanceComponent implements OnInit {
 
 
     this.attendanceService.importExcelFile(formData).subscribe({
-      next: (response: any) => {
+      next: (response) => {
         this.importMessage = 'File imported successfully';
         this.loadAttendances();
         this.closeImportForm();
         setTimeout(() => {
           this.importMessage = null;
-        }, 3000);
+        }, 5000);
       },
-      error: (error: any) => {
-        this.importMessage = 'Error importing file';
+      error: (error) => {
+      this.importMessage = 'File Importing Fail';
         setTimeout(() => {
           this.importMessage = null;
-        }, 3000);
+        }, 5000);
       }
     });
   }

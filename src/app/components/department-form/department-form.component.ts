@@ -20,6 +20,7 @@ import { PageTitleComponent } from '../page-title/page-title.component';
 export class DepartmentFormComponent implements OnInit {
   departmentId: any;
   department: any;
+  error : string = '';
   constructor(
     private departmentService: DepartmentService,
     private router: Router,
@@ -62,6 +63,9 @@ export class DepartmentFormComponent implements OnInit {
                 queryParams: { message: 'Department added successfully!' }
               });
             },
+            error: (error) => {
+              this.error = error.error.message;
+            }
           });
       } else {
         this.departmentService
@@ -72,6 +76,10 @@ export class DepartmentFormComponent implements OnInit {
                 queryParams: { message: 'Department updated successfully!' }
               });
             },
+            error: (error) => {
+              this.error = error.error.message;
+            }
+
           });
       }
     } else {

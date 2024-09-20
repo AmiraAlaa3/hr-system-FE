@@ -17,7 +17,7 @@ export class OfficalHolidayFormComponent implements OnInit {
 
   holidayId: any;
   holiday: any;
-
+  error : string = '';
   constructor(
     private holidayService: HolidaysService,
     private router: Router,
@@ -58,7 +58,7 @@ export class OfficalHolidayFormComponent implements OnInit {
     // numberOfDays: new FormControl('', [Validators.required]),
   });
 
-  
+
 
   // Getters for form controls
   get getDate() {
@@ -94,6 +94,9 @@ export class OfficalHolidayFormComponent implements OnInit {
                 queryParams: { message: 'Holiday added successfully!' }
               });
             },
+            error: (error) => {
+              this.error = error.error.message;
+            }
           });
       } else {
         // Update an existing holiday
@@ -105,6 +108,9 @@ export class OfficalHolidayFormComponent implements OnInit {
                 queryParams: { message: 'Holiday updated successfully!' }
               });
             },
+            error: (error) => {
+              this.error = error.error.message;
+            }
           });
       }
     } else {

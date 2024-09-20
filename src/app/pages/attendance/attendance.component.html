@@ -1,4 +1,13 @@
  <div class="container px-5 py-3">
+  <!-- backend error -->
+  @if (fatechError != '') {
+  <div
+    class="error-permissions d-flex justify-content-center align-items-center h-100">
+    <p class="lead"> You do not have permissions to Access this Page.
+      Please Ask Admin to allow View</p>
+  </div>
+  }
+  @else {
   <!--page title  -->
   <app-page-title [title]="'All Attendance'" />
   <!-- success message -->
@@ -6,6 +15,13 @@
   <div class="alert alert-success">
     {{ message }}
     <i class="bi bi-x-lg ms-5" (click)="closeMessage()" role="button"></i>
+  </div>
+  }
+
+  <!-- backend error -->
+  @if (errors) {
+  <div class="alert alert-danger">
+    {{ errors }}
   </div>
   }
 
@@ -22,9 +38,9 @@
         (click)="clearSearch()"></i>
     </div>
     @if (searchError !='') {
-      <div class="alert alert-danger">
-        {{ searchError }}
-      </div>
+    <div class="alert alert-danger">
+      {{ searchError }}
+    </div>
     }
   </div>
 
@@ -42,33 +58,37 @@
       Filter by Date
     </button>
   </div>
-   <!-- add new attendance button -->
-   <div class="d-flex justify-content-end align-items-center mb-4">
-    <app-add-button [entity]="'Attendance'" [routerLink]="['/attendance', 0, 'edit']" />
-      <button class="btn btn-add ms-2" (click)="openImportForm()">
-        <i class="bi bi-plus-lg"></i>
-        Import Excel File
-      </button>
+  <!-- add new attendance button -->
+  <div class="d-flex justify-content-end align-items-center mb-4">
+    <app-add-button [entity]="'Attendance'"
+      [routerLink]="['/attendance', 0, 'edit']" />
+    <button class="btn btn-add ms-2" (click)="openImportForm()">
+      <i class="bi bi-plus-lg"></i>
+      Import Excel File
+    </button>
   </div>
-    <!-- Import message -->
+  <!-- Import message -->
   @if(importMessage){
-    <div class="alert alert-info">
-      {{ importMessage }}
-    </div>
-  }
-<!-- Import Form -->
-<div *ngIf="showImportForm" class="import-form mb-4">
-  <form (ngSubmit)="importExcelFile()" class=" w-50 m-auto shadow p-4">
-    <div class="mb-3">
-      <label for="importFile" class="form-label">Choose Excel Attendance</label>
-      <input type="file" id="importFile" (change)="onFileSelected($event)" class="form-control" required />
-    </div>
-   <div class="d-flex justify-content-end align-items-center">
-       <button type="button" class="btn btn-outline-add me-2" (click)="closeImportForm()">Cancel</button>
-       <button type="submit" class="btn btn-add">Upload</button>
+  <div class="alert alert-info">
+    {{ importMessage }}
   </div>
-  </form>
-</div>
+  }
+  <!-- Import Form -->
+  <div *ngIf="showImportForm" class="import-form mb-4">
+    <form (ngSubmit)="importExcelFile()" class=" w-50 m-auto shadow p-4">
+      <div class="mb-3">
+        <label for="importFile" class="form-label">Choose Excel
+          Attendance</label>
+        <input type="file" id="importFile" (change)="onFileSelected($event)"
+          class="form-control" required />
+      </div>
+      <div class="d-flex justify-content-end align-items-center">
+        <button type="button" class="btn btn-outline-add me-2"
+          (click)="closeImportForm()">Cancel</button>
+        <button type="submit" class="btn btn-add">Upload</button>
+      </div>
+    </form>
+  </div>
   <!-- attendance table -->
   <div className="table-responsive mb-4">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -132,3 +152,5 @@
       class="mt-4"></mat-paginator>
 
   </div>
+  }
+ </div>

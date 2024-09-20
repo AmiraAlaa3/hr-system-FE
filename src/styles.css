@@ -88,6 +88,7 @@ body {
 
 html,
 body {
+  min-height: 100vh;
   height: 100%;
 }
 
@@ -190,6 +191,7 @@ td {
 
 .alert{
   position: fixed;
+  z-index: 9999;
   top: 100px;
   right: 50px;
   width: 350px;
@@ -209,4 +211,12 @@ td {
 .btn-outline-add:focus {
   background-color: var(--primary-600-color);
   color: var(--light-color);
+}
+
+.error-permissions
+{
+  color: var(--secondary-500-color);
+}
+.container{
+  height: calc(100% - 100px);
 }
