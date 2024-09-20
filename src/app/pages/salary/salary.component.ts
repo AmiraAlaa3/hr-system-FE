@@ -30,7 +30,22 @@ export class SalaryComponent implements OnInit {
   searchTerm: string = '';
   month: number | null = null;
   year: number | null = null;
+  months = [
 
+    { name: 'January', value: 1 },
+    { name: 'February', value: 2 },
+    { name: 'March', value: 3 },
+    { name: 'April', value: 4 },
+    { name: 'May', value: 5 },
+    { name: 'June', value: 6 },
+    { name: 'July', value: 7 },
+    { name: 'August', value: 8 },
+    { name: 'September', value: 9 },
+    { name: 'October', value: 10 },
+    { name: 'November', value: 11 },
+    { name: 'December', value: 12 }
+  ];
+  fatechError: string = '';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -60,7 +75,7 @@ export class SalaryComponent implements OnInit {
         this.totalSalary = response.data.length;
       },
       error: (error) => {
-        console.log(error);
+        this.fatechError = error.error.message;
       },
     });
   }
@@ -115,23 +130,8 @@ export class SalaryComponent implements OnInit {
     this.searchTerm = '';
     this.dataSource.filter = '';
   }
-    months = [
 
-      { name: 'January', value: 1 },
-      { name: 'February', value: 2 },
-      { name: 'March', value: 3 },
-      { name: 'April', value: 4 },
-      { name: 'May', value: 5 },
-      { name: 'June', value: 6 },
-      { name: 'July', value: 7 },
-      { name: 'August', value: 8 },
-      { name: 'September', value: 9 },
-      { name: 'October', value: 10 },
-      { name: 'November', value: 11 },
-      { name: 'December', value: 12 }
-    ];
-
-    printSalary(salary: any): void {
+  printSalary(salary: any): void {
       const printContent = `
         <div>
           <h1>Salary Details</h1>

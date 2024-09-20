@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageTitleComponent } from '../page-title/page-title.component';
 import { GeneralSettingService } from '../../services/generalSetting.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   FormControl,
   FormGroup,
@@ -21,6 +21,7 @@ export class SettingsFormComponent implements OnInit {
   settingId: number = 1;
   messages: string = '';
   errors: string = '';
+  fatechError : string = '';
   daysOfWeek: string[] = [
     'Sunday',
     'Monday',
@@ -43,10 +44,12 @@ export class SettingsFormComponent implements OnInit {
   constructor(
     private generalSettingService: GeneralSettingService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.loadDepartments();
+  }
+  loadDepartments(): void {
     this.generalSettingService.getGeneralSettings().subscribe({
       next: (response) => {
         const setting = response.data[0];
@@ -59,12 +62,11 @@ export class SettingsFormComponent implements OnInit {
           });
         }
       },
-      error: (err) => {
-        console.error('Error fetching settings:', err);
-      },
+      error: (error) => {
+        this.fatechError = error.error.message;
+      }
     });
   }
-
   get getWeekend1() {
     return this.settingForm.get('weekend1')!;
   }
@@ -94,6 +96,7 @@ export class SettingsFormComponent implements OnInit {
           },
           error: (error) => {
             this.errors = error.error.error;
+            this.loadDepartments();
             this.hideMessagesAfterDelay();
           },
         });
@@ -106,6 +109,6 @@ export class SettingsFormComponent implements OnInit {
     setTimeout(() => {
       this.messages = '';
       this.errors = '';
-    }, 3000); 
+    }, 3000);
   }
 }

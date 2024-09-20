@@ -1,11 +1,20 @@
 <div class="container px-5 py-3">
+  <!-- backend error -->
+  @if (fatechError) {
+  <div
+    class="error-permissions d-flex justify-content-center align-items-center h-100">
+    <p class="lead"> You do not have permissions to Access this Page.
+      Please Ask Admin to allow View</p>
+  </div>
+  }
+  @else {
   <app-page-title [title]="'General Setting'"></app-page-title>
-  @if (messages != '') {
+  @if (messages) {
   <div class="alert alert-success" role="alert">
     {{ messages }}
   </div>
   }
-  @if (errors != '') {
+  @if (errors) {
   <div class="alert alert-danger" role="alert">
     {{ errors }}
   </div>
@@ -92,4 +101,5 @@
       </button>
     </div>
   </form>
+  }
 </div>

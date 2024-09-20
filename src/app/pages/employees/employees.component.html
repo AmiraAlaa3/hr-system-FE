@@ -1,4 +1,12 @@
 <div class="container px-5 py-3">
+  <!-- backend error -->
+  @if (fatechError != '') {
+    <div class="error-permissions d-flex justify-content-center align-items-center h-100">
+      <p class="lead"> You do not have permissions to Access this Page.
+        Please Ask Admin to allow View</p>
+    </div>
+  }
+  @else {
   <!-- page title component -->
   <app-page-title [title]="'All Employees'" />
   <!-- success message -->
@@ -7,6 +15,12 @@
     {{ message }}
     <i class="bi bi-x-lg ms-5" (click)="closeMessage()" role="button"></i>
   </div>
+  }
+
+  @if (error) {
+    <div class="alert alert-danger">
+      {{ error }}
+    </div>
   }
    <!-- Search input -->
   <div class="d-flex justify-content-center align-items-center mb-3">
@@ -89,4 +103,5 @@
     </mat-paginator>
 
   </div>
+}
 </div>

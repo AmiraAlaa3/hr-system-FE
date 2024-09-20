@@ -1,9 +1,12 @@
 <div class="container px-5 py-3">
   <app-page-title
     [title]="employeeId == 0 ? 'Add New Employee' : 'Edit Employee'"></app-page-title>
-
-
-
+  <!-- backend error -->
+  @if (error) {
+    <div class="alert alert-danger">
+      {{ error }}
+    </div>
+  }
     <div *ngIf="hasErrors()" class="alert alert-danger">
       <ul>
         <li *ngFor="let key of objectKeys(errorMessages)">

@@ -28,7 +28,8 @@ export class DepartmentComponent implements OnInit {
   message: string | null = null;
   showModal: boolean = false;
   departmentIdToDelete: number | null = null;
-
+  fatechError : string = '';
+  error : string = '';
   displayedColumns: string[] = ['id', 'name', 'action'];
   dataSource!: MatTableDataSource<any>;
   totalDepartments: number = 0;
@@ -61,7 +62,7 @@ export class DepartmentComponent implements OnInit {
         this.totalDepartments = response.data.length;
       },
       error: (error) => {
-        console.log(error);
+        this.fatechError = error.error.message;
       },
     });
   }
@@ -93,7 +94,10 @@ export class DepartmentComponent implements OnInit {
             this.loadDepartments();
           },
           error: (error) => {
-            console.error('Error deleting department', error);
+            this.error = error.error.message;
+            setTimeout(() => {
+              this.error = '';
+            }, 5000);
           },
         });
       this.closeModal();

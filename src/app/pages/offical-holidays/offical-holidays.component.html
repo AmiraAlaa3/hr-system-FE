@@ -1,11 +1,26 @@
 
 <!-- holidays -->
 <div class="container px-5 py-3">
+  <!-- backend error -->
+  @if (fatechError != '') {
+  <div
+    class="error-permissions d-flex justify-content-center align-items-center h-100">
+    <p class="lead"> You do not have permissions to Access this Page.
+      Please Ask Admin to allow View</p>
+  </div>
+  }
+  @else {
   <app-page-title [title]="'All Holidays'" />
   @if(message){
   <div class="alert alert-success">
     {{ message }}
     <i class="bi bi-x-lg ms-5" (click)="closeMessage()" role="button"></i>
+  </div>
+  }
+
+  @if (error) {
+  <div class="alert alert-danger">
+    {{ error }}
   </div>
   }
   <div class="d-flex justify-content-end align-items-center mb-4">
@@ -20,22 +35,20 @@
         <td mat-cell *matCellDef="let holiday"> {{holiday.id}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="date" >
+      <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef> Date </th>
         <td mat-cell *matCellDef="let holiday"> {{holiday.date}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="title" >
+      <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef> Day </th>
         <td mat-cell *matCellDef="let holiday"> {{holiday.title}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="description" >
+      <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef> Description </th>
         <td mat-cell *matCellDef="let holiday"> {{holiday.description}} </td>
       </ng-container>
-
-    
 
       <!-- Add other columns as needed -->
       <ng-container matColumnDef="action" class="col-7">
@@ -71,4 +84,5 @@
     </mat-paginator>
 
   </div>
+}
 </div>

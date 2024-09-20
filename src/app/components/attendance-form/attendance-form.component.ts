@@ -23,6 +23,7 @@ export class AttendanceFormComponent implements OnInit {
   attendanceId: any;
   attendance: any;
   employees: any[] = [];
+  error :string = '';
 
   constructor(
     private attendanceService: AttendanceService,
@@ -101,9 +102,7 @@ export class AttendanceFormComponent implements OnInit {
               });
             },
             error: (error) => {
-              console.log(this.attendanceForm.value)
-              // Extract and set validation errors
-              // this.setServerErrors(error);
+              this.error = error.error.message;
             }
           });
       } else {
@@ -115,6 +114,9 @@ export class AttendanceFormComponent implements OnInit {
                 queryParams: { message: 'Attendance updated successfully!' },
               });
             },
+            error: (error) => {
+              this.error = error.error.message;
+            }
           });
       }
     } else {

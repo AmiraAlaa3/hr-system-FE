@@ -1,7 +1,4 @@
 <div class="container px-5 py-3">
-  <!-- Page title  -->
-  <app-page-title [title]="'All Users'"></app-page-title>
-
   <!-- Success message -->
   <div *ngIf="message">
     <div class="alert alert-success">
@@ -10,11 +7,25 @@
     </div>
   </div>
 
+  <!-- backend error -->
+  @if (fatechError != '') {
+    <div class="error-permissions d-flex justify-content-center align-items-center h-100">
+      <p class="lead"> You do not have permissions to Access this Page.
+        Please Ask Admin to allow View</p>
+    </div>
+  }
+  @else {
+  <!-- Page title  -->
+  <app-page-title [title]="'All Users'"></app-page-title>
+    @if (error) {
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
+    }
   <!-- Add new user button -->
   <div class="d-flex justify-content-end align-items-center mb-4">
     <app-add-button [entity]="'User'" [routerLink]="['/user', 0, 'edit']"></app-add-button>
   </div>
-
   <!-- User Table -->
   <div class="table-responsive mb-4">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -70,6 +81,7 @@
     <mat-paginator [length]="totalUsers" [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons class="mt-4"></mat-paginator>
   </div>
 
+  }
   <!-- Confirmation Modal -->
   <app-confirm-modal
     *ngIf="showModal"
