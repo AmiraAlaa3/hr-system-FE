@@ -31,6 +31,8 @@ export class OfficalHolidaysComponent implements OnInit {
   message: string | null = null;
   showModal: boolean = false;
   holidayIdToDelete: number | null = null;
+  error: string = '';
+  fatechError :string = '';
 
   displayedColumns: string[] = ['id', 'date', 'title', 'description', 'action'];
   dataSource!: MatTableDataSource<any>;
@@ -65,10 +67,10 @@ holiday: any;
         this.dataSource = new MatTableDataSource(response.data);
         this.dataSource.paginator = this.paginator;
         this.totalHolidays = response.data.length;
-        
+
       },
       error: (error) => {
-        console.log(error);
+        this.fatechError = error.error.message;
       },
     });
   }
@@ -100,7 +102,10 @@ holiday: any;
             this.loadHolidays();
           },
           error: (error) => {
-            console.error('Error deleting holiday', error);
+            this.error = error.error.message;
+            setTimeout(() => {
+              this.error = '';
+            }, 5000);
           },
         });
       this.closeModal();

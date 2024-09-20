@@ -1,5 +1,4 @@
 import { Group } from './../../models/group';
-// import { Component } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators ,FormBuilder} from '@angular/forms';
 import { Router,ActivatedRoute } from '@angular/router';
@@ -7,8 +6,7 @@ import { UserService } from '../../services/user.service';
 import { GroupService } from '../../services/group.service';
 import { User } from '../../models/user';
 import { PageTitleComponent } from '../page-title/page-title.component';
-import { CommonModule } from '@angular/common';
-
+import { CommonModule, Location } from '@angular/common';
 @Component({
   selector: 'app-user-form',
   standalone: true,
@@ -20,12 +18,14 @@ export class UserFormComponent {
   userId: number = 0;
   groups: Group[] = [];
   userForm: FormGroup;
+  error :string = '';
 
   constructor(
     private userService: UserService,
     private groupService: GroupService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location,
   ) {
     this.userForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(255)]),
@@ -64,7 +64,7 @@ export class UserFormComponent {
           name: user.name,
           Full_name: user.Full_name,
           email: user.email,
-          group_id: user.group.id // Set group_id from the user object
+          group_id: user.group.id
         });
       },
       error: (error) => {
@@ -84,7 +84,7 @@ export class UserFormComponent {
             this.router.navigate(['/users'], { queryParams: { message: 'User created successfully!' } });
           },
           error: (error) => {
-            console.error('Error creating user:', error);
+            this.error = error.error.message;
           }
         });
       } else {
@@ -94,12 +94,15 @@ export class UserFormComponent {
             this.router.navigate(['/users'], { queryParams: { message: 'User updated successfully!' } });
           },
           error: (error) => {
-            console.error('Error updating user:', error);
+            this.error = error.error.message;
           }
         });
       }
     } else {
-      this.userForm.markAllAsTouched(); // Mark all fields as touched to show validation errors
+      this.userForm.markAllAsTouched();
     }
+  }
+  goBack(): void {
+    this.location.back();
   }
 }

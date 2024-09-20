@@ -28,6 +28,8 @@ export class EmployeesComponent implements OnInit {
   message: string | null = null;
   showModal: boolean = false;
   employeeIdToDelete: number | null = null;
+  error: string = '';
+  fatechError :string = '';
 
   searchControl = new FormControl('');
 
@@ -66,7 +68,7 @@ export class EmployeesComponent implements OnInit {
         this.totalEmployees = response.data.length;
       },
       error: (error) => {
-        console.log(error);
+          this.fatechError = error.error.message;
       },
     });
   }
@@ -92,7 +94,10 @@ export class EmployeesComponent implements OnInit {
             this.loadDepartments();
           },
           error: (error) => {
-            console.error('Error deleting Employee', error);
+            this.error = error.error.message;
+            setTimeout(() => {
+              this.error = '';
+            }, 5000);
           },
         });
       this.closeModal();

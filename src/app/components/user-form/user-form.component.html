@@ -1,6 +1,11 @@
 <div class="container px-5 py-3">
   <app-page-title [title]="userId === 0 ? 'Add New User' : 'Edit User'"></app-page-title>
-
+  <!-- backend error -->
+  @if (error) {
+    <div class="alert alert-danger">
+      {{ error }}
+    </div>
+  }
   <form (ngSubmit)="onSubmit()" [formGroup]="userForm" class="w-50 mt-5">
     <!-- Name Input -->
     <div class="mb-3">
@@ -52,11 +57,10 @@
       </ng-container>
     </div>
 
-    <!-- Submit Button -->
-<!--   <app-page-title
-    [title]="userId === 0 ? 'Add New User' : 'Edit User'"></app-page-title> -->
 
     <div class="d-flex justify-content-end my-5">
+      <button class="btn btn-outline-add me-3 px-4" (click)="goBack()">Back</button>
+      <!-- Submit Button -->
       <button type="submit" class="btn btn-add px-4">
         {{ userId === 0 ? 'Add User' : 'Update User' }}
       </button>

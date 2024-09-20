@@ -25,7 +25,7 @@ export class EmployeeFormComponent implements OnInit {
   employee: any;
   departments: any[] = [];
   errorMessages: { [key: string]: string[] } = {};
-
+  error:string = '';
   genders :string []= ['male', 'female'];
   Maritals :string [] = ['single','married','widowed'];
 
@@ -162,7 +162,13 @@ export class EmployeeFormComponent implements OnInit {
             });
           },
           error: (error) => {
-            this.errorMessages = error.error.error;
+            if (error.status === 400) {
+              this.errorMessages = error.error.error;
+            } else if (error.status === 403) {
+              this.error = error.error.message;
+            } else {
+              console.error('Error creating user:', error);
+            }
           }
         });
       } else {
@@ -175,7 +181,13 @@ export class EmployeeFormComponent implements OnInit {
               });
             },
             error: (error) => {
-              this.errorMessages = error.error.error;
+              if (error.status === 400) {
+                this.errorMessages = error.error.error;
+              } else if (error.status === 403) {
+                this.error = error.error.message;
+              } else {
+                console.error('Error creating user:', error);
+              }
             }
           });
       }

@@ -1,6 +1,10 @@
 <div class="container px-5 py-3">
     <app-page-title [title]="holidayId == 0 ? 'Add New Holiday' : 'Edit Holiday'"></app-page-title>
-  
+    @if (error) {
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
+    }
     <form (submit)="HolidayHandler($event)" [formGroup]="holidayForm" class="w-50 mt-5">
       <div class="mb-3">
         <label for="date" class="form-label"><span class="text-danger me-1">*</span>Date</label>
@@ -97,26 +101,7 @@
         </ng-container>
         }
       </div>
-      <!-- <div class="mb-3">
-        <label for="numberOfDays" class="form-label"><span class="text-danger me-1">*</span>Number Of Days</label>
-        <input
-          type="number"
-          formControlName="numberOfDays"
-          class="form-control"
-          id="numberOfDays"
-          aria-describedby="numberOfDays"
-          placeholder="Enter Number Of Days " />
-        @if(getNumberOfDays.touched){
-        <ng-container>
-          @if(getNumberOfDays.hasError('required')){
-          <div id="emailHelp" class="form-text mt-2 text-danger">
-            Number Of Days is Required
-          </div>
-          }
-        </ng-container>
-        }
-      </div> -->
-  
+
       <div class="d-flex justify-content-end my-5">
         <button type="submit" class="btn btn-add px-4">
           {{ holidayId == 0 ? "Add Holiday" : "Edit Holiday" }}
@@ -124,4 +109,3 @@
       </div>
     </form>
   </div>
-  

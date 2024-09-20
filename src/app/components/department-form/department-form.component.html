@@ -1,6 +1,11 @@
 <div class="container px-5 py-3">
   <app-page-title [title]="departmentId == 0 ? 'Add New Department' : 'Edit Department'"></app-page-title>
-
+  <!-- backend error -->
+  @if (error) {
+    <div class="alert alert-danger">
+      {{ error }}
+    </div>
+  }
   <form (submit)="DepartmentHandler($event)" [formGroup]="departmentForm" class="w-50 mt-5">
     <div class="mb-3">
       <label for="Department" class="form-label"><span class="text-danger me-1">*</span>Department Name</label>
