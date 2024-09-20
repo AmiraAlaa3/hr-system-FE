@@ -1,0 +1,42 @@
+<p>add-group-permissions works!</p>
+
+<form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="groupName">Group Name</label>
+      <input id="groupName" formControlName="name" class="form-control" placeholder="Enter group name" />
+    </div>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Page Name</th>
+          <th>View</th>
+          <th>Add</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="permissions">
+        <tr *ngFor="let permission of groupForm.controls.permissions.controls; let i = index" [formGroupName]="i">
+          <td>
+            <input formControlName="page" class="form-control" readonly />
+          </td>
+          <td>
+            <input type="checkbox" formControlName="view" />
+          </td>
+          <td>
+            <input type="checkbox" formControlName="add" />
+          </td>
+          <td>
+            <input type="checkbox" formControlName="edit" />
+          </td>
+          <td>
+            <input type="checkbox" formControlName="delete" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <button type="submit" class="btn btn-primary">Save Group</button>
+  </form>
+  

@@ -3,6 +3,7 @@ import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 // import { User } from '../models/user';
 import { Group } from '../models/group';
+import { Group2 } from '../models/group';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,5 +19,9 @@ export class GroupService {
 
   getGroups(): Observable<{ data: Group[] }> {
     return this.http.get<{ data: Group[] }>(this.apiUrl,{ headers: this.getAuthHeaders() });
+  }
+
+  createGroup(group: Group2): Observable<Group2> {
+    return this.http.post<Group2>(this.apiUrl, group);
   }
 }

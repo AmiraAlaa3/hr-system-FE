@@ -5,3 +5,10 @@ export interface Group {
     name: string;
     permissions: Permission[];
 }
+
+
+export interface Group2 {
+    id?: number;
+    name: string;
+   permission_ids?: number[];
+}
