@@ -1,0 +1,34 @@
+.group-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+#groupName {
+    width: 450px;
+    border: 1px solid var(--primary-600-color);
+    border-radius: 6px;
+    transition: border-color 0.3s;
+}
+input {
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--secondary-500-color);
+}
+
+input::placeholder {
+    color: var(--primary-100-color);
+    opacity: 1;
+}
+
+input::-moz-placeholder {
+    color: var(--primary-100-color);
+    opacity: 1;
+}
+
+input:-ms-input-placeholder {
+    color: var(--primary-100-color);
+    opacity: 1;
+}

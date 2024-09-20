@@ -23,6 +23,7 @@ import { EmployeeDetailsComponent } from './components/employee-details/employee
 import { OfficalHolidayFormComponent } from './components/offical-holiday-form/offical-holiday-form.component';
 import { HolidayDetailsComponent } from './components/holiday-details/holiday-details.component';
 import { SettingsFormComponent } from './components/settings-form/settings-form.component';
+import { AddGroupPermissionsComponent } from './components/add-group-permissions/add-group-permissions.component';
 
 
 export const routes: Routes = [
@@ -93,20 +94,14 @@ export const routes: Routes = [
       },
       {
         path: 'groups/add',
-        component: GroupsComponent,
+        component: AddGroupPermissionsComponent,
         title: 'Add new group'
-      },
-      {
-        path: 'group/{:id}',
-        component: GroupsComponent,
-        title: 'View Group'
       },
       {
         path: 'officalHolidays',
         component: OfficalHolidaysComponent,
         title: 'Offical Holidays'
       },
-
       {
         path: 'officalHolidays/:id/edit',
         component: OfficalHolidayFormComponent,
@@ -117,7 +112,6 @@ export const routes: Routes = [
         component: HolidayDetailsComponent,
         title: 'View Holiday'
       },
-
       {
         path: 'salary',
         component: SalaryComponent,
@@ -144,13 +138,6 @@ export const routes: Routes = [
         component: SettingsFormComponent,
         title: 'settings'
       },
-
-      {
-        path: 'groups',
-        component: GroupsComponent,
-        title: 'Groups'
-      },
-
     ],
   },
 

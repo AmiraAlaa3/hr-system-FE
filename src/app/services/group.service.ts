@@ -19,4 +19,11 @@ export class GroupService {
   getGroups(): Observable<{ data: Group[] }> {
     return this.http.get<{ data: Group[] }>(this.apiUrl,{ headers: this.getAuthHeaders() });
   }
+  createGroup(groupData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/groups`, groupData);
+  }
+  deleteGroup(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+  }
+
 }
