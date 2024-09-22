@@ -1,55 +1,46 @@
 <div class="container px-5 py-3">
-    <app-page-title [title]="'Add New Group'" />
+  <app-page-title [title]="'Add New Group'"></app-page-title>
 
+  <form [formGroup]="addGroupForm" (submit)="saveGroup($event)">
     <!-- Group Name Input -->
-    <div class="d-flex justify-content-center align-items-center">
-        <div class="d-flex justify-content-center align-items-center mb-3">
-            <div class="position-relative ">
-                <input class="form-control  ps-5 pe-5 p-2" id="groupName" placeholder="Enter Group Name" type="text">
-            </div>
+    <div class="d-flex justify-content-center align-items-center mb-3">
+      <div class="position-relative">
+        <input class="form-control ps-5 pe-5 p-2" type="text" id="groupName"
+          formControlName="groupName" placeholder="Enter Group Name">
+        <div *ngIf="getGroupName.touched && getGroupName.invalid" class="form-text mt-2 text-danger">
+          <div *ngIf="getGroupName.hasError('required')">Group Name is Required</div>
         </div>
+      </div>
     </div>
+
+    <table class="my-3 shadow">
+      <thead>
+        <tr>
+          <th><input type="checkbox" (change)="toggleAllPermissions($event)"></th>
+          <th>Page</th>
+          <th>Add</th>
+          <th>Delete</th>
+          <th>Edit</th>
+          <th>View</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="permissions">
+        <tr *ngFor="let permission of permissions.controls; let i = index" [formGroupName]="i">
+          <td><input type="checkbox" formControlName="selected"></td>
+          <td>{{ permission.value.page }}</td>
+          <td><input type="checkbox" formControlName="add"></td>
+          <td><input type="checkbox" formControlName="delete"></td>
+          <td><input type="checkbox" formControlName="edit"></td>
+          <td><input type="checkbox" formControlName="view"></td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- Save Button -->
-    <div class="d-flex justify-content-end mb-3">
-        <button type="submit" class="btn btn-add px-4">
-            Save Group
-        </button>
+    <div class="d-flex justify-content-end my-3">
+      <button class="btn btn-add px-4" type="submit">
+        Save Group
+      </button>
     </div>
-
-    <!-- Permission Table -->
-    <div className="table-responsive mb-3">
-        <table mat-table class="mat-elevation-z8">
-            <ng-container matColumnDef="checkbox" class="col-1">
-                <th mat-header-cell *matHeaderCellDef><input type="checkbox" /></th>
-                <td mat-cell> <input type="checkbox" /> </td>
-            </ng-container>
-
-            <ng-container matColumnDef="page">
-                <th mat-header-cell *matHeaderCellDef> Page </th>
-                <!-- <td mat-cell *matCellDef="let permission> {{permission.page}} </td> -->
-            </ng-container>
-
-            <ng-container matColumnDef="add">
-                <th mat-header-cell *matHeaderCellDef> Add </th>
-                <td mat-cell><input type="checkbox" /></td>
-            </ng-container>
-
-            <ng-container matColumnDef="view">
-                <th mat-header-cell *matHeaderCellDef> View </th>
-                <td mat-cell><input type="checkbox" /></td>
-            </ng-container>
-
-            <ng-container matColumnDef="edit">
-                <th mat-header-cell *matHeaderCellDef> Edit </th>
-                <td mat-cell><input type="checkbox" /></td>
-            </ng-container>
-
-            <ng-container matColumnDef="delete">
-                <th mat-header-cell *matHeaderCellDef> Delete </th>
-                <td mat-cell><input type="checkbox" /></td>
-            </ng-container>
-
-        </table>
-    </div>
+  </form>
 </div>

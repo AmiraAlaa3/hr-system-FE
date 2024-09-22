@@ -32,3 +32,31 @@ input:-ms-input-placeholder {
     color: var(--primary-100-color);
     opacity: 1;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: right;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: var(--primary-200-color);
+  color: var(--primary-800-color);
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+td{
+  color: var(--primary-800-color);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+th, td {
+  text-align: center;
+}

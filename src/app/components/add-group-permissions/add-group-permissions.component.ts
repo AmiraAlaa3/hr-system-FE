@@ -1,87 +1,117 @@
-import { Component, OnInit } from '@angular/core';
-import { GroupService } from '../../services/group.service';
-import { group } from '@angular/animations';
+import { Permission } from './../../models/permission';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { AddButtonComponent } from '../add-button/add-button.component';
+import { PageTitleComponent } from '../page-title/page-title.component';
 import { PermissionService } from '../../services/permission.service';
-import { PageTitleComponent } from "../page-title/page-title.component";
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
-import { AddButtonComponent } from "../add-button/add-button.component";
+import { ActivatedRoute, Router } from '@angular/router';
+import { GroupService } from '../../services/group.service';
+import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
 
 @Component({
   selector: 'app-add-group-permissions',
   standalone: true,
-  imports: [PageTitleComponent, AddButtonComponent],
+  imports: [PageTitleComponent, AddButtonComponent, CommonModule, ReactiveFormsModule], // Add it here
   templateUrl: './add-group-permissions.component.html',
-  styleUrl: './add-group-permissions.component.css'
+  styleUrls: ['./add-group-permissions.component.css']
 })
 export class AddGroupPermissionsComponent {
+  error: string = '';
 
-  groupName: string = '';
-  selectAll: boolean = false; // Model for "Select All" checkbox
+  addGroupForm = new FormGroup({
+    groupName: new FormControl('', [Validators.required]),
+    permissions: new FormArray([]), // Initialize as an empty FormArray
+  });
 
-  permissions: any[] = [];
-
-  constructor(private groupService: GroupService, private permissionService: PermissionService) {}
-
-  ngOnInit(): void {
-    this.getPermissions();
+  constructor(
+    private permissionService: PermissionService,
+    private groupService: GroupService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.initializePermissions(); // Call to populate permissions
   }
-    // Fetch permissions from the PermissionService
-  getPermissions(): void {
-    this.permissionService.getPermission().subscribe((data: any) => {
-      this.permissions = data.map((permission: any) => ({
-        ...permission,
-        add: false,
-        delete: false,
-        modify: false,
-        display: false,
-        selected: false
-      }));
+
+  initializePermissions() {
+    const permissionsList = [
+      { page: 'employee' },
+      { page: 'department' },
+      { page: 'salary' },
+      { page: 'attendance' },
+      { page: 'setting' },
+      { page: 'user' },
+      { page: 'group' },
+    ];
+
+    permissionsList.forEach(permission => {
+      const permissionGroup = new FormGroup({
+        selected: new FormControl(false),
+        add: new FormControl(false),
+        delete: new FormControl(false),
+        edit: new FormControl(false),
+        view: new FormControl(false),
+        page: new FormControl(permission.page),
+      });
+      this.permissions.push(permissionGroup);
     });
   }
 
-  // Toggle all permissions based on "Select All" checkbox
+  get getGroupName() {
+    return this.addGroupForm.controls['groupName'];
+  }
+
+  get permissions() {
+    return this.addGroupForm.get('permissions') as FormArray;
+  }
+
   toggleAllPermissions(event: any): void {
-    this.permissions.forEach(permission => {
-      permission.selected = event.target.checked;
-      permission.add = event.target.checked;
-      permission.delete = event.target.checked;
-      permission.modify = event.target.checked;
-      permission.display = event.target.checked;
+    const checked = event.target.checked;
+    this.permissions.controls.forEach(control => {
+      control.get('selected')?.setValue(checked);
+      control.get('add')?.setValue(checked);
+      control.get('delete')?.setValue(checked);
+      control.get('edit')?.setValue(checked);
+      control.get('view')?.setValue(checked);
     });
   }
 
-  // Toggle individual permission row
-  togglePermissionRow(permission: any): void {
-    if (!permission.selected) {
-      permission.add = false;
-      permission.delete = false;
-      permission.modify = false;
-      permission.display = false;
+
+  saveGroup(e: Event) {
+    e.preventDefault();
+    if (this.addGroupForm.valid) {
+
+      const groupData = {
+        name: this.getGroupName.value,
+        permissions: this.permissions.value,
+      };
+
+      const PermissionDate ={
+        permissions: this.permissions.value,
+      }
+      this.permissionService.createPermission(PermissionDate).subscribe({
+        next: () => {
+          this.groupService.createGroup(groupData).subscribe({
+            next: () => {
+              this.router.navigate(['/group'], {
+                queryParams: { message: 'Group created successfully!' }
+              });
+            },
+            error: (error) => {
+              this.error = error.error.message;
+            }
+          });
+        },
+        error: (error) => {
+          console.log(error)
+          this.error = error.error.message;
+        }
+      });
+
+
+    } else {
+      this.addGroupForm.markAllAsTouched();
     }
   }
-
-  // Save group and its permissions
-  saveGroup(): void {
-    const groupData = {
-      name: this.groupName,
-      permissions: this.permissions.map(permission => ({
-        page: permission.page,
-        add: permission.add,
-        delete: permission.delete,
-        modify: permission.modify,
-        display: permission.display
-      }))
-    };
-
-    this.groupService.createGroup(groupData).subscribe(response => {
-      console.log('Group created:', response);
-    });
-  }
 }
+

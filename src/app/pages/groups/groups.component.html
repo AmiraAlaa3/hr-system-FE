@@ -1,29 +1,43 @@
 <div class="container px-5 py-3">
+    <!-- backend error -->
+    @if (fatechError != '') {
+      <div class="error-permissions d-flex justify-content-center align-items-center h-100">
+        <p class="lead"> You do not have permissions to Access this Page.
+          Please Ask Admin to allow View</p>
+      </div>
+    }
+    @else {
     <app-page-title [title]="'All Groups'" />
-    <!-- @if(message){
+    @if(message){
     <div class="alert alert-success">
         {{ message }}
         <i class="bi bi-x-lg ms-5" (click)="closeMessage()" role="button"></i>
-    </div> 
-    }-->
-    <div class="d-flex justify-content-end align-items-center mb-4"> 
+    </div>
+    }
+
+    @if (error) {
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
+    }
+    <div class="d-flex justify-content-end align-items-center mb-4">
         <app-add-button [entity]="'Group'" [routerLink]="['/groups/add']" />
     </div>
 
     <div className="table-responsive mb-4">
-        <table mat-table class="mat-elevation-z8">
-            <ng-container matColumnDef="id" class="col-1">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> ID </th>
-                <td mat-cell *matCellDef="let group"> 1 </td>
+                <td mat-cell *matCellDef="let group"> {{group.id}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="name" class="col-4">
+            <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let group"> CEO Manager </td>
+                <td mat-cell *matCellDef="let group">{{group.name}}</td>
             </ng-container>
 
             <!-- Add other columns as needed -->
-            <ng-container matColumnDef="action" class="col-7">
+            <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef> Action </th>
                 <td mat-cell *matCellDef="let group">
                     <button class="btn btn-view me-2" [routerLink]="['/groups', group.id]"><i
@@ -43,7 +57,8 @@
             <app-confirm-modal
             (confirmed)="confirmDelete()"
             (closed)="closeModal()"
-            [message]="'Are you sure you want to delete this department?'" />
+            [message]="'Are you sure you want to delete this Group?'" />
         }
     </div>
+    }
 </div>

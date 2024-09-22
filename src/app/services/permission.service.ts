@@ -18,7 +18,8 @@ export class PermissionService {
     });
   }
 
-  getPermission(): Observable<{ data: Permission[] }> {
-    return this.http.get<{ data: Permission[] }>(this.apiUrl,{ headers: this.getAuthHeaders() });
+  createPermission(permission: any): Observable<any> {
+    return this.http.post(this.apiUrl, permission, { headers: this.getAuthHeaders() });
   }
+ 
 }
