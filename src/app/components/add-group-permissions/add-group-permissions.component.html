@@ -1,15 +1,24 @@
 <div class="container px-5 py-3">
     <app-page-title [title]="'Add New Group'"></app-page-title>
-  
+    @if(errorMessage){
+      <div class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+    }
     <!-- Group Name Input -->
     <div class="d-flex justify-content-center align-items-center">
       <div class="d-flex justify-content-center align-items-center mb-3">
         <div class="position-relative">
-          <input [(ngModel)]="groupName" class="form-control ps-5 pe-5 p-2" id="groupName" placeholder="Enter Group Name" type="text">
+          <input [(ngModel)]="groupName" class="form-control p-2" id="groupName" placeholder="Enter Group Name" type="text">
         </div>
       </div>
     </div>
-  
+    <!-- Save Button -->
+    <div class="d-flex justify-content-end mb-3">
+      <button type="button" class="btn btn-add px-4" (click)="saveGroup()">
+        Save Group
+      </button>
+    </div>
     <!-- Permission Table -->
     <div class="table-responsive mb-3">
         <table class="table">
@@ -20,44 +29,48 @@
                     <th>View</th>
                     <th>Edit</th>
                     <th>Delete</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let permission of permissions; let i = index">
                     <td>
-                      <input [(ngModel)]="permission.page" placeholder="Page Name" />
+                      <input [(ngModel)]="permission.page" placeholder="Page: employee,department,user,group,salary,attendance,holiday" class="form-control" />
                     </td>
-                    <td>
+                    <td class="p-3">
                       <input type="checkbox" [checked]="permission.add === 'true'" (change)="updatePermissionAdd($event, permission)" />
                     </td>
-                    <td>
+                    <td  class="p-3">
                       <input type="checkbox" [checked]="permission.view === 'true'" (change)="updatePermissionView($event, permission)" />
                     </td>
-                    <td>
+                    <td  class="p-3">
                       <input type="checkbox" [checked]="permission.edit === 'true'" (change)="updatePermissionEdit($event, permission)" />
                     </td>
-                    <td>
+                    <td  class="p-3">
                       <input type="checkbox" [checked]="permission.delete === 'true'" (change)="updatePermissionDelete($event, permission)" />
                     </td>
+                    @if(i == 0){
+                      <td  class="p-3"></td>
+                    }
+                    @else {
+                      <td  class="p-3">
+                        <i class="bi bi-trash-fill" (click)="removePermissionRow(i)" role="button"></i>
+                      </td>
+                    }
+
                   </tr>
-                  
+
             </tbody>
         </table>
     </div>
-    
-    
-    
+
+
+
     <!-- Button to Add New Permission -->
     <div class="d-flex justify-content-end mb-3">
-        <button (click)="addPermission()" class="btn btn-primary">
+        <button (click)="addPermission()" class="btn btn-outline-add">
             Add New Permission
         </button>
     </div>
-    <!-- Save Button -->
-    <div class="d-flex justify-content-end mb-3">
-      <button type="button" class="btn btn-primary px-4" (click)="saveGroup()">
-        Save Group
-      </button>
-    </div>
+
   </div>
-  
