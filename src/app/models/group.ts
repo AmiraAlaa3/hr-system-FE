@@ -1,7 +1,5 @@
-
-import { Permission } from "./permission";
 export interface Group {
-    id: number;
+    id?: number;
     name: string;
-    permissions: Permission[];
+    permission_ids: number[];
 }

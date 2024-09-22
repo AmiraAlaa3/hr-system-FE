@@ -1,87 +1,156 @@
+import { Permission } from './../../models/permission';
+import { Group } from './../../models/group';
+import { PermissionService } from './../../services/permission.service';
+import { GroupService } from './../../services/group.service';
 import { Component, OnInit } from '@angular/core';
-import { GroupService } from '../../services/group.service';
-import { group } from '@angular/animations';
-import { PermissionService } from '../../services/permission.service';
 import { PageTitleComponent } from "../page-title/page-title.component";
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { AddButtonComponent } from "../add-button/add-button.component";
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-group-permissions',
   standalone: true,
-  imports: [PageTitleComponent, AddButtonComponent],
+  imports: [PageTitleComponent, AddButtonComponent,ReactiveFormsModule,FormsModule,CommonModule],
   templateUrl: './add-group-permissions.component.html',
-  styleUrl: './add-group-permissions.component.css'
+  styleUrls: ['./add-group-permissions.component.css']
 })
 export class AddGroupPermissionsComponent {
 
-  groupName: string = '';
-  selectAll: boolean = false; // Model for "Select All" checkbox
+groupName: string = '';
+permissions: Permission[] = [
+  { page: '', add: 'false', view: 'false', edit: 'false', delete: 'false' } // Initialize
+];
+validPages: string[] = ['employee', 'department', 'salary', 'attendance', 'setting', 'user', 'group'];
+errorMessage:string = '';
+constructor(private groupService: GroupService,
+   private permissionService: PermissionService,
+   private router: Router) {}
 
-  permissions: any[] = [];
+// Add a new permission row
+addPermission() {
+  console.log('Adding new permission');
+  this.permissions.push({
+    page: '',
+    add: 'false',
+    view: 'false',
+    edit: 'false',
+    delete: 'false'
+  });
+}
 
-  constructor(private groupService: GroupService, private permissionService: PermissionService) {}
+updatePermissionAdd(event: Event, permission: Permission) {
+  const target = event.target as HTMLInputElement;
+  permission.add = target.checked ? 'true' : 'false';
+}
 
-  ngOnInit(): void {
-    this.getPermissions();
+updatePermissionView(event: Event, permission: Permission) {
+  const target = event.target as HTMLInputElement;
+  permission.view = target.checked ? 'true' : 'false';
+}
+
+updatePermissionEdit(event: Event, permission: Permission) {
+  const target = event.target as HTMLInputElement;
+  permission.edit = target.checked ? 'true' : 'false';
+}
+
+updatePermissionDelete(event: Event, permission: Permission) {
+  const target = event.target as HTMLInputElement;
+  permission.delete = target.checked ? 'true' : 'false';
+}
+
+// Remove permission row
+removePermissionRow(index: number) {
+  if (this.permissions.length > 1) {
+    this.permissions.splice(index, 1);
   }
-    // Fetch permissions from the PermissionService
-  getPermissions(): void {
-    this.permissionService.getPermission().subscribe((data: any) => {
-      this.permissions = data.map((permission: any) => ({
-        ...permission,
-        add: false,
-        delete: false,
-        modify: false,
-        display: false,
-        selected: false
-      }));
-    });
-  }
-
-  // Toggle all permissions based on "Select All" checkbox
-  toggleAllPermissions(event: any): void {
-    this.permissions.forEach(permission => {
-      permission.selected = event.target.checked;
-      permission.add = event.target.checked;
-      permission.delete = event.target.checked;
-      permission.modify = event.target.checked;
-      permission.display = event.target.checked;
-    });
-  }
-
-  // Toggle individual permission row
-  togglePermissionRow(permission: any): void {
-    if (!permission.selected) {
-      permission.add = false;
-      permission.delete = false;
-      permission.modify = false;
-      permission.display = false;
+}
+  // Validate the permissions
+  validatePermissions(): boolean {
+    const pageNames: string[] = [];
+    for (let permission of this.permissions) {
+      if (!permission.page.trim()) {
+        this.errorMessage = 'Page name is required.';
+        return false;
+      }
+      if (!this.validPages.includes(permission.page)) {
+        this.errorMessage = `Invalid page name: ${permission.page}`;
+        return false;
+      }
+      if (pageNames.includes(permission.page)) {
+        this.errorMessage = `Duplicate page name: ${permission.page}`;
+        return false;
+      }
+      pageNames.push(permission.page);
     }
+    this.errorMessage = '';
+    return true;
+  }
+  // Validate the group name
+  validateGroupName(): boolean {
+      if (!this.groupName.trim()) {
+        this.errorMessage = 'Group name is required.';
+        return false;
+      }
+      this.errorMessage = '';
+      return true;
+    }
+
+
+// Save the group and permissions
+saveGroup() {
+  if (!this.validateGroupName()) {
+    return;
+  }
+  if (!this.validatePermissions()) {
+    return;
   }
 
-  // Save group and its permissions
-  saveGroup(): void {
-    const groupData = {
-      name: this.groupName,
-      permissions: this.permissions.map(permission => ({
-        page: permission.page,
-        add: permission.add,
-        delete: permission.delete,
-        modify: permission.modify,
-        display: permission.display
-      }))
-    };
-
-    this.groupService.createGroup(groupData).subscribe(response => {
-      console.log('Group created:', response);
+  const permissionRequests = this.permissions.map(permission => {
+    return this.permissionService.createPermission({
+      page: permission.page,
+      add: permission.add,
+      view: permission.view,
+      edit: permission.edit,
+      delete: permission.delete,
     });
-  }
+  });
+
+  forkJoin(permissionRequests).subscribe({
+    next: (createdPermissions) => {
+      const permissionIds = createdPermissions.map(perm => perm.data.id).filter(id => id !== undefined);
+
+      if (permissionIds.length === 0) {
+        console.error('No permissions created, cannot create group');
+        return;
+      }
+
+      const group: Group = {
+        name: this.groupName,
+        permission_ids: permissionIds
+      };
+
+      this.groupService.createGroup(group).subscribe({
+        next: (response) => {
+          this.router.navigate(['/groups'], {
+            queryParams: { message: 'Group added successfully!' }
+          });
+          this.groupName = '';
+          this.permissions = [{ page: '', add: 'false', view: 'false', edit: 'false', delete: 'false' }];
+        },
+        error: (error) => {
+          this.errorMessage = error.error.message;
+        }
+      });
+    },
+    error: (error) => {
+      console.error('Error creating permissions', error.error.message);
+    }
+  });
+}
+
+
 }

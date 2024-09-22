@@ -7,8 +7,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
-import printJS from 'print-js';
-
+import printJS from 'print-js'
 @Component({
   selector: 'app-salary',
   standalone: true,
