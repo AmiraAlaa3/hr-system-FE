@@ -40,10 +40,10 @@
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef> Action </th>
                 <td mat-cell *matCellDef="let group">
-                    <button class="btn btn-view me-2" [routerLink]="['/groups', group.id]"><i
+                    <!-- <button class="btn btn-view me-2" [routerLink]="['/groups', group.id]"><i
                             class="bi bi-eye"></i>
-                        View</button>
-                    <button class="btn btn-delete mx-2"
+                        View</button> -->
+                    <button class="btn btn-delete"
                     (click)="openDeleteModal(group.id)">
                         <i class="bi bi-x-lg"></i> Delete
                     </button>

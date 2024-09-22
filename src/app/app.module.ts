@@ -7,7 +7,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-
+ import { FormsModule } from '@angular/forms';
 import { EmployeeService } from './services/employee.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
@@ -18,6 +18,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    FormsModule
   ],
   providers: [
     EmployeeService,

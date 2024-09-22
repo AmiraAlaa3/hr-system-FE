@@ -1,6 +1,8 @@
 export interface Permission {
-    view: boolean;
-    add: boolean;
-    edit: boolean;
-    delete: boolean;
+    id?: number;
+    page: string;
+    view: 'true' | 'false';
+    add: 'true' | 'false';
+    edit: 'true' | 'false';
+    delete: 'true' | 'false';
 }

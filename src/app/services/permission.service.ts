@@ -17,9 +17,10 @@ export class PermissionService {
       'Authorization': `Bearer ${token}`
     });
   }
-
-  createPermission(permission: any): Observable<any> {
-    return this.http.post(this.apiUrl, permission, { headers: this.getAuthHeaders() });
+  createPermission(permissionData: Permission): Observable<any> {
+    return this.http.post(this.apiUrl, permissionData, { headers: this.getAuthHeaders() });
   }
- 
-}
+
+};
+
+
