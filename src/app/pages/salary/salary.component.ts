@@ -105,19 +105,28 @@ export class SalaryComponent implements OnInit {
   }
 
   searchSalary(): void {
-    if (this.searchTerm.trim()) {
-      this.SalaryService.searchSalary(this.searchTerm).subscribe({
-        next: (response) => {
-          this.dataSource = new MatTableDataSource(response.data);
-          this.dataSource.paginator = this.paginator;
-          this.totalSalary = response.data.length;
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
-    }
+    const employeeName = this.searchTerm.trim() || undefined;
+    const selectedMonth = this.month || undefined;
+    const selectedYear = this.year || undefined;
+  
+    this.SalaryService.searchSalary(employeeName, selectedMonth, selectedYear).subscribe({
+      next: (response) => {
+        this.dataSource = new MatTableDataSource(response.data);
+        this.dataSource.paginator = this.paginator;
+        this.totalSalary = response.data.length;
+  
+        if (this.dataSource.filteredData.length === 0) {
+          this.noResultsMessage = 'No results found for the given criteria';
+        } else {
+          this.noResultsMessage = '';
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
+  
 
   closeMessage(): void {
     this.message = null;
