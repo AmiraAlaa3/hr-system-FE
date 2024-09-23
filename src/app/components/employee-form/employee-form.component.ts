@@ -5,6 +5,7 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  ValidationErrors,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
@@ -76,7 +77,7 @@ export class EmployeeFormComponent implements OnInit {
     check_out_time: new FormControl('', [Validators.required]),
     salary: new FormControl('', [Validators.required,this.numberValidator]),
     department_id: new FormControl('', [Validators.required]),
-    hire_date: new FormControl('', [Validators.required]),
+    hire_date: new FormControl('', [Validators.required,this.dateAfterValidator('2020-01-01')]),
     position: new FormControl('', [Validators.required]),
   });
 
@@ -101,6 +102,19 @@ export class EmployeeFormComponent implements OnInit {
       return { 'invalidNumber': true };
     }
     return null;
+  }
+
+  dateAfterValidator(date: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const inputDate = new Date(control.value);
+      const afterDate = new Date(date);
+
+      if (isNaN(inputDate.getTime())) {
+        return { invalidDate: true };
+      }
+
+      return inputDate > afterDate ? null : { dateAfter: { requiredDate: date } };
+    };
   }
 
   get getName() {
@@ -177,7 +191,7 @@ export class EmployeeFormComponent implements OnInit {
           .subscribe({
             next: () => {
               this.router.navigate(['/employees'], {
-                queryParams: { message: 'Department added successfully!' }
+                queryParams: { message: 'Employee edit successfully!' }
               });
             },
             error: (error) => {

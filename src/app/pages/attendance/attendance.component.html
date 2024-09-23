@@ -46,14 +46,16 @@
 
   <!-- date filter -->
   <div class="d-flex justify-content-center align-items-center  mb-4 ">
+    <label for="to" class="mx-2">To</label>
     <input
       type="date"
       [(ngModel)]="startDate"
-      class="form-control date-input me-2" />
+      class="form-control date-input me-2" id="to"/>
+    <label for="from" class="mx-2">From</label>
     <input
       type="date"
       [(ngModel)]="endDate"
-      class="form-control date-input me-2" />
+      class="form-control date-input me-2" id="from"/>
     <button class="btn btn-outline-add filter-button" (click)="filterByDate()">
       Filter by Date
     </button>
