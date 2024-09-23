@@ -1,4 +1,3 @@
-import { Attendance } from './../../models/attendance';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AttendanceService} from './../../services/attendance.service';
 import { CommonModule } from '@angular/common';
@@ -36,8 +35,6 @@ export class AttendanceComponent implements OnInit {
   showModal: boolean = false;
   attendanceIdToDelete: number | null = null;
   searchError : string = '';
-
-
   displayedColumns: string[] = ['id', 'DepartmentName','EmployeeName','checkIN','checkOUT','date', 'action'];
   dataSource!: MatTableDataSource<any>;
   totalAttendances: number = 0;
@@ -104,13 +101,26 @@ export class AttendanceComponent implements OnInit {
       return employeeName.includes(filter) || departmentName.includes(filter);
     };
 
+    if (this.dataSource.filteredData.length === 0) {
+      this.searchError = 'Enter the name of a valid employee or department';
+    } else {
+      this.searchError = '';
+    }
+
     this.dataSource.filter = filterValue;
   }
   filterByDate(): void {
     const startDateValue = this.startDate ? new Date(this.startDate) : null;
     const endDateValue = this.endDate ? new Date(this.endDate) : null;
-    if (!startDateValue &&!endDateValue) {
+    if (!startDateValue || !endDateValue) {
       this.searchError = 'Please Select Date';
+      setTimeout(() => {
+        this.searchError = '';
+      }, 3000);
+      return;
+    }
+    if (startDateValue && endDateValue && startDateValue > endDateValue) {
+      this.searchError = 'Start date cannot be after end date';
       setTimeout(() => {
         this.searchError = '';
       }, 3000);
@@ -208,7 +218,7 @@ export class AttendanceComponent implements OnInit {
 
 
     this.attendanceService.importExcelFile(formData).subscribe({
-      next: (response) => {
+      next: () => {
         this.importMessage = 'File imported successfully';
         this.loadAttendances();
         this.closeImportForm();
@@ -216,8 +226,8 @@ export class AttendanceComponent implements OnInit {
           this.importMessage = null;
         }, 5000);
       },
-      error: (error) => {
-      this.importMessage = 'File Importing Fail';
+      error: () => {
+      this.importMessage = 'File Importing failed';
         setTimeout(() => {
           this.importMessage = null;
         }, 5000);

@@ -257,6 +257,11 @@
               Employee hire date is Required
             </div>
             }
+            @if(getHire_date.hasError('dateAfter')){
+              <div class="form-text mt-2 text-danger">
+                Hire date must be after 01-01-2020.
+              </div>
+              }
           </ng-container>
           }
         </div>
