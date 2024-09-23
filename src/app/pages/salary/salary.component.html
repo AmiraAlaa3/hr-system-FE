@@ -78,13 +78,11 @@
 
       <ng-container matColumnDef="TotalBounsHours">
         <th mat-header-cell *matHeaderCellDef> Bonus Hours</th>
-        <td mat-cell *matCellDef="let salary"> {{salary.total_bonus_hours|
-          number: '1.2-2'}} </td>
+        <td mat-cell *matCellDef="let salary"> {{salary.total_bonus_hours}} </td>
       </ng-container>
       <ng-container matColumnDef="TotalDeductionsHours">
         <th mat-header-cell *matHeaderCellDef> Deduction Hours</th>
-        <td mat-cell *matCellDef="let salary"> {{salary.total_deduction_hours|
-          number: '1.2-2'}}
+        <td mat-cell *matCellDef="let salary"> {{salary.total_deduction_hours}}
         </td>
       </ng-container>
       <ng-container matColumnDef="TotalBouns">

@@ -52,18 +52,30 @@ export class SalaryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.message = params['message'] || null;
+      if (this.message) {
+        setTimeout(() => {
+          this.closeMessage();
+        }, 6000);
+      }
+    });
+    this.loadSalary();
+  }
+  loadSalary(): void {
     this.SalaryService.getSalary().subscribe({
       next: (response) => {
         this.dataSource = new MatTableDataSource(response.data);
+        console.log(this.dataSource);
         this.dataSource.paginator = this.paginator;
         this.totalSalary = response.data.length;
       },
       error: (error) => {
+        console.log(error);
         this.fatechError = error.error.message;
       },
     });
   }
-
   applyFilter(): void {
     const filterValue = this.searchTerm.trim().toLowerCase();
     this.dataSource.filterPredicate = (data: any, filter: string) => {
@@ -139,8 +151,8 @@ export class SalaryComponent implements OnInit {
           <p><strong>Department:</strong> ${salary.department.name}</p>
           <p><strong>Work Days:</strong> ${salary.work_days}</p>
           <p><strong>Absence Days:</strong> ${salary.absence_days}</p>
-          <p><strong>Total Bonus Hours:</strong> ${salary.total_bonus_hours.toFixed(2)}</p>
-          <p><strong>Total Deduction Hours:</strong> ${salary.total_deduction_hours.toFixed(2)}</p>
+          <p><strong>Total Bonus Hours:</strong> ${salary.total_bonus_hours}</p>
+          <p><strong>Total Deduction Hours:</strong> ${salary.total_deduction_hours}</p>
           <p><strong>Bonus Amount:</strong> ${salary.bonus_amount.toFixed(2)}</p>
           <p><strong>Deductions Amount:</strong> ${salary.deductions_amount.toFixed(2)}</p>
           </div>
