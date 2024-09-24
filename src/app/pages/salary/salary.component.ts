@@ -17,12 +17,10 @@ import printJS from 'print-js'
 })
 
 export class SalaryComponent implements OnInit {
-  attendances: any;
   message: string | null = null;
   showModal: boolean = false;
-  attendanceIdToDelete: number | null = null;
-
-  displayedColumns: string[] = ['EmployeeName', 'DepartmentName', 'WorkDays', 'AbsenceDays', 'TotalBounsHours',
+  noResultsMessage :string = '';
+  displayedColumns: string[] = ['EmployeeName', 'DepartmentName','salary', 'WorkDays', 'AbsenceDays', 'TotalBounsHours',
     'TotalDeductionsHours', 'TotalBouns', 'TotalDeductions','totalsalary','action'];
   dataSource!: MatTableDataSource<any>;
   totalSalary: number = 0;
@@ -54,22 +52,9 @@ export class SalaryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.message = params['message'] || null;
-      if (this.message) {
-        setTimeout(() => {
-          this.closeMessage();
-        }, 6000);
-      }
-    });
-    this.loadSalary();
-  }
-
-  loadSalary(): void {
     this.SalaryService.getSalary().subscribe({
       next: (response) => {
         this.dataSource = new MatTableDataSource(response.data);
-        console.log(this.dataSource);
         this.dataSource.paginator = this.paginator;
         this.totalSalary = response.data.length;
       },
@@ -85,6 +70,11 @@ export class SalaryComponent implements OnInit {
       const employeeName = data.name? data.name.toLowerCase() : '';
       return employeeName.includes(filter);
     };
+    if (this.dataSource.filteredData.length === 0) {
+      this.noResultsMessage = 'Enter the name of a valid employee';
+    } else {
+      this.noResultsMessage = '';
+    }
 
     this.dataSource.filter = filterValue;
   }
@@ -95,30 +85,48 @@ export class SalaryComponent implements OnInit {
           this.dataSource = new MatTableDataSource(response.data);
           this.dataSource.paginator = this.paginator;
           this.totalSalary = response.data.length;
+          if (this.dataSource.filteredData.length === 0) {
+            this.noResultsMessage = 'Enter valid date';
+          } else {
+            this.noResultsMessage = '';
+          }
         },
         error: (error) => {
           console.log(error);
         },
       });
+    }
+    else{
+      this.noResultsMessage = 'Please select a month and year';
+      setTimeout(() => {
+          this.noResultsMessage = '';
+        }, 5000);
     }
   }
 
   searchSalary(): void {
-    if (this.searchTerm.trim()) {
-      this.SalaryService.searchSalary(this.searchTerm).subscribe({
-        next: (response) => {
-          this.dataSource = new MatTableDataSource(response.data);
-          this.dataSource.paginator = this.paginator;
-          this.totalSalary = response.data.length;
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
-    } else {
-      this.loadSalary();
-    }
+    const employeeName = this.searchTerm.trim() || undefined;
+    const selectedMonth = this.month || undefined;
+    const selectedYear = this.year || undefined;
+  
+    this.SalaryService.searchSalary(employeeName, selectedMonth, selectedYear).subscribe({
+      next: (response) => {
+        this.dataSource = new MatTableDataSource(response.data);
+        this.dataSource.paginator = this.paginator;
+        this.totalSalary = response.data.length;
+  
+        if (this.dataSource.filteredData.length === 0) {
+          this.noResultsMessage = 'No results found for the given criteria';
+        } else {
+          this.noResultsMessage = '';
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
+  
 
   closeMessage(): void {
     this.message = null;

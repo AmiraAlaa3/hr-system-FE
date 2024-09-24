@@ -30,6 +30,7 @@ export class EmployeesComponent implements OnInit {
   employeeIdToDelete: number | null = null;
   error: string = '';
   fatechError :string = '';
+  noResultsMessage:string = '';
 
   searchControl = new FormControl('');
 
@@ -112,10 +113,17 @@ export class EmployeesComponent implements OnInit {
   closeMessage() {
     this.message = null;
   }
-  // search by employee name
+
+  // Search by employee name
   applyFilter(value: any) {
     this.dataSource.filter = value.trim().toLowerCase();
+    if (this.dataSource.filteredData.length === 0) {
+      this.noResultsMessage = 'Enter the name of a valid employee';
+    } else {
+      this.noResultsMessage = ''; 
+    }
   }
+
   clearSearch(){
     this.searchControl.setValue('');
     this.dataSource.filter = '';

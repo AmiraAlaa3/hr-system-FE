@@ -18,12 +18,14 @@ export class SalaryService {
   getSalary(): Observable<{ data: Salary[] }> {
     return this.http.get<{ data: Salary[] }>(this.apiUrl,{ headers: this.getAuthHeaders() });
   }
-  searchSalary(employeeName?: string): Observable<any> {
+  searchSalary(employeeName?: string, month?: number, year?: number): Observable<any> {
     let params = new HttpParams();
     if (employeeName) {
       params = params.set('name', employeeName);
     }
-
+    if (month && year) {
+      params = params.set('month', month).set('year', year);
+    }
     return this.http.get(`${this.apiUrl}/search`, { params , headers: this.getAuthHeaders() });
   }
      filterSalaryByDate(month: number , year: number): Observable<any> {
