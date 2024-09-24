@@ -17,11 +17,15 @@
   <div class="d-flex justify-content-center align-items-center mb-4">
     <div class="position-relative search-input">
       <input class="form-control ps-5 pe-5 p-2" id="searchEmployeeName" placeholder="Search By Employee Name"
-        [(ngModel)]="searchTerm" aria-label="Search" (input)="applyFilter()">
+        [(ngModel)]="searchTerm" aria-label="Search">
       <i class="bi bi-search position-absolute search-icon"></i>
       <i class="bi bi-x position-absolute clear-search" (click)="clearSearch()"></i>
     </div>
   </div>
+
+  <!-- <button class="btn btn-outline-add filter-button" (click)="searchSalary()">
+    Filter
+  </button> -->
   @if(noResultsMessage){
   <div class="alert alert-danger">
     {{noResultsMessage}}
@@ -39,8 +43,8 @@
     <input type="number" [(ngModel)]="year" class="form-control date-input me-2" min="2008" max="2100" step="1"
       placeholder="Select Year" />
 
-    <button class="btn btn-outline-add filter-button" (click)="filterByDate()">
-      Filter by Month and Year
+    <button class="btn btn-outline-add filter-button" (click)="searchSalary()">
+      Filter
     </button>
   </div>
 
@@ -69,13 +73,11 @@
 
       <ng-container matColumnDef="TotalBounsHours">
         <th mat-header-cell *matHeaderCellDef> Bonus Hours</th>
-        <td mat-cell *matCellDef="let salary"> {{salary.total_bonus_hours|
-          number: '1.2-2'}} </td>
+        <td mat-cell *matCellDef="let salary"> {{salary.total_bonus_hours}} </td>
       </ng-container>
       <ng-container matColumnDef="TotalDeductionsHours">
         <th mat-header-cell *matHeaderCellDef> Deduction Hours</th>
-        <td mat-cell *matCellDef="let salary"> {{salary.total_deduction_hours|
-          number: '1.2-2'}}
+        <td mat-cell *matCellDef="let salary"> {{salary.total_deduction_hours}}
         </td>
       </ng-container>
       <ng-container matColumnDef="TotalBouns">
