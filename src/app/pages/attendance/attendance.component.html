@@ -1,8 +1,7 @@
- <div class="container px-5 py-3">
+<div class="container px-5 py-3">
   <!-- backend error -->
   @if (fatechError != '') {
-  <div
-    class="error-permissions d-flex justify-content-center align-items-center h-100">
+  <div class="error-permissions d-flex justify-content-center align-items-center h-100">
     <p class="lead"> You do not have permissions to Access this Page.
       Please Ask Admin to allow View</p>
   </div>
@@ -28,14 +27,11 @@
   <!-- search input -->
   <div class="d-flex justify-content-center align-items-center mb-4">
     <div class="position-relative search-input">
-      <input class="form-control ps-5 pe-5 p-2"
-        id="searchEmployeeName"
-        placeholder="Search By Employee Name or Department Name"
-        [(ngModel)]="searchTerm" type="search" aria-label="Search"
+      <input class="form-control ps-5 pe-5 p-2" id="searchEmployeeName"
+        placeholder="Search By Employee Name or Department Name" [(ngModel)]="searchTerm" aria-label="Search"
         (input)="applyFilter()">
       <i class="bi bi-search position-absolute search-icon"></i>
-      <i class="bi bi-x position-absolute clear-search"
-        (click)="clearSearch()"></i>
+      <i class="bi bi-x position-absolute clear-search" (click)="clearSearch()"></i>
     </div>
     @if (searchError !='') {
     <div class="alert alert-danger">
@@ -47,23 +43,16 @@
   <!-- date filter -->
   <div class="d-flex justify-content-center align-items-center  mb-4 ">
     <label for="to" class="mx-2">To</label>
-    <input
-      type="date"
-      [(ngModel)]="startDate"
-      class="form-control date-input me-2" id="to"/>
+    <input type="date" [(ngModel)]="startDate" class="form-control date-input me-2" id="to" />
     <label for="from" class="mx-2">From</label>
-    <input
-      type="date"
-      [(ngModel)]="endDate"
-      class="form-control date-input me-2" id="from"/>
+    <input type="date" [(ngModel)]="endDate" class="form-control date-input me-2" id="from" />
     <button class="btn btn-outline-add filter-button" (click)="filterByDate()">
       Filter by Date
     </button>
   </div>
   <!-- add new attendance button -->
   <div class="d-flex justify-content-end align-items-center mb-4">
-    <app-add-button [entity]="'Attendance'"
-      [routerLink]="['/attendance', 0, 'edit']" />
+    <app-add-button [entity]="'Attendance'" [routerLink]="['/attendance', 0, 'edit']" />
     <button class="btn btn-add ms-2" (click)="openImportForm()">
       <i class="bi bi-plus-lg"></i>
       Import Excel File
@@ -81,12 +70,10 @@
       <div class="mb-3">
         <label for="importFile" class="form-label">Choose Excel
           Attendance</label>
-        <input type="file" id="importFile" (change)="onFileSelected($event)"
-          class="form-control" required />
+        <input type="file" id="importFile" (change)="onFileSelected($event)" class="form-control" required />
       </div>
       <div class="d-flex justify-content-end align-items-center">
-        <button type="button" class="btn btn-outline-add me-2"
-          (click)="closeImportForm()">Cancel</button>
+        <button type="button" class="btn btn-outline-add me-2" (click)="closeImportForm()">Cancel</button>
         <button type="submit" class="btn btn-add">Upload</button>
       </div>
     </form>
@@ -128,12 +115,10 @@
       <ng-container matColumnDef="action" class="col-7">
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let attendance">
-          <button class="btn btn-edit mx-2"
-            [routerLink]="['/attendance', attendance.id, 'edit']">
+          <button class="btn btn-edit mx-2" [routerLink]="['/attendance', attendance.id, 'edit']">
             <i class="bi bi-pen"></i> Edit
           </button>
-          <button class="btn btn-delete mx-2"
-            (click)="openDeleteModal(attendance.id)">
+          <button class="btn btn-delete mx-2" (click)="openDeleteModal(attendance.id)">
             <i class="bi bi-x-lg"></i> Delete
           </button>
         </td>
@@ -143,16 +128,13 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     @if(showModal){
-    <app-confirm-modal
-      (confirmed)="confirmDelete()"
-      (closed)="closeModal()"
+    <app-confirm-modal (confirmed)="confirmDelete()" (closed)="closeModal()"
       [message]="'Are you sure you want to delete this attendance?'" />
     }
 
-    <mat-paginator [length]="totalAttendances" [pageSize]="5"
-      [pageSizeOptions]="[5, 10]" showFirstLastButtons
+    <mat-paginator [length]="totalAttendances" [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons
       class="mt-4"></mat-paginator>
 
   </div>
   }
- </div>
+</div>
