@@ -7,24 +7,20 @@ import { GroupsComponent } from './pages/groups/groups.component';
 import { OfficalHolidaysComponent } from './pages/offical-holidays/offical-holidays.component';
 import { SalaryComponent } from './pages/salary/salary.component';
 import { UsersComponent } from './pages/users/users.component';
-
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DepartmentFormComponent } from './components/department-form/department-form.component';
 import { DepartmentDetailsComponent } from './components/department-details/department-details.component';
 import { AttendanceFormComponent } from './components/attendance-form/attendance-form.component';
-// import { AttendanceExcelComponent } from './components/attendance-excel/attendance-excel.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { authGuard } from './components/guard/auth.guard';
 import { EmployeeFormComponent } from './components/employee-form/employee-form.component';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
-
 import { OfficalHolidayFormComponent } from './components/offical-holiday-form/offical-holiday-form.component';
 import { HolidayDetailsComponent } from './components/holiday-details/holiday-details.component';
 import { SettingsFormComponent } from './components/settings-form/settings-form.component';
 import { AddGroupPermissionsComponent } from './components/add-group-permissions/add-group-permissions.component';
-
 
 export const routes: Routes = [
   {
