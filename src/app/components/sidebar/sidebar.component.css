@@ -1,7 +1,9 @@
 .sidebar{
     background-color: #d6e4eb;
     font-family: "Roboto", sans-serif;
-
+    height: 100%;
+    width: 250px;
+    padding-bottom: 194px;
 }
 .sidebar hr {
     border-color: #dee2e6;
