@@ -76,69 +76,117 @@ export class SalaryComponent implements OnInit {
       },
     });
   }
-  applyFilter(): void {
-    const filterValue = this.searchTerm.trim().toLowerCase();
-    this.dataSource.filterPredicate = (data: any, filter: string) => {
-      const employeeName = data.name? data.name.toLowerCase() : '';
-      return employeeName.includes(filter);
-    };
-    if (this.dataSource.filteredData.length === 0) {
-      this.noResultsMessage = 'Enter the name of a valid employee';
-    } else {
-      this.noResultsMessage = '';
-    }
+  // applyFilter(): void {
+  //   const filterValue = this.searchTerm.trim().toLowerCase();
+  //   this.dataSource.filterPredicate = (data: any, filter: string) => {
+  //     const employeeName = data.name? data.name.toLowerCase() : '';
+  //     return employeeName.includes(filter);
+  //   };
+  //   if (this.dataSource.filteredData.length === 0) {
+  //     this.noResultsMessage = 'Enter the name of a valid employee';
+  //   } else {
+  //     this.noResultsMessage = '';
+  //   }
 
-    this.dataSource.filter = filterValue;
-  }
-  filterByDate(): void {
-    if (this.month !== null && this.year !== null) {
-      this.SalaryService.filterSalaryByDate(this.month, this.year).subscribe({
+  //   this.dataSource.filter = filterValue;
+  // }
+  // filterByDate(): void {
+  //   if (this.month !== null && this.year !== null) {
+  //     this.SalaryService.filterSalaryByDate(this.month, this.year).subscribe({
+  //       next: (response) => {
+  //         this.dataSource = new MatTableDataSource(response.data);
+  //         this.dataSource.paginator = this.paginator;
+  //         this.totalSalary = response.data.length;
+  //         if (this.dataSource.filteredData.length === 0) {
+  //           this.noResultsMessage = 'Enter valid date';
+  //         } else {
+  //           this.noResultsMessage = '';
+  //         }
+  //       },
+  //       error: (error) => {
+  //         console.log(error);
+  //       },
+  //     });
+  //   }
+  //   else{
+  //     this.noResultsMessage = 'Please select a month and year';
+  //     setTimeout(() => {
+  //         this.noResultsMessage = '';
+  //       }, 5000);
+  //   }
+  // }
+
+  // searchSalary(): void {
+  //   const employeeName = this.searchTerm.trim() || undefined;
+  //   const selectedMonth = this.month || undefined;
+  //   const selectedYear = this.year || undefined;
+
+  //   this.SalaryService.searchSalary(employeeName, selectedMonth, selectedYear).subscribe({
+  //     next: (response) => {
+  //       this.dataSource = new MatTableDataSource(response.data);
+  //       this.dataSource.paginator = this.paginator;
+  //       this.totalSalary = response.data.length;
+  //       console.log(this.dataSource);
+
+
+  //       if (this.dataSource.filteredData.length === 0) {
+  //         this.noResultsMessage = 'No results found for the given criteria';
+  //       } else {
+  //         this.noResultsMessage = '';
+  //       }
+  //     },
+  //     error: (error) => {
+  //       console.log(error);
+  //     },
+  //   });
+  // }
+  searchSalary(): void {
+    const name = this.searchTerm.trim() || undefined;
+    const filterValue = this.searchTerm.trim().toLowerCase();
+
+    if (name && this.month && this.year) {
+      // Search by both name and date
+      this.SalaryService.searchSalary(name, this.month, this.year).subscribe({
         next: (response) => {
           this.dataSource = new MatTableDataSource(response.data);
           this.dataSource.paginator = this.paginator;
-          this.totalSalary = response.data.length;
-          if (this.dataSource.filteredData.length === 0) {
-            this.noResultsMessage = 'Enter valid date';
-          } else {
-            this.noResultsMessage = '';
-          }
+
+          // Handle no results for combined search
+          this.noResultsMessage = this.dataSource.data.length === 0 ? 'No results found for the given criteria.' : '';
         },
         error: (error) => {
           console.log(error);
         },
       });
-    }
-    else{
-      this.noResultsMessage = 'Please select a month and year';
+    }  else if (name) {
+      // Search by name only
+      this.dataSource.filterPredicate = (data: any) => {
+        const employeeName = data.name ? data.name.toLowerCase() : '';
+        return employeeName.includes(filterValue);
+      };
+      this.dataSource.filter = filterValue;
+      this.noResultsMessage = this.dataSource.filteredData.length === 0 ? 'Enter the name of a valid employee' : '';
+    } else if (this.month && this.year) {
+      // Search by date only
+      this.SalaryService.filterSalaryByDate(this.month, this.year).subscribe({
+        next: (response) => {
+          this.dataSource = new MatTableDataSource(response.data);
+          this.dataSource.paginator = this.paginator;
+          this.noResultsMessage = this.dataSource.data.length === 0 ? 'No results found for the given date.' : '';
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    } else {
+      // No valid input
+      this.noResultsMessage = 'Please enter a name or select a month and year';
       setTimeout(() => {
-          this.noResultsMessage = '';
-        }, 5000);
+        this.noResultsMessage = '';
+      }, 5000);
     }
   }
 
-  searchSalary(): void {
-    const employeeName = this.searchTerm.trim() || undefined;
-    const selectedMonth = this.month || undefined;
-    const selectedYear = this.year || undefined;
-  
-    this.SalaryService.searchSalary(employeeName, selectedMonth, selectedYear).subscribe({
-      next: (response) => {
-        this.dataSource = new MatTableDataSource(response.data);
-        this.dataSource.paginator = this.paginator;
-        this.totalSalary = response.data.length;
-  
-        if (this.dataSource.filteredData.length === 0) {
-          this.noResultsMessage = 'No results found for the given criteria';
-        } else {
-          this.noResultsMessage = '';
-        }
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-  }
-  
 
   closeMessage(): void {
     this.message = null;

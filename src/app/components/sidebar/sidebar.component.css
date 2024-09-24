@@ -1,35 +1,35 @@
 .sidebar{
-    background-color: #d6e4eb;
-    font-family: "Roboto", sans-serif;
-    height: 100%;
-    width: 250px;
-    padding-bottom: 194px;
+  background-color: #d6e4eb;
+  font-family: "Roboto", sans-serif;
+  width: 250px;
+  height: 100vh;
+
 }
 .sidebar hr {
-    border-color: #dee2e6;
+  border-color: #dee2e6;
 }
 .logo{
-    width: 50px;
-    height: auto;
+  width: 50px;
+  height: auto;
 }
 .sidebarHeader{
-    color: #296f93;
-    margin-bottom: -10px;
+  color: #296f93;
+  margin-bottom: -10px;
 
 }
 .pHeader {
-    margin-top: -10px; 
+  margin-top: -10px;
 }
 a{
-    color: #173d51;
+  color: #173d51;
 }
 h5{
-    font-size: 18px;
+  font-size: 18px;
 }
 i {
-    font: 17px bold;
-    color: #e94d65; 
+  font: 17px bold;
+  color: #e94d65;
 }
 li{
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 }

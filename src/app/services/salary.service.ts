@@ -10,7 +10,7 @@ export class SalaryService {
 
   constructor(private http: HttpClient) { }
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem('token');
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
@@ -20,52 +20,16 @@ export class SalaryService {
   }
   searchSalary(employeeName?: string, month?: number, year?: number): Observable<any> {
     let params = new HttpParams();
-    if (employeeName) {
-      params = params.set('name', employeeName);
+    if (month && year && employeeName) {
+      params = params.set('month', month).set('year', year).set('name', employeeName);
     }
-    if (month && year) {
-      params = params.set('month', month).set('year', year);
-    }
-    return this.http.get(`${this.apiUrl}/search`, { params , headers: this.getAuthHeaders() });
+    return this.http.get(`http://127.0.0.1:8000/api/salary/search?name=${employeeName}&month=${month}&year=${year}`, { params , headers: this.getAuthHeaders() });
   }
-     filterSalaryByDate(month: number , year: number): Observable<any> {
+  filterSalaryByDate(month: number , year: number): Observable<any> {
         const params = new HttpParams()
           .set('month', month)
           .set('year', year);
         return this.http.get(`http://127.0.0.1:8000/api/salary/search-by-month-year?month=${month}&year=${year}`, { params ,headers: this.getAuthHeaders() });
       }
-//   getAttendance(id: number): Observable<{ data: Attendance[] }> {
-//     return this.http.get<{ data: Attendance[] }>(`${this.apiUrl}/${id}`);
-//   }
 
-
-//   createAttendance(Attendance: any){
-//     return this.http.post(this.apiUrl, Attendance);
-//   }
-
-//   updateAttendance(id: number, Attendance: any){
-//     return this.http.put(`${this.apiUrl}/${id}`, Attendance);
-//   }
-
-//   deleteAttendance(id: number): Observable<void> {
-//     return this.http.delete<void>(`${this.apiUrl}/${id}`);
-//   }
-
-//   searchAttendances(employeeName?: string, departmentName?: string): Observable<any> {
-//     let params = new HttpParams();
-//     if (employeeName) {
-//       params = params.set('employee_name', employeeName);
-//     }
-//     if (departmentName) {
-//       params = params.set('department_name', departmentName);
-//     }
-//     return this.http.get(`${this.apiUrl}/search`, { params });
-//   }
-
-//   filterAttendancesByDate(startDate: string, endDate: string): Observable<any> {
-//     const params = new HttpParams()
-//       .set('start_date', startDate)
-//       .set('end_date', endDate);
-//     return this.http.get(`${this.apiUrl}/filterByDate`, { params });
-//   }
 }
