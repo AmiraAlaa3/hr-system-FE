@@ -1,27 +1,43 @@
-# HrSystemFE
+# HR System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
+An HR System to manage employees, departments, attendance, salaries, and user groups with permissions. This project aims to streamline HR processes and improve efficiency in managing HR-related tasks.
 
-## Development server
+## Project Overview
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The HR System is designed to solve common HR challenges such as employee management, attendance tracking, salary calculations, and permissions management. It provides a user-friendly interface for HR staff to manage all HR-related tasks efficiently.
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Employee Management**: Add, edit, and delete employee records.
+- **Department Management**: Manage different departments within the organization.
+- **Attendance Tracking**: Track employee attendance and manage check-in/check-out times.
+- **Salary Management**: Calculate and manage employee salaries, including bonuses and deductions.
+- **User Groups & Permissions**: Define user groups with specific permissions to control access to different parts of the system.
+- **General Setting**: Edit bonuses, deductions and weekiy hoildays
 
-## Build
+## Technologies Used
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Frontend**: Angular 18, TypeScript, HTML, CSS,Bootstrap
+- **Backend**: Laravel, PHP
+- **Database**: MySQL
+- **Other Tools**: Docker, Git
 
-## Running unit tests
+## Team Members
+- Amira Alaa (Team leader)
+- Mohamed Ibrahhim (Project Manager)
+- Noha Sobhy
+- Mahmoud Salama
+- Hossam Rabea 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installation
+- Node.js and npm
+- PHP and Composer
+- MySQL
 
-## Running end-to-end tests
+# Demo Video
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Watch the demo video to see the HR System in action:
 
-## Further help
+https://github.com/user-attachments/assets/568150e1-9da4-4178-8d16-36ba319efbfe
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
