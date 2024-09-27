@@ -1,6 +1,6 @@
 # HR System
 
-An HR System to manage employees, departments, attendance, salaries, and user groups with permissions. This project aims to streamline HR processes and improve efficiency in managing HR-related tasks.
+This project is a hr system (graduation ptoject) developed as part of the ITI (Information Technology Institute) Full Stack PHP track. Its a system to manage employees, departments, attendance, salaries, and user groups with permissions. This project aims to streamline HR processes and improve efficiency in managing HR-related tasks.
 
 ## Project Overview
 
@@ -17,14 +17,14 @@ The HR System is designed to solve common HR challenges such as employee managem
 
 ## Technologies Used
 
-- **Frontend**: Angular 18, TypeScript, HTML, CSS,Bootstrap
-- **Backend**: Laravel, PHP
+- **Frontend**: Angular 18, TypeScript, HTML, CSS, Bootstrap
+- **Backend**: Laravel 11, PHP
 - **Database**: MySQL
-- **Other Tools**: Docker, Git
+- **Other Tools**: Figma, Postman , Git
 
 ## Team Members
 - Amira Alaa (Team leader)
-- Mohamed Ibrahhim (Project Manager)
+- Mohamed Ibrahim (Project Manager)
 - Noha Sobhy
 - Mahmoud Salama
 - Hossam Rabea 
